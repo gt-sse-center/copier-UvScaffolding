@@ -1,0 +1,29 @@
+name: "CI+CD"
+run-name: ${{ github.run_number }} [${{ github.actor }}] on ${{ github.ref_name }}
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *' # Once a day at 12am UTC
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  CICD_Workflow:
+    name: "CI+CD Workflow"
+
+    permissions:
+      contents: write
+
+    uses: ./.github/workflows/CICD_impl.yml
+
+    with:
+      # These values can be customized for your specific requirements.
+      operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
+      python_version_json_string: "[ '3.13', '3.12', '3.11', '3.10' ]"

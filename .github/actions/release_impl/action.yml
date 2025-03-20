@@ -1,0 +1,26 @@
+name: "[impl] Release"
+description: "Releases the current repository."
+
+runs:
+  using: composite
+  steps:
+    - name: Install uv and python
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+
+    - name: Install Dependencies
+      run: uv sync --frozen
+
+    - name: Create Repository Tag
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.has_release_changes.outputs.src == 'true' }}
+      shell: bash
+      run: |-
+        export TEMPLATE_VERSION=$(uv run AutoGitSemVer template --quiet --no-branch-name --no-metadata)
+        echo "**Template Version:** ${TEMPLATE_VERSION}" >> $GITHUB_STEP_SUMMARY
+
+        git config user.name "GitHub Action Bot"
+        git config user.email "<>"
+
+        git tag --annotate --force -m "Publish Tag" "v${TEMPLATE_VERSION}" "${{ github.sha }}"
+        git push origin "v${TEMPLATE_VERSION}" --force

@@ -1,0 +1,81 @@
+name: "[Callable] CI+CD Workflow Impl"
+
+on:
+  workflow_call:
+    inputs:
+      operating_system_json_string:
+        type: string
+        description: "The operating systems to run the job on. Note that this is JSON content embedded within a string."
+        required: true
+
+      python_version_json_string:
+        type: string
+        description: "The Python versions to run the job with. Note that this is JSON content embedded within a string."
+        required: true
+
+jobs:
+  # ----------------------------------------------------------------------
+  validate:
+    strategy:
+      fail-fast: false
+
+      matrix:
+        os: ${{ fromJson(inputs.operating_system_json_string) }}
+        python_version: ${{ fromJson(inputs.python_version_json_string) }}
+
+    name: Validate
+    runs-on: ${{ matrix.os }}
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv and python
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python_version }}
+          enable-cache: true
+
+      - name: Install Dependencies
+        run: uv sync --frozen
+
+      - name: Validate Formatting
+        run: uv run ruff format --check --verbose
+
+      - name: Validate Linting
+        run: uv run ruff check --verbose
+
+      - name: Validate Tests
+        run: uv run pytest
+        env:
+          COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
+
+  # ----------------------------------------------------------------------
+  release:
+    needs: [validate]
+
+    name: Release
+    runs-on: ubuntu-latest
+
+    env:
+      TEMPLATE_VERSION: ${{ needs.calculate_version.outputs.template_version }}
+
+    permissions:
+      contents: write  # To tag the repository and create the release
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Has Release Changes?
+        id: has_release_changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: ./.github/release_sources.yaml
+
+      - name: Release
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.has_release_changes.outputs.src == 'true' }}
+        uses: ./.github/actions/release_impl

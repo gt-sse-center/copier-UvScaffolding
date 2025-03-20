@@ -1,0 +1,24 @@
+# serializer version: 1
+# name: test_All[]
+  dict({
+    '.copier-answers.yml': '''
+      # Changes here will be overwritten by Copier; DO NOT MODIFY THIS FILE DIRECTLY!
+      #
+      # This file was generated using copier (https://copier.readthedocs.io/) with the
+      # template copier-UvScaffolding (https://github.com/gt-sse-center/copier-UvScaffolding).
+      # Additional information (including instructions on how to use this template with copier) is
+      # available at https://github.com/gt-sse-center/copier-UvScaffolding.
+      #
+      
+      _commit: <<commit>>
+      _src_path: <<cwd>>
+      author_email: <<author_email>>
+      author_name: <<author_name>>
+      github_host: https://github.com
+      github_repo_name: <<github_repo_name>>
+      github_username: <<github_username>>
+      project_name: this_is_the_project_name
+  
+    ''',
+  })
+# ---
