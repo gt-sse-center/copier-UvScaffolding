@@ -1,0 +1,59 @@
+[project]
+name = "copier-uvscaffolding"
+version = "0.1.0"
+description = "Copier (https://copier.readthedocs.io/) template to create uv-based python scaffolding."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "copier>=9.6.0",
+    "copier-templates-extensions>=0.3.1",
+]
+
+[dependency-groups]
+dev = [
+    "autogitsemver>=0.8.0",
+    "pytest>=8.3.5",
+    "pytest-copie>=0.2.1",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.11.0",
+    "syrupy>=4.9.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "--verbose -vv --capture=no"
+
+python_files = [
+    "**/*Test.py",
+]
+norecursedirs = ["template"]
+
+[tool.ruff]
+line-length = 110
+
+[tool.ruff.lint]
+exclude = ["tests/**"]
+
+select = ["ALL"]
+
+ignore = [
+    "ANN002", # Missing type annotation for `*args`
+    "ANN003", # Missing type annotation for `**kwargs`
+    "BLE001", # Do not catch blind exception: `Exception`
+    "COM812", # Trailing comma missing
+    "D202", # No blank lines allowed after function docstring
+    "D205", # 1 blank line required between summary line and description
+    "E501", # Line too long
+    "I001", # Import block is un-sorted or un-formatted
+    "N802", # Function name `xxx` should be lowercase
+    "N999", # Invalid module name
+    "S101", # Use of assert detected
+    "UP032", # Use f-string instead of `format` call
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15
+
+[tool.ruff.lint.pylint]
+max-args = 10
+max-branches = 20
+max-returns = 20

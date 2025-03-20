@@ -1,0 +1,75 @@
+# ----------------------------------------------------------------------
+# |
+# |  Questions
+# |
+# ----------------------------------------------------------------------
+project_name:
+  type: str
+  help: Enter the name of the project.
+  validator: |-
+    {% if not (project_name | regex_search('^[a-zA-Z][a-zA-Z0-9_-]*$')) %}
+    Project names must 1) Start with a letter and 2) Only contain alphanumeric characters, hyphens, and underscores
+    {% endif %}
+
+author_name:
+  type: str
+  help: Enter the name of the author or organization.
+  validator: |-
+    {% if not author_name %}
+    Please enter a valid author or organization.
+    {% endif %}
+
+author_email:
+  type: str
+  help: Enter the email address of the author or organization.
+  validator: |-
+    {% if not author_email %}
+    Please enter a valid email address.
+    {% endif %}
+
+github_host:
+  type: str
+  help: Enter the GitHub URL.
+  default: https://github.com
+  validator: |-
+    {% if not github_host %}
+    Please enter a valid URL.
+    {% endif %}
+
+github_username:
+  type: str
+  help: Enter your GitHub user/organization name.
+  validator: |-
+    {% if not github_username %}
+    Please enter a valid GitHub user/organization name
+    {% endif %}
+
+github_repo_name:
+  type: str
+  help: Enter the name of your GitHub repository.
+  default: "{{ project_name | slugify }}"
+  validator: |-
+    {% if not github_repo_name %}
+    Please enter a valid GitHub repository name.
+    {% endif %}
+
+github_url:
+  type: str
+  default: "{{ github_host }}/{{ github_username }}/{{ github_repo_name }}"
+  when: False
+
+# ----------------------------------------------------------------------
+# |
+# |  Configuration
+# |
+# ----------------------------------------------------------------------
+_subdirectory: template
+_templates_suffix: ""
+
+_tasks:
+  - python __tools/Cleanup.py
+  - python -c "import shutil; shutil.rmtree('__tools');"
+
+_jinja_extensions:
+  - copier_templates_extensions.TemplateExtensionLoader
+  - extensions/slugify.py:SlugifyExtension
