@@ -10,10 +10,10 @@ runs:
         enable-cache: true
 
     - name: Install Dependencies
+      shell: bash
       run: uv sync --frozen
 
     - name: Create Repository Tag
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.has_release_changes.outputs.src == 'true' }}
       shell: bash
       run: |-
         export TEMPLATE_VERSION=$(uv run AutoGitSemVer template --quiet --no-branch-name --no-metadata)
