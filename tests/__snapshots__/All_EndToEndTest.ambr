@@ -18,6 +18,7 @@
       github_repo_name: <<github_repo_name>>
       github_username: <<github_username>>
       project_name: this_is_the_project_name
+      python_package_name: this_is_the_project_name
   
     ''',
     '.github/ISSUE_TEMPLATE/bug_report.md': '''
@@ -104,5 +105,115 @@
       Please provide any images, GIFs, or videos that show the effect of your changes (if applicable). A picture is worth a thousand words.
   
     ''',
+    '.gitignore': '''
+      # Python-generated files
+      __pycache__/
+      *.py[oc]
+      build/
+      dist/
+      wheels/
+      *.egg-info
+      
+      # Virtual environments
+      .venv
+      .coverage
+      .DS_Store
+      .vscode
+      minisign_key.pri
+    ''',
+    '.python-version': '<<python_version>>',
+    'README.md': '',
+    'pyproject.toml': '''
+      [project]
+      name = "this-is-the-project-name"
+      description = "Add your description here"
+      readme = "README.md"
+      requires-python = ">= <<python_version>>"
+      dependencies = []
+      dynamic = ["version"]
+      classifiers = [
+          "License :: OSI Approved :: MIT License",
+          "Operating System :: MacOS",
+          "Operating System :: Microsoft :: Windows",
+          "Operating System :: POSIX :: Linux",
+          "Programming Language :: Python",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.10",
+      ]
+      
+      [project.urls]
+      Homepage = "https://github.com/<<github_username>>/<<github_repo_name>>"
+      Documentation = "https://github.com/<<github_username>>/<<github_repo_name>>"
+      Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
+      
+      [build-system]
+      requires = ["hatchling"]
+      build-backend = "hatchling.build"
+      
+      [dependency-groups]
+      dev = ["autogitsemver", "pytest", "pytest", "ruff"]
+      
+      [tool.hatch.version]
+      path = "src/this_is_the_project_name/__init__.py"
+      
+      [tool.pytest.ini_options]
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-fail-under=95.0"
+      
+      [tool.ruff]
+      line-length = 110
+      
+      [tool.ruff.lint]
+      exclude = ["tests/**"]
+      
+      select = ["ALL"]
+      
+      ignore = [
+          "ANN002", # Missing type annotation for `*args`
+          "ANN003", # Missing type annotation for `**kwargs`
+          "BLE001", # Do not catch blind exception: `Exception`
+          "COM812", # Trailing comma missing
+          "D202", # No blank lines allowed after function docstring
+          "E501", # Line too long
+          "I001", # Import block is un-sorted or un-formatted
+          "N802", # Function name `xxx` should be lowercase
+          "N999", # Invalid module name
+          "S101", # Use of assert detected
+          "UP032", # Use f-string instead of `format` call
+      ]
+      
+      [tool.ruff.lint.mccabe]
+      max-complexity = 15
+      
+      [tool.ruff.lint.pylint]
+      max-args = 10
+      max-branches = 20
+      max-returns = 20
+  
+    ''',
+    'src/AutoGitSemVer.yaml': '''
+      # This file is used by AutoGitSemVer to configure the semantic version of this package. It indicates
+      # that AutoGitSemVer should only look at changes in this directory, its descendants, and files
+      # specified in this list when calculating the semantic version for the package.
+      additional_dependencies:
+        - "../pyproject.toml"
+        - "../README.md"
+        - "../uv.lock"
+  
+    ''',
+    'src/this_is_the_project_name/__init__.py': '''
+      def hello() -> str:
+          return "Hello from this-is-the-project-name!"
+      
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
+      #
+      __version__ = "0.1.0"
+  
+    ''',
+    'src/this_is_the_project_name/py.typed': '',
   })
 # ---

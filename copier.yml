@@ -58,6 +58,16 @@ github_url:
   default: "{{ github_host }}/{{ github_username }}/{{ github_repo_name }}"
   when: False
 
+python_package_name:
+  type: str
+  help: Enter the name of the Python package.
+  default: "{{ project_name | pythonpackageify }}"
+  validator: |-
+    {% if not (python_package_name | regex_search('^[a-z_][a-z0-9_]*$')) %}
+    Python package names must 1) Start with a lowercase letter or underscore and 2) Only contain alphanumeric characters and underscores.
+    {% endif %}
+
+
 # ----------------------------------------------------------------------
 # |
 # |  Configuration
@@ -67,9 +77,11 @@ _subdirectory: template
 _templates_suffix: ""
 
 _tasks:
+  - python __tools/UvInit.py
   - python __tools/Cleanup.py
   - python -c "import shutil; shutil.rmtree('__tools');"
 
 _jinja_extensions:
   - copier_templates_extensions.TemplateExtensionLoader
   - extensions/slugify.py:SlugifyExtension
+  - extensions/slugify.py:PythonPackageifyExtension
