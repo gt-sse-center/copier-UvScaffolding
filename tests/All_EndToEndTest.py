@@ -23,8 +23,12 @@ def test_All(configuration_info, copie, snapshot) -> None:
 
     results: dict[str, str | None] = {}
 
-    for root_str, _, filenames in os.walk(project_dir):
+    for root_str, directories, filenames in os.walk(project_dir):
         root = Path(root_str)
+        if root.parts[-1] == ".git":
+            directories[:] = []
+            continue
+
         relative_path = root.relative_to(project_dir)
 
         if not filenames:
@@ -32,6 +36,9 @@ def test_All(configuration_info, copie, snapshot) -> None:
             continue
 
         for filename in filenames:
+            if filename == "uv.lock":
+                continue
+
             content = (root / filename).read_text(encoding="utf-8")
 
             for freeform_string in TestHelpers.freeform_strings:

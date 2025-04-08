@@ -71,6 +71,7 @@ def _EnumerateConfigurations(
     # Do not make the project name random, as it needs to remain consistent across invocations
     # for valid comparisons (for example, when the name is used to create directories).
     configuration["project_name"] = "this_is_the_project_name"
+    configuration["python_package_name"] = configuration["project_name"]
 
     # We will generate more ConfigurationInfo instances in future commits
     yield ConfigurationInfo("", configuration)
