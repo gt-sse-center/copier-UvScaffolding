@@ -7,6 +7,8 @@ requires-python = ">=3.10"
 dependencies = [
     "copier>=9.6.0",
     "copier-templates-extensions>=0.3.1",
+    "dbrownell-common>=0.14.4",
+    "tomlkit>=0.13.2",
 ]
 
 [dependency-groups]
@@ -44,6 +46,7 @@ ignore = [
     "D205", # 1 blank line required between summary line and description
     "E501", # Line too long
     "I001", # Import block is un-sorted or un-formatted
+    "INP001", # Missing __init__.py file
     "N802", # Function name `xxx` should be lowercase
     "N999", # Invalid module name
     "S101", # Use of assert detected

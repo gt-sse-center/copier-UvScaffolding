@@ -1,0 +1,5 @@
+.coverage
+.DS_Store
+.vscode
+__pycache__
+minisign_key.pri

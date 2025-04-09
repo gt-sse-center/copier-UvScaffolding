@@ -1,0 +1,7 @@
+# This file is used by AutoGitSemVer to configure the semantic version of this package. It indicates
+# that AutoGitSemVer should only look at changes in this directory, its descendants, and files
+# specified in this list when calculating the semantic version for the package.
+additional_dependencies:
+  - "../pyproject.toml"
+  - "../README.md"
+  - "../uv.lock"
