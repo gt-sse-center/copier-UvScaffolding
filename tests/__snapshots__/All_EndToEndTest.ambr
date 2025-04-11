@@ -122,6 +122,35 @@
       .vscode
       minisign_key.pri
     ''',
+    '.pre-commit-config.yaml': '''
+      # See https://pre-commit.com for more information
+      # See https://pre-commit.com/hooks.html for more hooks
+      repos:
+      - repo: local
+        hooks:
+        - id: uv sync --frozen
+          name: uv sync --frozen
+          entry: uv sync --frozen
+          language: system
+          pass_filenames: false
+          require_serial: true
+          always_run: true
+      
+        - id: uv run ruff format --check
+          name: uv run ruff format --check
+          entry: uv run ruff format --check
+          language: system
+          pass_filenames: false
+          always_run: true
+      
+        - id: uv run ruff check
+          name: uv run ruff check
+          entry: uv run ruff check
+          language: system
+          pass_filenames: false
+          always_run: true
+  
+    ''',
     '.python-version': '<<python_version>>',
     'LICENSE': '''
       Copyright <<year>> <<author_name>>
@@ -172,7 +201,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pytest", "pytest", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -390,6 +419,35 @@
       .vscode
       minisign_key.pri
     ''',
+    '.pre-commit-config.yaml': '''
+      # See https://pre-commit.com for more information
+      # See https://pre-commit.com/hooks.html for more hooks
+      repos:
+      - repo: local
+        hooks:
+        - id: uv sync --frozen
+          name: uv sync --frozen
+          entry: uv sync --frozen
+          language: system
+          pass_filenames: false
+          require_serial: true
+          always_run: true
+      
+        - id: uv run ruff format --check
+          name: uv run ruff format --check
+          entry: uv run ruff format --check
+          language: system
+          pass_filenames: false
+          always_run: true
+      
+        - id: uv run ruff check
+          name: uv run ruff check
+          entry: uv run ruff check
+          language: system
+          pass_filenames: false
+          always_run: true
+  
+    ''',
     '.python-version': '<<python_version>>',
     'LICENSE': '''
       Copyright <<year>> <<author_name>>
@@ -454,7 +512,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pytest", "pytest", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -672,6 +730,35 @@
       .vscode
       minisign_key.pri
     ''',
+    '.pre-commit-config.yaml': '''
+      # See https://pre-commit.com for more information
+      # See https://pre-commit.com/hooks.html for more hooks
+      repos:
+      - repo: local
+        hooks:
+        - id: uv sync --frozen
+          name: uv sync --frozen
+          entry: uv sync --frozen
+          language: system
+          pass_filenames: false
+          require_serial: true
+          always_run: true
+      
+        - id: uv run ruff format --check
+          name: uv run ruff format --check
+          entry: uv run ruff format --check
+          language: system
+          pass_filenames: false
+          always_run: true
+      
+        - id: uv run ruff check
+          name: uv run ruff check
+          entry: uv run ruff check
+          language: system
+          pass_filenames: false
+          always_run: true
+  
+    ''',
     '.python-version': '<<python_version>>',
     'LICENSE': '''
       Copyright <<year>> <<author_name>>
@@ -734,7 +821,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pytest", "pytest", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -952,6 +1039,35 @@
       .vscode
       minisign_key.pri
     ''',
+    '.pre-commit-config.yaml': '''
+      # See https://pre-commit.com for more information
+      # See https://pre-commit.com/hooks.html for more hooks
+      repos:
+      - repo: local
+        hooks:
+        - id: uv sync --frozen
+          name: uv sync --frozen
+          entry: uv sync --frozen
+          language: system
+          pass_filenames: false
+          require_serial: true
+          always_run: true
+      
+        - id: uv run ruff format --check
+          name: uv run ruff format --check
+          entry: uv run ruff format --check
+          language: system
+          pass_filenames: false
+          always_run: true
+      
+        - id: uv run ruff check
+          name: uv run ruff check
+          entry: uv run ruff check
+          language: system
+          pass_filenames: false
+          always_run: true
+  
+    ''',
     '.python-version': '<<python_version>>',
     'LICENSE': '''
       Copyright (C) <<year>> <<author_name>>
@@ -1003,7 +1119,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pytest", "pytest", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -1221,6 +1337,35 @@
       .vscode
       minisign_key.pri
     ''',
+    '.pre-commit-config.yaml': '''
+      # See https://pre-commit.com for more information
+      # See https://pre-commit.com/hooks.html for more hooks
+      repos:
+      - repo: local
+        hooks:
+        - id: uv sync --frozen
+          name: uv sync --frozen
+          entry: uv sync --frozen
+          language: system
+          pass_filenames: false
+          require_serial: true
+          always_run: true
+      
+        - id: uv run ruff format --check
+          name: uv run ruff format --check
+          entry: uv run ruff format --check
+          language: system
+          pass_filenames: false
+          always_run: true
+      
+        - id: uv run ruff check
+          name: uv run ruff check
+          entry: uv run ruff check
+          language: system
+          pass_filenames: false
+          always_run: true
+  
+    ''',
     '.python-version': '<<python_version>>',
     'LICENSE': '''
       MIT LICENSE
@@ -1279,7 +1424,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pytest", "pytest", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -1497,6 +1642,35 @@
       .vscode
       minisign_key.pri
     ''',
+    '.pre-commit-config.yaml': '''
+      # See https://pre-commit.com for more information
+      # See https://pre-commit.com/hooks.html for more hooks
+      repos:
+      - repo: local
+        hooks:
+        - id: uv sync --frozen
+          name: uv sync --frozen
+          entry: uv sync --frozen
+          language: system
+          pass_filenames: false
+          require_serial: true
+          always_run: true
+      
+        - id: uv run ruff format --check
+          name: uv run ruff format --check
+          entry: uv run ruff format --check
+          language: system
+          pass_filenames: false
+          always_run: true
+      
+        - id: uv run ruff check
+          name: uv run ruff check
+          entry: uv run ruff check
+          language: system
+          pass_filenames: false
+          always_run: true
+  
+    ''',
     '.python-version': '<<python_version>>',
     'README.md': '',
     'pyproject.toml': '''
@@ -1528,7 +1702,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pytest", "pytest", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"

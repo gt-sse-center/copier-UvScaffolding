@@ -96,7 +96,7 @@ def test_All(configuration_info, copie, snapshot) -> None:
 
                 # A regex to extract the dependency name and ignore the version information that
                 # comes after it.
-                dev_dependency_regex = re.compile(r"^(?P<name>\w+).+?")
+                dev_dependency_regex = re.compile(r"^(?P<name>[\w\-]+).+?")
 
                 versionless_dev_dependencies: list[str] = []
 

@@ -57,6 +57,7 @@ def _RunUvInit(indented_stream: StreamDecorator) -> bool:
             # Add dev dependencies
             dev_dependencies = [
                 "autogitsemver",
+                "pre-commit",
                 "pytest",
                 "pytest-cov",
                 "ruff",
