@@ -3,6 +3,7 @@ import os
 import re
 import sys
 
+from datetime import datetime
 from pathlib import Path
 from typing import cast
 import pytest
@@ -64,6 +65,8 @@ def test_All(configuration_info, copie, snapshot) -> None:
             elif filename == ".python-version":
                 assert content.strip() == python_version, (content, python_version)
                 content = "<<python_version>>"
+            elif filename == "LICENSE":
+                content = content.replace(str(datetime.now().year), "<<year>>")
             elif filename == "pyproject.toml":
                 toml_content = tomlkit.loads(content)
 

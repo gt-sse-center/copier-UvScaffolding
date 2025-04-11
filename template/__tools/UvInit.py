@@ -157,8 +157,18 @@ def _AugmentPyProject(indented_stream: StreamDecorator) -> bool:
 
         _MergeDictionaries(source, destination)
 
-        cast("tomlkit.TOMLDocument", destination["project"]).pop("version", None)
+        project_section = cast("tomlkit.TOMLDocument", destination["project"])
 
+        # Remove the hard-coded version, as __pyproject.fragment.toml is making it dynamic
+        project_section.pop("version", None)
+
+        # Always overwrite the license value, as it may have changed
+        if "{{ license }}" == "None":  # noqa: PLR0133
+            project_section.pop("license", None)
+        else:
+            project_section["license"] = {"text": "{{ license }}"}
+
+        # Write the updated content
         with pyproject_file.open("w") as f:
             tomlkit.dump(destination, f)
 
@@ -204,16 +214,12 @@ def _AugmentHelper(
     assert fragment_filename.is_file(), fragment_filename
 
     with DoneManager.Create(indented_stream, description):
-        with source_filename.open("rb") as f:
-            source_content = f.read().decode("utf-8")
-
-        with fragment_filename.open("rb") as f:
-            fragment_content = f.read().decode("utf-8")
+        source_content = source_filename.read_text(encoding="utf-8")
+        fragment_content = fragment_filename.read_text(encoding="utf-8")
 
         decorated_content = decorate_callback(source_content, fragment_content)
         if decorated_content is not None:
-            with source_filename.open("wb") as f:
-                f.write(decorated_content.encode("utf-8"))
+            source_filename.write_text(decorated_content, encoding="utf-8")
 
         fragment_filename.unlink()
 

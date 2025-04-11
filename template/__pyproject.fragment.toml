@@ -7,7 +7,6 @@
 dynamic = ["version"]
 
 classifiers = [
-    "License :: OSI Approved :: MIT License",
     "Operating System :: MacOS",
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX :: Linux",
@@ -18,8 +17,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
 ]
 
-# TODO: Select proper license
-# license = { text = "MIT" }
+license = { text = "{{ license }}" }
 
 [project.urls]
 Homepage = "{{ github_url }}"

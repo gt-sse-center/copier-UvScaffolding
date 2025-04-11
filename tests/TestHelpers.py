@@ -4,6 +4,13 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Generator
 
+import rtyaml
+
+from dbrownell_Common.ContextlibEx import ExitStack
+from dbrownell_Common import PathEx
+from dbrownell_Common.Streams.DoneManager import DoneManager
+from dbrownell_Common import SubprocessEx
+
 
 # ----------------------------------------------------------------------
 # copier values that can be any string value.
@@ -57,6 +64,27 @@ def RunTest(
 
 
 # ----------------------------------------------------------------------
+def RunManually(
+    dm: DoneManager,
+    template_dir: Path,
+    output_dir: Path,
+    configuration: dict[str, Any],
+) -> None:
+    configuration_filename = PathEx.CreateTempFileName(".yaml")
+
+    with configuration_filename.open("w") as f:
+        rtyaml.dump(configuration, f)
+
+    with ExitStack(configuration_filename.unlink):
+        command_line = f'copier copy "{template_dir}" "{output_dir}" --trust --overwrite --defaults --data-file "{configuration_filename}" --vcs-ref=HEAD'
+
+        dm.WriteVerbose(f"Command line: {command_line}\n\n")
+
+        with dm.YieldStream() as stream:
+            dm.result = SubprocessEx.Stream(command_line, stream)
+
+
+# ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 def _EnumerateConfigurations(
@@ -73,5 +101,18 @@ def _EnumerateConfigurations(
     configuration["project_name"] = "this_is_the_project_name"
     configuration["python_package_name"] = configuration["project_name"]
 
-    # We will generate more ConfigurationInfo instances in future commits
-    yield ConfigurationInfo("", configuration)
+    name_parts: list[str] = []
+
+    for license_value in [
+        "None",
+        "Apache-2.0",
+        "BSD-3-Clause-Clear",
+        "BSL-1.0",
+        "GPL-3.0-or-later",
+        "MIT",
+    ]:
+        configuration["license"] = license_value
+
+        name_parts.append(license_value)
+        with ExitStack(name_parts.pop):
+            yield ConfigurationInfo("-".join(name_parts), configuration)
