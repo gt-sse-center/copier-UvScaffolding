@@ -187,7 +187,7 @@ def _AugmentInitFile(indented_stream: StreamDecorator) -> bool:
         if "__version__" in source:
             return None
 
-        return source.rstrip() + "\n\n" + fragment
+        return source.rstrip() + "\n\n\n" + fragment
 
     # ----------------------------------------------------------------------
 

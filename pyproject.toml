@@ -31,10 +31,17 @@ python_files = [
 norecursedirs = ["template"]
 
 [tool.ruff]
+exclude = [
+    "template/**",
+]
+
 line-length = 110
 
 [tool.ruff.lint]
-exclude = ["tests/**"]
+exclude = [
+    "template/**",
+    "tests/**",
+]
 
 select = ["ALL"]
 
