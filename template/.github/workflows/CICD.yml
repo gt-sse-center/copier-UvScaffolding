@@ -1,0 +1,36 @@
+name: "CI+CD"
+run-name: {% raw %}${{ github.run_number }} [${{ github.actor }}] on ${{ github.ref_name }}{% endraw %}
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *' # Once a day at 12am UTC
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  CICD_Workflow:
+    name: "CI+CD Workflow"
+
+    permissions:
+      contents: write
+
+    uses: ./.github/workflows/CICD_impl.yml
+
+    with:
+      # These values can be customized for your specific requirements.
+      operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
+      python_version_json_string: "{{ python_versions | to_python_list }}"
+      python_package_version: "{{ (python_versions | to_python_list)[-1] }}"
+
+    secrets:
+      # These values should be populated as GitHub Action secrets ({{ github_url }}/settings/secrets/actions)
+      MINISIGN_PRIVATE_KEY: {% raw %}${{ secrets.MINISIGN_PRIVATE_KEY }}{% endraw %}
+      PYPI_PUBLISH_TOKEN: {% raw %}${{ secrets.PYPI_PUBLISH_TOKEN }}{% endraw %}
+      COVERAGE_BADGE_GIST_TOKEN: {% raw %}${{ secrets.COVERAGE_BADGE_GIST_TOKEN }}{% endraw %}

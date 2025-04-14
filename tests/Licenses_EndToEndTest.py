@@ -1,12 +1,10 @@
 import copy
 
 from pathlib import Path
-from typing import Any
 
 import pytest
-import tomlkit
 
-from dbrownell_Common.Streams.DoneManager import DoneManager, Flags as DoneManagerFlags
+from dbrownell_Common.Streams.DoneManager import DoneManager
 from dbrownell_Common.Streams.StreamDecorator import StreamDecorator
 
 pytest.register_assert_rewrite("TestHelpers")
@@ -26,7 +24,7 @@ def test_LicenseToNone(copie) -> None:
 
     assert (output_dir / "LICENSE").is_file()
 
-    pyproject_content = _LoadPyproject(output_dir)
+    pyproject_content = TestHelpers.LoadPyproject(output_dir)
     assert "license" in pyproject_content["project"]
 
     # Run the none_configuration
@@ -40,7 +38,7 @@ def test_LicenseToNone(copie) -> None:
 
     assert not (output_dir / "LICENSE").exists()
 
-    pyproject_content = _LoadPyproject(output_dir)
+    pyproject_content = TestHelpers.LoadPyproject(output_dir)
     assert "license" not in pyproject_content["project"]
 
 
@@ -57,7 +55,7 @@ def test_NoneToLicense(copie) -> None:
 
     assert not (output_dir / "LICENSE").exists()
 
-    pyproject_content = _LoadPyproject(output_dir)
+    pyproject_content = TestHelpers.LoadPyproject(output_dir)
     assert "license" not in pyproject_content["project"]
 
     # Run the not_none_configuration
@@ -71,23 +69,12 @@ def test_NoneToLicense(copie) -> None:
 
     assert (output_dir / "LICENSE").is_file()
 
-    pyproject_content = _LoadPyproject(output_dir)
+    pyproject_content = TestHelpers.LoadPyproject(output_dir)
     assert "license" in pyproject_content["project"]
 
 
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
-def _LoadPyproject(project_dir: Path) -> dict[str, Any]:
-    pyproject_path = project_dir / "pyproject.toml"
-    assert pyproject_path.is_file(), pyproject_path
-
-    with pyproject_path.open("r", encoding="utf-8") as f:
-        content = tomlkit.load(f)
-
-    return content
-
-
 # ----------------------------------------------------------------------
 def _GetConfigurations() -> tuple[TestHelpers.ConfigurationInfo, TestHelpers.ConfigurationInfo]:
     none_configuration: TestHelpers.ConfigurationInfo | None = None

@@ -67,6 +67,15 @@ python_package_name:
     Python package names must 1) Start with a lowercase letter or underscore and 2) Only contain alphanumeric characters and underscores.
     {% endif %}
 
+python_versions:
+  type: str
+  help: Enter a comma-delimited list of Python versions to support.
+  default: "3.10, 3.11, 3.12, 3.13"
+  validator: |-
+    {% if not (python_versions | regex_search('^(\d+\.\d+)(\s*,\s*\d+\.\d+)*,?$')) %}
+    Please enter one or more valid Python versions, separated by commas.
+    {% endif %}
+
 license:
   type: str
   help: Select the open source license you would like to use for this project. More information about these licenses can be found at https://choosealicense.com/.
@@ -97,3 +106,4 @@ _jinja_extensions:
   - copier_templates_extensions.TemplateExtensionLoader
   - extensions/slugify.py:SlugifyExtension
   - extensions/slugify.py:PythonPackageifyExtension
+  - extensions/to_python_list.py:ToPythonListExtension
