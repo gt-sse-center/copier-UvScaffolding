@@ -163,11 +163,34 @@ def _AugmentPyProject(indented_stream: StreamDecorator) -> bool:
         # Remove the hard-coded version, as __pyproject.fragment.toml is making it dynamic
         project_section.pop("version", None)
 
-        # Always overwrite the license value, as it may have changed
+        # Always overwrite the license value, as it may have changed between invocations
         if "{{ license }}" == "None":  # noqa: PLR0133
             project_section.pop("license", None)
         else:
             project_section["license"] = {"text": "{{ license }}"}
+
+        # Always update the python versions, as the value may have changed between invocations
+        classifiers = project_section.get("classifiers", [])
+
+        index = 0
+        while index < len(classifiers):
+            if classifiers[index].startswith("Programming Language :: Python :: "):
+                del classifiers[index]
+            else:
+                index += 1
+
+        new_python_versions = [
+            {% for python_version in python_versions | to_python_list %}
+            "{{ python_version }}",
+            {% endfor %}
+        ]
+
+        for python_version in new_python_versions:
+            classifiers.append(
+                f"Programming Language :: Python :: {python_version}",
+            )
+
+        project_section["classifiers"] = classifiers
 
         # Write the updated content
         with pyproject_file.open("w") as f:

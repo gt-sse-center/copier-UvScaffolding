@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Generator
 
 import rtyaml
+import tomlkit
 
 from dbrownell_Common.ContextlibEx import ExitStack
 from dbrownell_Common import PathEx
@@ -82,6 +83,17 @@ def RunManually(
 
         with dm.YieldStream() as stream:
             dm.result = SubprocessEx.Stream(command_line, stream)
+
+
+# ----------------------------------------------------------------------
+def LoadPyproject(project_dir: Path) -> dict[str, Any]:
+    pyproject_path = project_dir / "pyproject.toml"
+    assert pyproject_path.is_file(), pyproject_path
+
+    with pyproject_path.open("r", encoding="utf-8") as f:
+        content = tomlkit.load(f)
+
+    return content
 
 
 # ----------------------------------------------------------------------
