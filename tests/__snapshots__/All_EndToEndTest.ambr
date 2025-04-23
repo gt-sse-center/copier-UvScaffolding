@@ -228,6 +228,15 @@
       Please provide any images, GIFs, or videos that show the effect of your changes (if applicable). A picture is worth a thousand words.
   
     ''',
+    '.github/release_sources.yaml': '''
+      # Changes to any of these files or a file within these directories will trigger a release.
+      src:
+        - 'src/**'
+        - 'pyproject.toml'
+        - 'README.md'
+        - 'uv.lock'
+  
+    ''',
     '.github/workflows/CICD.yml': '''
       name: "CI+CD"
       run-name: ${{ github.run_number }} [${{ github.actor }}] on ${{ github.ref_name }}
@@ -428,7 +437,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/uvrepotemplate/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -442,7 +451,7 @@
                 echo "package_name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
                 echo "**Package Name:** ${PACKAGE_NAME}" >> $GITHUB_STEP_SUMMARY
       
-                export PACKAGE_VERSION=$(uv run python -c "import uvrepotemplate as package; print(package.__version__)")
+                export PACKAGE_VERSION=$(uv run python -c "import this_is_the_project_name as package; print(package.__version__)")
                 echo "package_version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
@@ -490,7 +499,7 @@
               run: uv pip install dist/${{ env.PACKAGE_NAME }}
       
             - name: Validate Python Package
-              run: uv run python -c "import uvrepotemplate as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
+              run: uv run python -c "import this_is_the_project_name as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
       
         # ----------------------------------------------------------------------
         release:
@@ -686,7 +695,7 @@
       name = "this-is-the-project-name"
       description = "Add your description here"
       readme = "README.md"
-      requires-python = ">= <<python_version>>"
+      requires-python = ">= 3.10"
       dependencies = []
       dynamic = ["version"]
       classifiers = [
@@ -1037,6 +1046,15 @@
       Please provide any images, GIFs, or videos that show the effect of your changes (if applicable). A picture is worth a thousand words.
   
     ''',
+    '.github/release_sources.yaml': '''
+      # Changes to any of these files or a file within these directories will trigger a release.
+      src:
+        - 'src/**'
+        - 'pyproject.toml'
+        - 'README.md'
+        - 'uv.lock'
+  
+    ''',
     '.github/workflows/CICD.yml': '''
       name: "CI+CD"
       run-name: ${{ github.run_number }} [${{ github.actor }}] on ${{ github.ref_name }}
@@ -1237,7 +1255,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/uvrepotemplate/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -1251,7 +1269,7 @@
                 echo "package_name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
                 echo "**Package Name:** ${PACKAGE_NAME}" >> $GITHUB_STEP_SUMMARY
       
-                export PACKAGE_VERSION=$(uv run python -c "import uvrepotemplate as package; print(package.__version__)")
+                export PACKAGE_VERSION=$(uv run python -c "import this_is_the_project_name as package; print(package.__version__)")
                 echo "package_version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
@@ -1299,7 +1317,7 @@
               run: uv pip install dist/${{ env.PACKAGE_NAME }}
       
             - name: Validate Python Package
-              run: uv run python -c "import uvrepotemplate as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
+              run: uv run python -c "import this_is_the_project_name as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
       
         # ----------------------------------------------------------------------
         release:
@@ -1509,7 +1527,7 @@
       name = "this-is-the-project-name"
       description = "Add your description here"
       readme = "README.md"
-      requires-python = ">= <<python_version>>"
+      requires-python = ">= 3.10"
       dependencies = []
       dynamic = ["version"]
       classifiers = [
@@ -1860,6 +1878,15 @@
       Please provide any images, GIFs, or videos that show the effect of your changes (if applicable). A picture is worth a thousand words.
   
     ''',
+    '.github/release_sources.yaml': '''
+      # Changes to any of these files or a file within these directories will trigger a release.
+      src:
+        - 'src/**'
+        - 'pyproject.toml'
+        - 'README.md'
+        - 'uv.lock'
+  
+    ''',
     '.github/workflows/CICD.yml': '''
       name: "CI+CD"
       run-name: ${{ github.run_number }} [${{ github.actor }}] on ${{ github.ref_name }}
@@ -2060,7 +2087,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/uvrepotemplate/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -2074,7 +2101,7 @@
                 echo "package_name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
                 echo "**Package Name:** ${PACKAGE_NAME}" >> $GITHUB_STEP_SUMMARY
       
-                export PACKAGE_VERSION=$(uv run python -c "import uvrepotemplate as package; print(package.__version__)")
+                export PACKAGE_VERSION=$(uv run python -c "import this_is_the_project_name as package; print(package.__version__)")
                 echo "package_version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
@@ -2122,7 +2149,7 @@
               run: uv pip install dist/${{ env.PACKAGE_NAME }}
       
             - name: Validate Python Package
-              run: uv run python -c "import uvrepotemplate as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
+              run: uv run python -c "import this_is_the_project_name as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
       
         # ----------------------------------------------------------------------
         release:
@@ -2330,7 +2357,7 @@
       name = "this-is-the-project-name"
       description = "Add your description here"
       readme = "README.md"
-      requires-python = ">= <<python_version>>"
+      requires-python = ">= 3.10"
       dependencies = []
       dynamic = ["version"]
       classifiers = [
@@ -2681,6 +2708,15 @@
       Please provide any images, GIFs, or videos that show the effect of your changes (if applicable). A picture is worth a thousand words.
   
     ''',
+    '.github/release_sources.yaml': '''
+      # Changes to any of these files or a file within these directories will trigger a release.
+      src:
+        - 'src/**'
+        - 'pyproject.toml'
+        - 'README.md'
+        - 'uv.lock'
+  
+    ''',
     '.github/workflows/CICD.yml': '''
       name: "CI+CD"
       run-name: ${{ github.run_number }} [${{ github.actor }}] on ${{ github.ref_name }}
@@ -2881,7 +2917,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/uvrepotemplate/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -2895,7 +2931,7 @@
                 echo "package_name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
                 echo "**Package Name:** ${PACKAGE_NAME}" >> $GITHUB_STEP_SUMMARY
       
-                export PACKAGE_VERSION=$(uv run python -c "import uvrepotemplate as package; print(package.__version__)")
+                export PACKAGE_VERSION=$(uv run python -c "import this_is_the_project_name as package; print(package.__version__)")
                 echo "package_version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
@@ -2943,7 +2979,7 @@
               run: uv pip install dist/${{ env.PACKAGE_NAME }}
       
             - name: Validate Python Package
-              run: uv run python -c "import uvrepotemplate as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
+              run: uv run python -c "import this_is_the_project_name as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
       
         # ----------------------------------------------------------------------
         release:
@@ -3140,7 +3176,7 @@
       name = "this-is-the-project-name"
       description = "Add your description here"
       readme = "README.md"
-      requires-python = ">= <<python_version>>"
+      requires-python = ">= 3.10"
       dependencies = []
       dynamic = ["version"]
       classifiers = [
@@ -3491,6 +3527,15 @@
       Please provide any images, GIFs, or videos that show the effect of your changes (if applicable). A picture is worth a thousand words.
   
     ''',
+    '.github/release_sources.yaml': '''
+      # Changes to any of these files or a file within these directories will trigger a release.
+      src:
+        - 'src/**'
+        - 'pyproject.toml'
+        - 'README.md'
+        - 'uv.lock'
+  
+    ''',
     '.github/workflows/CICD.yml': '''
       name: "CI+CD"
       run-name: ${{ github.run_number }} [${{ github.actor }}] on ${{ github.ref_name }}
@@ -3691,7 +3736,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/uvrepotemplate/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -3705,7 +3750,7 @@
                 echo "package_name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
                 echo "**Package Name:** ${PACKAGE_NAME}" >> $GITHUB_STEP_SUMMARY
       
-                export PACKAGE_VERSION=$(uv run python -c "import uvrepotemplate as package; print(package.__version__)")
+                export PACKAGE_VERSION=$(uv run python -c "import this_is_the_project_name as package; print(package.__version__)")
                 echo "package_version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
@@ -3753,7 +3798,7 @@
               run: uv pip install dist/${{ env.PACKAGE_NAME }}
       
             - name: Validate Python Package
-              run: uv run python -c "import uvrepotemplate as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
+              run: uv run python -c "import this_is_the_project_name as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
       
         # ----------------------------------------------------------------------
         release:
@@ -3957,7 +4002,7 @@
       name = "this-is-the-project-name"
       description = "Add your description here"
       readme = "README.md"
-      requires-python = ">= <<python_version>>"
+      requires-python = ">= 3.10"
       dependencies = []
       dynamic = ["version"]
       classifiers = [
@@ -4308,6 +4353,15 @@
       Please provide any images, GIFs, or videos that show the effect of your changes (if applicable). A picture is worth a thousand words.
   
     ''',
+    '.github/release_sources.yaml': '''
+      # Changes to any of these files or a file within these directories will trigger a release.
+      src:
+        - 'src/**'
+        - 'pyproject.toml'
+        - 'README.md'
+        - 'uv.lock'
+  
+    ''',
     '.github/workflows/CICD.yml': '''
       name: "CI+CD"
       run-name: ${{ github.run_number }} [${{ github.actor }}] on ${{ github.ref_name }}
@@ -4508,7 +4562,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/uvrepotemplate/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -4522,7 +4576,7 @@
                 echo "package_name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
                 echo "**Package Name:** ${PACKAGE_NAME}" >> $GITHUB_STEP_SUMMARY
       
-                export PACKAGE_VERSION=$(uv run python -c "import uvrepotemplate as package; print(package.__version__)")
+                export PACKAGE_VERSION=$(uv run python -c "import this_is_the_project_name as package; print(package.__version__)")
                 echo "package_version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
@@ -4570,7 +4624,7 @@
               run: uv pip install dist/${{ env.PACKAGE_NAME }}
       
             - name: Validate Python Package
-              run: uv run python -c "import uvrepotemplate as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
+              run: uv run python -c "import this_is_the_project_name as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
       
         # ----------------------------------------------------------------------
         release:
@@ -4750,7 +4804,7 @@
       name = "this-is-the-project-name"
       description = "Add your description here"
       readme = "README.md"
-      requires-python = ">= <<python_version>>"
+      requires-python = ">= 3.10"
       dependencies = []
       dynamic = ["version"]
       classifiers = [
