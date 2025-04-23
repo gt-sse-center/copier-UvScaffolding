@@ -192,6 +192,9 @@ def _AugmentPyProject(indented_stream: StreamDecorator) -> bool:
 
         project_section["classifiers"] = classifiers
 
+        # Always update the earliest python version
+        project_section["requires-python"] = f">= {new_python_versions[-1]}"
+
         # Write the updated content
         with pyproject_file.open("w") as f:
             tomlkit.dump(destination, f)

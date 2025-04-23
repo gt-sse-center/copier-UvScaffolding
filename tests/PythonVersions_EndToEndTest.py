@@ -20,10 +20,10 @@ def test_ChangePythonVersionsPyProject(copie) -> None:
     output_dir = TestHelpers.RunTest(copie, configuration)
     assert output_dir is not None
 
-    classifiers = _GetPythonVersionClassifiers(
-        TestHelpers.LoadPyproject(output_dir)["project"]["classifiers"]
-    )
-    assert classifiers
+    original_project = TestHelpers.LoadPyproject(output_dir)["project"]
+
+    original_classifiers = _GetPythonVersionClassifiers(original_project["classifiers"])
+    assert original_classifiers
 
     # Generate with new classifiers
     new_versions: list[str] = ["1.2", "2.3", "2.10"]
@@ -37,14 +37,21 @@ def test_ChangePythonVersionsPyProject(copie) -> None:
             configuration,
         )
 
-    new_classifiers = _GetPythonVersionClassifiers(
-        TestHelpers.LoadPyproject(output_dir)["project"]["classifiers"]
-    )
+    new_project = TestHelpers.LoadPyproject(output_dir)["project"]
+
+    new_classifiers = _GetPythonVersionClassifiers(new_project["classifiers"])
     assert all(new_version in new_classifiers for new_version in new_versions), (
         new_classifiers,
         new_versions,
     )
     assert len(new_classifiers) == len(new_versions), (new_classifiers, new_versions)
+
+    # Test to see that `requires-python` has been updated
+    assert new_project["requires-python"] != original_project["requires-python"]
+    assert new_versions[0] in new_project["requires-python"], (
+        new_versions[0],
+        new_project["requires-python"],
+    )
 
 
 # ----------------------------------------------------------------------

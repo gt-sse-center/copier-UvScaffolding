@@ -48,6 +48,9 @@ def test_All(configuration_info, copie, snapshot) -> None:
             content = (root / filename).read_text(encoding="utf-8")
 
             for freeform_string in TestHelpers.freeform_strings:
+                if not configuration_info.configuration[freeform_string]:
+                    continue
+
                 content = content.replace(
                     configuration_info.configuration[freeform_string], f"<<{freeform_string}>>"
                 )
@@ -71,13 +74,6 @@ def test_All(configuration_info, copie, snapshot) -> None:
                 toml_content = tomlkit.loads(content)
 
                 project_section = cast(tomlkit.TOMLDocument, toml_content["project"])
-
-                # project.requires-python
-                assert project_section["requires-python"] == f">={python_version}", (
-                    project_section["requires-python"],
-                    python_version,
-                )
-                project_section["requires-python"] = ">= <<python_version>>"
 
                 # project.authors
 
