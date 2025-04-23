@@ -28,6 +28,8 @@ jobs:
       operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
       python_version_json_string: "{{ python_versions | to_python_list }}"
       python_package_version: "{{ (python_versions | to_python_list)[-1] }}"
+      coverage_badge_gist_id: "{{ coverage_badge_gist_id }}"
+      coverage_badge_gist_username: "{{ coverage_badge_gist_username }}"
 
     secrets:
       # These values should be populated as GitHub Action secrets ({{ github_url }}/settings/secrets/actions)

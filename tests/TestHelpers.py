@@ -20,6 +20,8 @@ freeform_strings: list[str] = [
     "author_email",
     "github_username",
     "github_repo_name",
+    "coverage_badge_gist_id",
+    "coverage_badge_gist_username",
 ]
 
 
@@ -124,7 +126,19 @@ def _EnumerateConfigurations(
         "MIT",
     ]:
         configuration["license"] = license_value
+        with ExitStack(lambda: configuration.pop("license")):
+            name_parts.append(license_value)
+            with ExitStack(name_parts.pop):
+                yield ConfigurationInfo("-".join(name_parts), configuration)
 
-        name_parts.append(license_value)
+    # Without coverage_badge_gist_id
+    original_coverage_badge = configuration["coverage_badge_gist_id"]
+    configuration["coverage_badge_gist_id"] = ""
+
+    def RestoreOriginalCoverageBadge():
+        configuration["coverage_badge_gist_id"] = original_coverage_badge
+
+    with ExitStack(RestoreOriginalCoverageBadge):
+        name_parts.append("NoCoverageBadge")
         with ExitStack(name_parts.pop):
             yield ConfigurationInfo("-".join(name_parts), configuration)

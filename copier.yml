@@ -88,6 +88,40 @@ license:
     - MIT
   default: MIT
 
+coverage_badge_gist_id:
+  type: str
+  help: |-
+    Enter the Gist ID used to store dynamic code coverage information produced during the Continuous Integration process. This value may be left
+       blank if you do not want to store this information between runs.
+
+       To create a GitHub Gist ID:
+
+         1) Visit https://gist.github.com.
+         2) Enter the following values in their respective fields:
+
+             Gist description...:              Gist used by GitHub Action workflows to store and retrieve dynamic information (oftentimes used to create and display badges).
+             Filename including extension...:  README.md
+             File contents:                    Gist used by GitHub Action workflows to store and retrieve dynamic information (oftentimes used to create and display badges).
+
+         3) Click the "Create secret gist" button.
+         4) Note the GitHub username and Gist ID.
+         5) Provide the Gist ID as an answer to this question, and the GitHub username as the answer to the next question.
+
+                                      /    GitHub username     \
+                                     /                          \
+             https://gist.github.com/this_is_the_github_username/4c10281ff1abc26cafcb9a5f9a8a443e
+                                                                 \                              /
+                                                                  \           Gist ID          /
+
+       :
+  default: ""
+
+coverage_badge_gist_username:
+  type: str
+  help: "Enter the Gist username associated with the Gist ID used to store dynamic code coverage information."
+  default: "{{ github_username }}"
+  when: "{{ coverage_badge_gist_id }}"
+
 # ----------------------------------------------------------------------
 # |
 # |  Configuration

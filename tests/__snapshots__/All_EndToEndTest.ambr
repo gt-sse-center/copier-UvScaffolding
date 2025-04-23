@@ -14,6 +14,8 @@
       _src_path: <<cwd>>
       author_email: <<author_email>>
       author_name: <<author_name>>
+      coverage_badge_gist_id: <<coverage_badge_gist_id>>
+      coverage_badge_gist_username: <<coverage_badge_gist_username>>
       github_host: https://github.com
       github_repo_name: <<github_repo_name>>
       github_username: <<github_username>>
@@ -268,6 +270,8 @@
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
             python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
+            coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
+            coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
       
           secrets:
             # These values should be populated as GitHub Action secrets (https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions)
@@ -832,6 +836,8 @@
       _src_path: <<cwd>>
       author_email: <<author_email>>
       author_name: <<author_name>>
+      coverage_badge_gist_id: <<coverage_badge_gist_id>>
+      coverage_badge_gist_username: <<coverage_badge_gist_username>>
       github_host: https://github.com
       github_repo_name: <<github_repo_name>>
       github_username: <<github_username>>
@@ -1086,6 +1092,8 @@
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
             python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
+            coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
+            coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
       
           secrets:
             # These values should be populated as GitHub Action secrets (https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions)
@@ -1664,6 +1672,8 @@
       _src_path: <<cwd>>
       author_email: <<author_email>>
       author_name: <<author_name>>
+      coverage_badge_gist_id: <<coverage_badge_gist_id>>
+      coverage_badge_gist_username: <<coverage_badge_gist_username>>
       github_host: https://github.com
       github_repo_name: <<github_repo_name>>
       github_username: <<github_username>>
@@ -1918,6 +1928,8 @@
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
             python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
+            coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
+            coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
       
           secrets:
             # These values should be populated as GitHub Action secrets (https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions)
@@ -2494,6 +2506,8 @@
       _src_path: <<cwd>>
       author_email: <<author_email>>
       author_name: <<author_name>>
+      coverage_badge_gist_id: <<coverage_badge_gist_id>>
+      coverage_badge_gist_username: <<coverage_badge_gist_username>>
       github_host: https://github.com
       github_repo_name: <<github_repo_name>>
       github_username: <<github_username>>
@@ -2748,6 +2762,8 @@
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
             python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
+            coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
+            coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
       
           secrets:
             # These values should be populated as GitHub Action secrets (https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions)
@@ -3313,6 +3329,8 @@
       _src_path: <<cwd>>
       author_email: <<author_email>>
       author_name: <<author_name>>
+      coverage_badge_gist_id: <<coverage_badge_gist_id>>
+      coverage_badge_gist_username: <<coverage_badge_gist_username>>
       github_host: https://github.com
       github_repo_name: <<github_repo_name>>
       github_username: <<github_username>>
@@ -3567,6 +3585,837 @@
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
             python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
+            coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
+            coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
+      
+          secrets:
+            # These values should be populated as GitHub Action secrets (https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions)
+            MINISIGN_PRIVATE_KEY: ${{ secrets.MINISIGN_PRIVATE_KEY }}
+            PYPI_PUBLISH_TOKEN: ${{ secrets.PYPI_PUBLISH_TOKEN }}
+            COVERAGE_BADGE_GIST_TOKEN: ${{ secrets.COVERAGE_BADGE_GIST_TOKEN }}
+  
+    ''',
+    '.github/workflows/CICD_impl.yml': '''
+      name: "[Callable] CI+CD Workflow Impl"
+      
+      on:
+        workflow_call:
+          inputs:
+            operating_system_json_string:
+              type: string
+              description: "The operating systems to run the job on. Note that this is JSON content embedded within a string."
+              required: true
+      
+            python_version_json_string:
+              type: string
+              description: "The Python versions to run the job with. Note that this is JSON content embedded within a string."
+              required: true
+      
+            python_package_version:
+              type: string
+              description: "The python version used when creating the python package."
+              required: true
+      
+            coverage_badge_gist_id:
+              type: string
+              description: "The ID of the Gist used to store coverage badge information. Code coverage information will not be persisted if this value is missing."
+              required: false
+      
+            coverage_badge_gist_username:
+              type: string
+              description: "The username used to access the Gist used to store coverage badge information. The current GitHub user will be used if this value is not provided."
+              required: false
+      
+          secrets:
+            MINISIGN_PRIVATE_KEY:
+              required: false
+              description: "Private key used to sign artifacts. Artifacts will not be signed if this value is missing."
+      
+            PYPI_PUBLISH_TOKEN:
+              required: false
+              description: "Token used to publish packages to PyPi. Packages will not be published if this value is missing."
+      
+            COVERAGE_BADGE_GIST_TOKEN:
+              required: false
+              description: "Token used to access the Gist used to store coverage badge information. Code coverage information will not be persisted if this value is missing."
+      
+      jobs:
+        # ----------------------------------------------------------------------
+        validate:
+          strategy:
+            fail-fast: false
+      
+            matrix:
+              os: ${{ fromJson(inputs.operating_system_json_string) }}
+              python_version: ${{ fromJson(inputs.python_version_json_string) }}
+      
+          name: Validate
+          runs-on: ${{ matrix.os }}
+      
+          permissions:
+            contents: read
+      
+          steps:
+            - uses: actions/checkout@v4
+      
+            - name: Install uv and python
+              uses: astral-sh/setup-uv@v5
+              with:
+                python-version: ${{ matrix.python_version }}
+                enable-cache: true
+      
+            - name: Run pre-commit scripts
+              run: uv run pre-commit run --verbose
+      
+            - name: Validate Tests
+              run: uv run pytest
+              env:
+                COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
+      
+            - name: Upload Coverage Data
+              uses: actions/upload-artifact@v4
+              with:
+                name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
+                path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
+                include-hidden-files: true
+      
+        # ----------------------------------------------------------------------
+        package_coverage:
+          needs: validate
+      
+          name: Postprocess Coverage Info
+          runs-on: ubuntu-latest
+      
+          outputs:
+            coverage_total: ${{ steps.combine_coverage_data.outputs.coverage_total }}
+      
+          permissions:
+            contents: read
+      
+          steps:
+            - uses: actions/checkout@v4
+      
+            - name: Install uv and python
+              uses: astral-sh/setup-uv@v5
+              with:
+                enable-cache: true
+      
+            - name: Install Dependencies
+              run: uv sync --frozen
+      
+            - name: Download Coverage Data
+              uses: actions/download-artifact@v4
+              with:
+                merge-multiple: true
+      
+            - name: Combine Coverage Data
+              id: combine_coverage_data
+              shell: bash
+              run: |
+                uv run coverage combine .
+                uv run coverage report --ignore-errors --show-missing --skip-covered
+                uv run coverage json --ignore-errors -o .coverage.json
+      
+                export TOTAL=$(uv run python -c "import json;print(json.load(open('.coverage.json'))['totals']['percent_covered_display'])")
+                echo "coverage_total=${TOTAL}" >> $GITHUB_OUTPUT
+                echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
+      
+            - name: Upload Coverage Data
+              uses: actions/upload-artifact@v4
+              with:
+                name: .coverage.json
+                path: .coverage.json
+                include-hidden-files: true
+      
+        # ----------------------------------------------------------------------
+        python_package:
+          needs: package_coverage
+      
+          name: Build Python Package
+          runs-on: ubuntu-latest
+      
+          outputs:
+            package_name: ${{ steps.package_name_and_version.outputs.package_name }}
+            package_version: ${{ steps.package_name_and_version.outputs.package_version }}
+      
+          permissions:
+            contents: read
+      
+          steps:
+            - uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+      
+            - name: Install uv and python
+              uses: astral-sh/setup-uv@v5
+              with:
+                enable-cache: true
+                python-version: ${{ inputs.python_package_version }}
+      
+            - name: Install Dependencies
+              run: uv sync --frozen
+      
+            - name: Update Version
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
+      
+            - name: Build Python Package
+              run: uv build
+      
+            - name: Save Package Name and Version
+              id: package_name_and_version
+              run: |-
+                cd dist
+      
+                export PACKAGE_NAME=$(ls *.whl)
+                echo "package_name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
+                echo "**Package Name:** ${PACKAGE_NAME}" >> $GITHUB_STEP_SUMMARY
+      
+                export PACKAGE_VERSION=$(uv run python -c "import this_is_the_project_name as package; print(package.__version__)")
+                echo "package_version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
+                echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
+      
+            - name: Upload Python Package
+              uses: actions/upload-artifact@v4
+              with:
+                name: Python package
+                path: dist/**
+      
+        # ----------------------------------------------------------------------
+        validate_python_package:
+          needs: python_package
+      
+          strategy:
+            fail-fast: false
+      
+            matrix:
+              os: ${{ fromJson(inputs.operating_system_json_string) }}
+              python_version: ${{ fromJson(inputs.python_version_json_string) }}
+      
+          name: Validate Python Package
+          runs-on: ${{ matrix.os }}
+      
+          env:
+            PACKAGE_NAME: ${{ needs.python_package.outputs.package_name }}
+            PACKAGE_VERSION: ${{ needs.python_package.outputs.package_version }}
+      
+          permissions: {}
+      
+          steps:
+            - name: Install uv and python
+              uses: astral-sh/setup-uv@v5
+              with:
+                python-version: ${{ matrix.python_version }}
+                enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
+                ignore-empty-workdir: true
+      
+            - name: Download Python Package
+              uses: actions/download-artifact@v4
+              with:
+                name: Python package
+                path: dist
+      
+            - name: Install Python Package
+              run: uv pip install dist/${{ env.PACKAGE_NAME }}
+      
+            - name: Validate Python Package
+              run: uv run python -c "import this_is_the_project_name as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
+      
+        # ----------------------------------------------------------------------
+        release:
+          needs: [package_coverage, python_package, validate_python_package]
+      
+          name: Release
+          runs-on: ubuntu-latest
+      
+          env:
+            COVERAGE_TOTAL: ${{ needs.package_coverage.outputs.coverage_total }}
+            PACKAGE_NAME: ${{ needs.python_package.outputs.package_name }}
+            PACKAGE_VERSION: ${{ needs.python_package.outputs.package_version }}
+            GH_TOKEN: ${{ github.token }}
+      
+          permissions:
+            contents: write  # To tag the repository and create the release
+      
+          steps:
+            - uses: actions/checkout@v4
+      
+            - name: Has Release Changes?
+              id: has_release_changes
+              uses: dorny/paths-filter@v3
+              with:
+                filters: ./.github/release_sources.yaml
+      
+            - name: Release
+              if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.has_release_changes.outputs.src == 'true' }}
+              uses: ./.github/actions/release_impl
+              with:
+                minisign_private_key: ${{ secrets.MINISIGN_PRIVATE_KEY }}
+                pypi_publish_token: ${{ secrets.PYPI_PUBLISH_TOKEN }}
+                coverage_badge_gist_token: ${{ secrets.COVERAGE_BADGE_GIST_TOKEN }}
+                coverage_badge_gist_id: ${{ inputs.coverage_badge_gist_id }}
+                coverage_badge_gist_username: ${{ inputs.coverage_badge_gist_username }}
+  
+    ''',
+    '.github/workflows/codeql.yml': '''
+      # For most projects, this workflow file will not need changing; you simply need
+      # to commit it to your repository.
+      #
+      # You may wish to alter this file to override the set of languages analyzed,
+      # or to provide custom queries or build logic.
+      #
+      # ******** NOTE ********
+      # We have attempted to detect the languages in your repository. Please check
+      # the `language` matrix defined below to confirm you have the correct set of
+      # supported CodeQL languages.
+      #
+      name: "CodeQL"
+      
+      on:
+        push:
+          branches: [ "main" ]
+        pull_request:
+          branches: [ "main" ]
+        schedule:
+          - cron: '0 0 * * *'
+        workflow_dispatch:
+      
+      permissions: {}
+      
+      jobs:
+        analyze:
+          name: Analyze
+          # Runner size impacts CodeQL analysis time. To learn more, please see:
+          #   - https://gh.io/recommended-hardware-resources-for-running-codeql
+          #   - https://gh.io/supported-runners-and-hardware-resources
+          #   - https://gh.io/using-larger-runners
+          # Consider using larger runners for possible analysis time improvements.
+          runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+          timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
+          permissions:
+            # required for all workflows
+            security-events: write
+      
+            # only required for workflows in private repositories
+            actions: read
+            contents: read
+      
+          strategy:
+            fail-fast: false
+            matrix:
+              language: [ 'python' ]
+              # CodeQL supports [ 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift' ]
+              # Use only 'java-kotlin' to analyze code written in Java, Kotlin or both
+              # Use only 'javascript-typescript' to analyze code written in JavaScript, TypeScript or both
+              # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
+      
+          steps:
+          - name: Checkout repository
+            uses: actions/checkout@v4
+      
+          # Initializes the CodeQL tools for scanning.
+          - name: Initialize CodeQL
+            uses: github/codeql-action/init@v3
+            with:
+              languages: ${{ matrix.language }}
+              # If you wish to specify custom queries, you can do so here or in a config file.
+              # By default, queries listed here will override any specified in a config file.
+              # Prefix the list here with "+" to use these queries and those in the config file.
+      
+              # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+              # queries: security-extended,security-and-quality
+      
+      
+          # Autobuild attempts to build any compiled languages (C/C++, C#, Go, Java, or Swift).
+          # If this step fails, then you should remove it and run the build manually (see below)
+          - name: Autobuild
+            uses: github/codeql-action/autobuild@v3
+      
+          # ℹ️ Command-line programs to run using the OS shell.
+          # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+      
+          #   If the Autobuild fails above, remove it and uncomment the following three lines.
+          #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
+      
+          # - run: |
+          #     echo "Run, Build Application using script"
+          #     ./location_of_script_within_repo/buildscript.sh
+      
+          - name: Perform CodeQL Analysis
+            uses: github/codeql-action/analyze@v3
+            with:
+              category: "/language:${{matrix.language}}"
+  
+    ''',
+    '.gitignore': '''
+      # Python-generated files
+      __pycache__/
+      *.py[oc]
+      build/
+      dist/
+      wheels/
+      *.egg-info
+      
+      # Virtual environments
+      .venv
+      .coverage
+      .DS_Store
+      .vscode
+      minisign_key.pri
+    ''',
+    '.pre-commit-config.yaml': '''
+      # See https://pre-commit.com for more information
+      # See https://pre-commit.com/hooks.html for more hooks
+      repos:
+      - repo: local
+        hooks:
+        - id: uv sync --frozen
+          name: uv sync --frozen
+          entry: uv sync --frozen
+          language: system
+          pass_filenames: false
+          require_serial: true
+          always_run: true
+      
+        - id: uv run ruff format --check
+          name: uv run ruff format --check
+          entry: uv run ruff format --check
+          language: system
+          pass_filenames: false
+          always_run: true
+      
+        - id: uv run ruff check
+          name: uv run ruff check
+          entry: uv run ruff check
+          language: system
+          pass_filenames: false
+          always_run: true
+  
+    ''',
+    '.python-version': '<<python_version>>',
+    'LICENSE': '''
+      MIT LICENSE
+      
+      Copyright (c) <<year>> <<author_name>>
+      
+      Permission is hereby granted, free of charge, to any person obtaining a copy
+      of this software and associated documentation files (the "Software"), to deal
+      in the Software without restriction, including without limitation the rights
+      to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+      copies of the Software, and to permit persons to whom the Software is
+      furnished to do so, subject to the following conditions:
+      
+      The above copyright notice and this permission notice shall be included in all
+      copies or substantial portions of the Software.
+      
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+      SOFTWARE.
+  
+    ''',
+    'README.md': '',
+    'pyproject.toml': '''
+      [project]
+      name = "this-is-the-project-name"
+      description = "Add your description here"
+      readme = "README.md"
+      requires-python = ">= 3.10"
+      dependencies = []
+      dynamic = ["version"]
+      classifiers = [
+          "Operating System :: MacOS",
+          "Operating System :: Microsoft :: Windows",
+          "Operating System :: POSIX :: Linux",
+          "Programming Language :: Python",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.10",
+      ]
+      
+      [project.license]
+      text = "MIT"
+      
+      [project.urls]
+      Homepage = "https://github.com/<<github_username>>/<<github_repo_name>>"
+      Documentation = "https://github.com/<<github_username>>/<<github_repo_name>>"
+      Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
+      
+      [build-system]
+      requires = ["hatchling"]
+      build-backend = "hatchling.build"
+      
+      [dependency-groups]
+      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
+      
+      [tool.hatch.version]
+      path = "src/this_is_the_project_name/__init__.py"
+      
+      [tool.pytest.ini_options]
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-fail-under=95.0"
+      
+      [tool.ruff]
+      line-length = 110
+      
+      [tool.ruff.lint]
+      exclude = ["tests/**"]
+      
+      select = ["ALL"]
+      
+      ignore = [
+          "ANN002", # Missing type annotation for `*args`
+          "ANN003", # Missing type annotation for `**kwargs`
+          "BLE001", # Do not catch blind exception: `Exception`
+          "COM812", # Trailing comma missing
+          "D202", # No blank lines allowed after function docstring
+          "E501", # Line too long
+          "I001", # Import block is un-sorted or un-formatted
+          "N802", # Function name `xxx` should be lowercase
+          "N999", # Invalid module name
+          "S101", # Use of assert detected
+          "UP032", # Use f-string instead of `format` call
+      ]
+      
+      [tool.ruff.lint.mccabe]
+      max-complexity = 15
+      
+      [tool.ruff.lint.pylint]
+      max-args = 10
+      max-branches = 20
+      max-returns = 20
+  
+    ''',
+    'src/AutoGitSemVer.yaml': '''
+      # This file is used by AutoGitSemVer to configure the semantic version of this package. It indicates
+      # that AutoGitSemVer should only look at changes in this directory, its descendants, and files
+      # specified in this list when calculating the semantic version for the package.
+      additional_dependencies:
+        - "../pyproject.toml"
+        - "../README.md"
+        - "../uv.lock"
+  
+    ''',
+    'src/this_is_the_project_name/UvScaffolding_sample_file.py': '''
+      """A sample file generated by copier - this file is safe to delete."""
+      
+      
+      def Add(a: int, b: int) -> int:
+          """Add two numbers."""
+          return a + b
+      
+      
+      def Subtract(a: int, b: int) -> int:
+          """Subtract two numbers."""
+          return a - b
+  
+    ''',
+    'src/this_is_the_project_name/__init__.py': '''
+      def hello() -> str:
+          return "Hello from this-is-the-project-name!"
+      
+      
+      # noqa: D104
+      
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
+      #
+      __version__ = "0.1.0"
+  
+    ''',
+    'src/this_is_the_project_name/py.typed': '',
+    'tests/UvScaffolding_sample_file_test.py': '''
+      """A sample file generated by copier - this file is safe to delete."""
+      
+      from this_is_the_project_name.UvScaffolding_sample_file import Add, Subtract
+      
+      
+      def test_Add():
+          assert Add(1, 2) == 3
+      
+      
+      def test_Subtract():
+          assert Subtract(1, 2) == -1
+  
+    ''',
+  })
+# ---
+# name: test_All[NoCoverageBadge]
+  dict({
+    '.copier-answers.yml': '''
+      # Changes here will be overwritten by Copier; DO NOT MODIFY THIS FILE DIRECTLY!
+      #
+      # This file was generated using copier (https://copier.readthedocs.io/) with the
+      # template copier-UvScaffolding (https://github.com/gt-sse-center/copier-UvScaffolding).
+      # Additional information (including instructions on how to use this template with copier) is
+      # available at https://github.com/gt-sse-center/copier-UvScaffolding.
+      #
+      
+      _commit: <<commit>>
+      _src_path: <<cwd>>
+      author_email: <<author_email>>
+      author_name: <<author_name>>
+      coverage_badge_gist_id: ''
+      github_host: https://github.com
+      github_repo_name: <<github_repo_name>>
+      github_username: <<github_username>>
+      license: MIT
+      project_name: this_is_the_project_name
+      python_package_name: this_is_the_project_name
+      python_versions: 3.10, 3.11, 3.12, 3.13
+  
+    ''',
+    '.github/ISSUE_TEMPLATE/bug_report.md': '''
+      ---
+      name: Bug report
+      about: Create a report to help us improve.
+      title: ''
+      labels: ''
+      assignees: ''
+      
+      ---
+      
+      ## Describe the bug
+      A clear and concise description of what the bug is.
+      
+      ## To Reproduce
+      Steps to reproduce the behavior:
+      1. Go to '...'
+      2. Click on '....'
+      3. Scroll down to '....'
+      4. See error
+      
+      ## Expected behavior
+      A clear and concise description of what you expected to happen.
+      
+      ## Screenshots
+      If applicable, add screenshots to help explain your problem.
+      
+      ## Environment (please complete the following information):
+       - OS: [e.g. iOS]
+       - Python Version: [e.g. 3.13, 3.12, 3.11, etc.]
+       - dbrownell_DevTools Version [e.g. 1.2.3]
+      
+      ## Additional context
+      Add any other context about the problem here.
+  
+    ''',
+    '.github/ISSUE_TEMPLATE/config.yml': '''
+      blank_issues_enabled: false
+  
+    ''',
+    '.github/ISSUE_TEMPLATE/custom.md': '''
+      ---
+      name: Custom issue template
+      about: Create an issue that isn't a bug or feature request.
+      title: ''
+      labels: ''
+      assignees: ''
+      
+      ---
+  
+    ''',
+    '.github/ISSUE_TEMPLATE/feature_request.md': '''
+      ---
+      name: Feature request
+      about: Suggest an idea for this project.
+      title: ''
+      labels: ''
+      assignees: ''
+      
+      ---
+      
+      ## Is your feature request related to a problem? Please describe.
+      A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+      
+      ## Describe the solution you'd like
+      A clear and concise description of what you want to happen.
+      
+      ## Describe alternatives you've considered
+      A clear and concise description of any alternative solutions or features you've considered.
+      
+      ## Additional context
+      Add any other context or screenshots about the feature request here.
+  
+    ''',
+    '.github/actions': None,
+    '.github/actions/release_impl/action.yml': '''
+      name: "[impl] Release"
+      description: "Releases the current repository."
+      
+      # spell-checker: words jedisct, minisig, minisign, pypi, schneegans
+      
+      inputs:
+        minisign_private_key:
+          description: "Key used to sign dist artifacts. No signatures will be created if the key is empty."
+          required: false
+          default: ""
+      
+        pypi_publish_token:
+          description: "Token used to publish the package to PyPI."
+          required: false
+          default: ""
+      
+        coverage_badge_gist_token:
+          description: "Gist token used to store the code coverage badge."
+          default: ""
+      
+        coverage_badge_gist_id:
+          description: "Gist ID used to store the code coverage badge."
+          required: false
+          default: ""
+      
+        coverage_badge_gist_username:
+          description: "Gist username used to store the code coverage badge. The current GitHub user will be used if this value is not provided."
+          required: false
+          default: ""
+      
+      runs:
+        using: composite
+        steps:
+          - name: Install uv and python
+            uses: astral-sh/setup-uv@v5
+            with:
+              enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
+      
+          - name: Download Python Package
+            uses: actions/download-artifact@v4
+            with:
+              name: Python package
+              path: dist
+      
+          # Create repository tag
+          - name: Create Repository Tag
+            shell: bash
+            run: |-
+              git config user.name "GitHub Action Bot"
+              git config user.email "<>"
+      
+              git tag --annotate --force -m "Publish Tag" "v${{ env.PACKAGE_VERSION }}" "${{ github.sha }}"
+              git push origin "v${{ env.PACKAGE_VERSION }}" --force
+      
+          # Commit code coverage
+          - name: Create Code Coverage Badge
+            if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
+            uses: schneegans/dynamic-badges-action@v1.7.0
+            with:
+              auth: ${{ inputs.coverage_badge_gist_token }}
+              gistID: ${{ inputs.coverage_badge_gist_id }}
+              filename: ${{ github.event.repository.name }}_code_coverage.json
+              label: Coverage
+              message: ${{ env.COVERAGE_TOTAL }}%
+              valColorRange: ${{ env.COVERAGE_TOTAL }}
+              minColorRange: 50
+              maxColorRange: 90
+      
+          - name: Display Code Coverage Badge Url
+            if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
+            shell: bash
+            run: |-
+              username="${{ inputs.coverage_badge_gist_username }}"
+              if [ -z "${username}" ]; then
+                username="${{ github.repository_owner }}"
+              fi
+      
+              echo "**Code Coverage Badge:** [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${username}/${{ inputs.coverage_badge_gist_id }}/raw/${{ github.event.repository.name }}_code_coverage.json)](${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}/actions)" >> $GITHUB_STEP_SUMMARY
+              echo "**Code Coverage Badge Markdown:** <code>\[!\[Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${username}/${{ inputs.coverage_badge_gist_id }}/raw/${{ github.event.repository.name }}_code_coverage.json)](${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}/actions)</code>" >> $GITHUB_STEP_SUMMARY
+      
+          # Sign artifacts
+          - name: Sign Artifacts
+            if: ${{ inputs.minisign_private_key != '' }}
+            shell: bash
+            run: |-
+              pushd dist
+      
+              echo "**Signed Artifacts:**" >> $GITHUB_STEP_SUMMARY
+      
+              echo "${{ inputs.minisign_private_key }}" > /tmp/minisign.key
+      
+              for filename in *; do
+                echo "- ${filename} [${filename}.minisig]" >> $GITHUB_STEP_SUMMARY
+                uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file('/tmp/minisign.key').sign_file('${filename}', trusted_comment='${{ env.PACKAGE_NAME }} v${{ env.PACKAGE_VERSION }}', drop_signature=True)"
+              done
+      
+              rm /tmp/minisign.key
+      
+          - name: Upload Signatures
+            if: ${{ inputs.minisign_private_key != '' }}
+            uses: actions/upload-artifact@v4
+            with:
+              name: Minisign signatures
+              path: ./dist/*.minisig
+      
+          # Create the GitHub release
+          - name: Create GitHub Release
+            shell: bash
+            run: |-
+              gh release create "v${{ env.PACKAGE_VERSION }}" ./dist/* --generate-notes
+      
+          # Publish Python Package
+          - name: Publish Python Package
+            if: ${{ inputs.pypi_publish_token != '' }}
+            shell: bash
+            run: |-
+              uv publish --token "${{ inputs.pypi_publish_token }}" --verbose
+  
+    ''',
+    '.github/pull_request_template.md': '''
+      ## :pencil: Description
+      Please include a summary of the change.
+      
+      ## :gear: Work Item
+      Please include link to the corresponding GitHub Issue or Project work item.
+      
+      ## :movie_camera: Demo
+      Please provide any images, GIFs, or videos that show the effect of your changes (if applicable). A picture is worth a thousand words.
+  
+    ''',
+    '.github/release_sources.yaml': '''
+      # Changes to any of these files or a file within these directories will trigger a release.
+      src:
+        - 'src/**'
+        - 'pyproject.toml'
+        - 'README.md'
+        - 'uv.lock'
+  
+    ''',
+    '.github/workflows/CICD.yml': '''
+      name: "CI+CD"
+      run-name: ${{ github.run_number }} [${{ github.actor }}] on ${{ github.ref_name }}
+      
+      on:
+        pull_request:
+          branches:
+            - main
+        push:
+          branches:
+            - main
+        schedule:
+          - cron: '0 0 * * *' # Once a day at 12am UTC
+        workflow_dispatch:
+      
+      permissions: {}
+      
+      jobs:
+        CICD_Workflow:
+          name: "CI+CD Workflow"
+      
+          permissions:
+            contents: write
+      
+          uses: ./.github/workflows/CICD_impl.yml
+      
+          with:
+            # These values can be customized for your specific requirements.
+            operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
+            python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
+            python_package_version: "3.10"
+            coverage_badge_gist_id: ""
+            coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
       
           secrets:
             # These values should be populated as GitHub Action secrets (https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions)
@@ -4139,6 +4988,8 @@
       _src_path: <<cwd>>
       author_email: <<author_email>>
       author_name: <<author_name>>
+      coverage_badge_gist_id: <<coverage_badge_gist_id>>
+      coverage_badge_gist_username: <<coverage_badge_gist_username>>
       github_host: https://github.com
       github_repo_name: <<github_repo_name>>
       github_username: <<github_username>>
@@ -4393,6 +5244,8 @@
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
             python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
+            coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
+            coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
       
           secrets:
             # These values should be populated as GitHub Action secrets (https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions)
