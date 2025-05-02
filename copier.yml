@@ -132,6 +132,7 @@ _templates_suffix: ""
 
 _tasks:
   - python __tools/UvInit.py
+  - python __tools/PostprocessReadme.py
   - python __licenses/__postprocess.py
   - python __tools/Cleanup.py
   - python -c "import shutil; shutil.rmtree('__tools');"
