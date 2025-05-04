@@ -122,6 +122,17 @@ coverage_badge_gist_username:
   default: "{{ github_username }}"
   when: "{{ coverage_badge_gist_id }}"
 
+sign_artifacts_question:
+  type: bool
+  help: Would you like to sign artifacts created using minisign during the Continuous Integration process?
+  default: true
+
+sign_artifacts_public_key:
+  type: str
+  help: This value will be populated automatically.
+  default: ""
+  when: False
+
 # ----------------------------------------------------------------------
 # |
 # |  Configuration
@@ -139,6 +150,7 @@ _tasks:
 
 _jinja_extensions:
   - copier_templates_extensions.TemplateExtensionLoader
+  - extensions/context.py:ContextUpdater
   - extensions/slugify.py:SlugifyExtension
   - extensions/slugify.py:PythonPackageifyExtension
   - extensions/to_python_list.py:ToPythonListExtension

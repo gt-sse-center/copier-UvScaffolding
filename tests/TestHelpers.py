@@ -115,6 +115,8 @@ def _EnumerateConfigurations(
     configuration["project_name"] = "this_is_the_project_name"
     configuration["python_package_name"] = configuration["project_name"]
 
+    configuration["_sign_artifacts_simulate_keygen"] = True
+
     name_parts: list[str] = []
 
     for license_value in [
@@ -140,5 +142,12 @@ def _EnumerateConfigurations(
 
     with ExitStack(RestoreOriginalCoverageBadge):
         name_parts.append("NoCoverageBadge")
+        with ExitStack(name_parts.pop):
+            yield ConfigurationInfo("-".join(name_parts), configuration)
+
+    # Without sign artifacts
+    configuration["sign_artifacts_question"] = False
+    with ExitStack(lambda: configuration.pop("sign_artifacts_question")):
+        name_parts.append("NoSignArtifacts")
         with ExitStack(name_parts.pop):
             yield ConfigurationInfo("-".join(name_parts), configuration)

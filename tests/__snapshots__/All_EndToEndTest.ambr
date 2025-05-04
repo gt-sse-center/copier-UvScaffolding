@@ -23,6 +23,7 @@
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
       python_versions: 3.10, 3.11, 3.12, 3.13
+      sign_artifacts_question: true
   
     ''',
     '.github/ISSUE_TEMPLATE/bug_report.md': '''
@@ -885,6 +886,13 @@
       | Via [uv](https://github.com/astral-sh/uv) | `uv add this_is_the_project_name` |
       | Via [pip](https://pip.pypa.io/en/stable/) | `pip install this_is_the_project_name` |
       
+      ### Verifying Signed Artifacts
+      Artifacts are signed and validated using [py-minisign](https://github.com/x13a/py-minisign) and the public key in the file `./minisign_key.pub`.
+      
+      To verify that an artifact is valid, visit [the latest release](https://github.com/<<github_username>>/<<github_repo_name>>/releases/latest) and download the `.minisign` signature file that corresponds to the artifact, then run the following command, replacing `<filename>` with the name of the artifact to be verified:
+      
+      `uv run --with py-minisign python -c "import minisign; minisign.PublicKey.from_file('minisign_key.pub').verify_file('<filename>')"`
+      
       ## Development
       Please visit [Contributing](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/CONTRIBUTING.md) and [Development](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/DEVELOPMENT.md) for information on contributing to this project.
       
@@ -1088,6 +1096,7 @@
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
       python_versions: 3.10, 3.11, 3.12, 3.13
+      sign_artifacts_question: true
   
     ''',
     '.github/ISSUE_TEMPLATE/bug_report.md': '''
@@ -1964,6 +1973,13 @@
       | Via [uv](https://github.com/astral-sh/uv) | `uv add this_is_the_project_name` |
       | Via [pip](https://pip.pypa.io/en/stable/) | `pip install this_is_the_project_name` |
       
+      ### Verifying Signed Artifacts
+      Artifacts are signed and validated using [py-minisign](https://github.com/x13a/py-minisign) and the public key in the file `./minisign_key.pub`.
+      
+      To verify that an artifact is valid, visit [the latest release](https://github.com/<<github_username>>/<<github_repo_name>>/releases/latest) and download the `.minisign` signature file that corresponds to the artifact, then run the following command, replacing `<filename>` with the name of the artifact to be verified:
+      
+      `uv run --with py-minisign python -c "import minisign; minisign.PublicKey.from_file('minisign_key.pub').verify_file('<filename>')"`
+      
       ## Development
       Please visit [Contributing](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/CONTRIBUTING.md) and [Development](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/DEVELOPMENT.md) for information on contributing to this project.
       
@@ -2167,6 +2183,7 @@
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
       python_versions: 3.10, 3.11, 3.12, 3.13
+      sign_artifacts_question: true
   
     ''',
     '.github/ISSUE_TEMPLATE/bug_report.md': '''
@@ -3041,6 +3058,13 @@
       | Via [uv](https://github.com/astral-sh/uv) | `uv add this_is_the_project_name` |
       | Via [pip](https://pip.pypa.io/en/stable/) | `pip install this_is_the_project_name` |
       
+      ### Verifying Signed Artifacts
+      Artifacts are signed and validated using [py-minisign](https://github.com/x13a/py-minisign) and the public key in the file `./minisign_key.pub`.
+      
+      To verify that an artifact is valid, visit [the latest release](https://github.com/<<github_username>>/<<github_repo_name>>/releases/latest) and download the `.minisign` signature file that corresponds to the artifact, then run the following command, replacing `<filename>` with the name of the artifact to be verified:
+      
+      `uv run --with py-minisign python -c "import minisign; minisign.PublicKey.from_file('minisign_key.pub').verify_file('<filename>')"`
+      
       ## Development
       Please visit [Contributing](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/CONTRIBUTING.md) and [Development](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/DEVELOPMENT.md) for information on contributing to this project.
       
@@ -3244,6 +3268,7 @@
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
       python_versions: 3.10, 3.11, 3.12, 3.13
+      sign_artifacts_question: true
   
     ''',
     '.github/ISSUE_TEMPLATE/bug_report.md': '''
@@ -4107,6 +4132,13 @@
       | Via [uv](https://github.com/astral-sh/uv) | `uv add this_is_the_project_name` |
       | Via [pip](https://pip.pypa.io/en/stable/) | `pip install this_is_the_project_name` |
       
+      ### Verifying Signed Artifacts
+      Artifacts are signed and validated using [py-minisign](https://github.com/x13a/py-minisign) and the public key in the file `./minisign_key.pub`.
+      
+      To verify that an artifact is valid, visit [the latest release](https://github.com/<<github_username>>/<<github_repo_name>>/releases/latest) and download the `.minisign` signature file that corresponds to the artifact, then run the following command, replacing `<filename>` with the name of the artifact to be verified:
+      
+      `uv run --with py-minisign python -c "import minisign; minisign.PublicKey.from_file('minisign_key.pub').verify_file('<filename>')"`
+      
       ## Development
       Please visit [Contributing](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/CONTRIBUTING.md) and [Development](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/DEVELOPMENT.md) for information on contributing to this project.
       
@@ -4310,6 +4342,7 @@
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
       python_versions: 3.10, 3.11, 3.12, 3.13
+      sign_artifacts_question: true
   
     ''',
     '.github/ISSUE_TEMPLATE/bug_report.md': '''
@@ -5180,6 +5213,13 @@
       | Via [uv](https://github.com/astral-sh/uv) | `uv add this_is_the_project_name` |
       | Via [pip](https://pip.pypa.io/en/stable/) | `pip install this_is_the_project_name` |
       
+      ### Verifying Signed Artifacts
+      Artifacts are signed and validated using [py-minisign](https://github.com/x13a/py-minisign) and the public key in the file `./minisign_key.pub`.
+      
+      To verify that an artifact is valid, visit [the latest release](https://github.com/<<github_username>>/<<github_repo_name>>/releases/latest) and download the `.minisign` signature file that corresponds to the artifact, then run the following command, replacing `<filename>` with the name of the artifact to be verified:
+      
+      `uv run --with py-minisign python -c "import minisign; minisign.PublicKey.from_file('minisign_key.pub').verify_file('<filename>')"`
+      
       ## Development
       Please visit [Contributing](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/CONTRIBUTING.md) and [Development](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/DEVELOPMENT.md) for information on contributing to this project.
       
@@ -5382,6 +5422,7 @@
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
       python_versions: 3.10, 3.11, 3.12, 3.13
+      sign_artifacts_question: true
   
     ''',
     '.github/ISSUE_TEMPLATE/bug_report.md': '''
@@ -6251,6 +6292,1089 @@
       | Via [uv](https://github.com/astral-sh/uv) | `uv add this_is_the_project_name` |
       | Via [pip](https://pip.pypa.io/en/stable/) | `pip install this_is_the_project_name` |
       
+      ### Verifying Signed Artifacts
+      Artifacts are signed and validated using [py-minisign](https://github.com/x13a/py-minisign) and the public key in the file `./minisign_key.pub`.
+      
+      To verify that an artifact is valid, visit [the latest release](https://github.com/<<github_username>>/<<github_repo_name>>/releases/latest) and download the `.minisign` signature file that corresponds to the artifact, then run the following command, replacing `<filename>` with the name of the artifact to be verified:
+      
+      `uv run --with py-minisign python -c "import minisign; minisign.PublicKey.from_file('minisign_key.pub').verify_file('<filename>')"`
+      
+      ## Development
+      Please visit [Contributing](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/CONTRIBUTING.md) and [Development](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/DEVELOPMENT.md) for information on contributing to this project.
+      
+      ## Additional Information
+      Additional information can be found at these locations.
+      
+      | Title | Document | Description |
+      | --- | --- | --- |
+      | Code of Conduct | [CODE_OF_CONDUCT.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/CODE_OF_CONDUCT.md) | Information about the norms, rules, and responsibilities we adhere to when participating in this open source community. |
+      | Contributing | [CONTRIBUTING.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/CONTRIBUTING.md) | Information about contributing to this project. |
+      | Development | [DEVELOPMENT.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/DEVELOPMENT.md) | Information about development activities involved in making changes to this project. |
+      | Governance | [GOVERNANCE.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/GOVERNANCE.md) | Information about how this project is governed. |
+      | Maintainers | [MAINTAINERS.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/MAINTAINERS.md) | Information about individuals who maintain this project. |
+      | Security | [SECURITY.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/SECURITY.md) | Information about how to privately report security issues associated with this project. |
+      
+      ## License
+      this_is_the_project_name is licensed under the <a href="https://choosealicense.com/licenses/MIT/" target="_blank">MIT</a> license.
+  
+    ''',
+    'SECURITY.md': '''
+      # Security
+      
+      ## Reporting a Vulnerability
+      
+      If you discover any security issues or vulnerabilities, please report them to us privately. Do not create a public issue.
+      
+      **How to report a security vulnerability:**
+      
+      1. **Contact:** Please use the [GitHub mechanism for privately reporting a vulnerability](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability#privately-reporting-a-security-vulnerability).
+          1. Under [this repository's security tab](https://github.com/<<github_username>>/<<github_repo_name>>/security)...
+              - ...in the left sidebar...
+              - ...under "Reporting"...
+              - ...click "Advisories"
+          2. Click the "New draft security advisory" button to open the advisory form.
+      
+      2. **Response Time:** We will acknowledge your report within 24 hours and provide an initial assessment within 48 hours.
+      3. **Fixes:** Once the issue is confirmed, we will work to issue a fix as soon as possible and will keep you informed of our progress.
+      
+      ## Vulnerability Disclosure Policy
+      
+      We commit to working with security researchers and the community to verify and address any potential vulnerabilities. We ask that the following guidelines be followed to ensure an effective resolution:
+      
+      1. **Non-Disclosure:** Do not disclose the vulnerability publicly until we have had a reasonable chance to fix it. We will inform you when the issue is resolved.
+      2. **Cooperation:** We may need additional information from you to effectively address the issue. Please cooperate with us during this process.
+      
+      Thank you for helping us keep our project secure!
+      
+      ## Patches
+      We gladly welcome patches to fix such vulnerabilities! See [CONTRIBUTING.md](CONTRIBUTING.md) for information about contributions.
+  
+    ''',
+    'pyproject.toml': '''
+      [project]
+      name = "this-is-the-project-name"
+      description = "Add your description here"
+      readme = "README.md"
+      requires-python = ">= 3.10"
+      dependencies = []
+      dynamic = ["version"]
+      classifiers = [
+          "Operating System :: MacOS",
+          "Operating System :: Microsoft :: Windows",
+          "Operating System :: POSIX :: Linux",
+          "Programming Language :: Python",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.10",
+      ]
+      
+      [project.license]
+      text = "MIT"
+      
+      [project.urls]
+      Homepage = "https://github.com/<<github_username>>/<<github_repo_name>>"
+      Documentation = "https://github.com/<<github_username>>/<<github_repo_name>>"
+      Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
+      
+      [build-system]
+      requires = ["hatchling"]
+      build-backend = "hatchling.build"
+      
+      [dependency-groups]
+      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
+      
+      [tool.hatch.version]
+      path = "src/this_is_the_project_name/__init__.py"
+      
+      [tool.pytest.ini_options]
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-fail-under=95.0"
+      
+      [tool.ruff]
+      line-length = 110
+      
+      [tool.ruff.lint]
+      exclude = ["tests/**"]
+      
+      select = ["ALL"]
+      
+      ignore = [
+          "ANN002", # Missing type annotation for `*args`
+          "ANN003", # Missing type annotation for `**kwargs`
+          "BLE001", # Do not catch blind exception: `Exception`
+          "COM812", # Trailing comma missing
+          "D202", # No blank lines allowed after function docstring
+          "E501", # Line too long
+          "I001", # Import block is un-sorted or un-formatted
+          "N802", # Function name `xxx` should be lowercase
+          "N999", # Invalid module name
+          "S101", # Use of assert detected
+          "UP032", # Use f-string instead of `format` call
+      ]
+      
+      [tool.ruff.lint.mccabe]
+      max-complexity = 15
+      
+      [tool.ruff.lint.pylint]
+      max-args = 10
+      max-branches = 20
+      max-returns = 20
+  
+    ''',
+    'src/AutoGitSemVer.yaml': '''
+      # This file is used to configure AutoGitSemVer as it calculates the semantic version for this
+      # package. This file specifies that AutoGitSemVer should only look at changes in this directory,
+      # its descendants, and files specified in this list when calculating the semantic version for the
+      # package.
+      additional_dependencies:
+        - "../pyproject.toml"
+        - "../README.md"
+        - "../uv.lock"
+  
+    ''',
+    'src/this_is_the_project_name/UvScaffolding_sample_file.py': '''
+      """A sample file generated by copier - this file is safe to delete."""
+      
+      
+      def Add(a: int, b: int) -> int:
+          """Add two numbers."""
+          return a + b
+      
+      
+      def Subtract(a: int, b: int) -> int:
+          """Subtract two numbers."""
+          return a - b
+  
+    ''',
+    'src/this_is_the_project_name/__init__.py': '''
+      def hello() -> str:
+          return "Hello from this-is-the-project-name!"
+      
+      
+      # noqa: D104
+      
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
+      #
+      __version__ = "0.1.0"
+  
+    ''',
+    'src/this_is_the_project_name/py.typed': '',
+    'tests/UvScaffolding_sample_file_test.py': '''
+      """A sample file generated by copier - this file is safe to delete."""
+      
+      from this_is_the_project_name.UvScaffolding_sample_file import Add, Subtract
+      
+      
+      def test_Add():
+          assert Add(1, 2) == 3
+      
+      
+      def test_Subtract():
+          assert Subtract(1, 2) == -1
+  
+    ''',
+  })
+# ---
+# name: test_All[NoSignArtifacts]
+  dict({
+    '.copier-answers.yml': '''
+      # Changes here will be overwritten by Copier; DO NOT MODIFY THIS FILE DIRECTLY!
+      #
+      # This file was generated using copier (https://copier.readthedocs.io/) with the
+      # template copier-UvScaffolding (https://github.com/gt-sse-center/copier-UvScaffolding).
+      # Additional information (including instructions on how to use this template with copier) is
+      # available at https://github.com/gt-sse-center/copier-UvScaffolding.
+      #
+      
+      _commit: <<commit>>
+      _src_path: <<cwd>>
+      author_email: <<author_email>>
+      author_name: <<author_name>>
+      coverage_badge_gist_id: <<coverage_badge_gist_id>>
+      coverage_badge_gist_username: <<coverage_badge_gist_username>>
+      github_host: https://github.com
+      github_repo_name: <<github_repo_name>>
+      github_username: <<github_username>>
+      license: MIT
+      project_name: this_is_the_project_name
+      python_package_name: this_is_the_project_name
+      python_versions: 3.10, 3.11, 3.12, 3.13
+      sign_artifacts_question: false
+  
+    ''',
+    '.github/ISSUE_TEMPLATE/bug_report.md': '''
+      ---
+      name: Bug report
+      about: Create a report to help us improve.
+      title: ''
+      labels: ''
+      assignees: ''
+      
+      ---
+      
+      ## Describe the bug
+      A clear and concise description of what the bug is.
+      
+      ## To Reproduce
+      Steps to reproduce the behavior:
+      1. Go to '...'
+      2. Click on '....'
+      3. Scroll down to '....'
+      4. See error
+      
+      ## Expected behavior
+      A clear and concise description of what you expected to happen.
+      
+      ## Screenshots
+      If applicable, add screenshots to help explain your problem.
+      
+      ## Environment (please complete the following information):
+       - OS: [e.g. iOS]
+       - Python Version: [e.g. 3.13, 3.12, 3.11, etc.]
+       - dbrownell_DevTools Version [e.g. 1.2.3]
+      
+      ## Additional context
+      Add any other context about the problem here.
+  
+    ''',
+    '.github/ISSUE_TEMPLATE/config.yml': '''
+      blank_issues_enabled: false
+  
+    ''',
+    '.github/ISSUE_TEMPLATE/custom.md': '''
+      ---
+      name: Custom issue template
+      about: Create an issue that isn't a bug or feature request.
+      title: ''
+      labels: ''
+      assignees: ''
+      
+      ---
+  
+    ''',
+    '.github/ISSUE_TEMPLATE/feature_request.md': '''
+      ---
+      name: Feature request
+      about: Suggest an idea for this project.
+      title: ''
+      labels: ''
+      assignees: ''
+      
+      ---
+      
+      ## Is your feature request related to a problem? Please describe.
+      A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+      
+      ## Describe the solution you'd like
+      A clear and concise description of what you want to happen.
+      
+      ## Describe alternatives you've considered
+      A clear and concise description of any alternative solutions or features you've considered.
+      
+      ## Additional context
+      Add any other context or screenshots about the feature request here.
+  
+    ''',
+    '.github/actions': None,
+    '.github/actions/release_impl/action.yml': '''
+      name: "[impl] Release"
+      description: "Releases the current repository."
+      
+      # spell-checker: words jedisct, minisig, minisign, pypi, schneegans
+      
+      inputs:
+        minisign_private_key:
+          description: "Key used to sign dist artifacts. No signatures will be created if the key is empty."
+          required: false
+          default: ""
+      
+        pypi_publish_token:
+          description: "Token used to publish the package to PyPI."
+          required: false
+          default: ""
+      
+        coverage_badge_gist_token:
+          description: "Gist token used to store the code coverage badge."
+          default: ""
+      
+        coverage_badge_gist_id:
+          description: "Gist ID used to store the code coverage badge."
+          required: false
+          default: ""
+      
+        coverage_badge_gist_username:
+          description: "Gist username used to store the code coverage badge. The current GitHub user will be used if this value is not provided."
+          required: false
+          default: ""
+      
+      runs:
+        using: composite
+        steps:
+          - name: Install uv and python
+            uses: astral-sh/setup-uv@v5
+            with:
+              enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
+      
+          - name: Download Python Package
+            uses: actions/download-artifact@v4
+            with:
+              name: Python package
+              path: dist
+      
+          # Create repository tag
+          - name: Create Repository Tag
+            shell: bash
+            run: |-
+              git config user.name "GitHub Action Bot"
+              git config user.email "<>"
+      
+              git tag --annotate --force -m "Publish Tag" "v${{ env.PACKAGE_VERSION }}" "${{ github.sha }}"
+              git push origin "v${{ env.PACKAGE_VERSION }}" --force
+      
+          # Commit code coverage
+          - name: Create Code Coverage Badge
+            if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
+            uses: schneegans/dynamic-badges-action@v1.7.0
+            with:
+              auth: ${{ inputs.coverage_badge_gist_token }}
+              gistID: ${{ inputs.coverage_badge_gist_id }}
+              filename: ${{ github.event.repository.name }}_code_coverage.json
+              label: Coverage
+              message: ${{ env.COVERAGE_TOTAL }}%
+              valColorRange: ${{ env.COVERAGE_TOTAL }}
+              minColorRange: 50
+              maxColorRange: 90
+      
+          - name: Display Code Coverage Badge Url
+            if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
+            shell: bash
+            run: |-
+              username="${{ inputs.coverage_badge_gist_username }}"
+              if [ -z "${username}" ]; then
+                username="${{ github.repository_owner }}"
+              fi
+      
+              echo "**Code Coverage Badge:** [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${username}/${{ inputs.coverage_badge_gist_id }}/raw/${{ github.event.repository.name }}_code_coverage.json)](${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}/actions)" >> $GITHUB_STEP_SUMMARY
+              echo "**Code Coverage Badge Markdown:** <code>\[!\[Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/${username}/${{ inputs.coverage_badge_gist_id }}/raw/${{ github.event.repository.name }}_code_coverage.json)](${{ github.server_url }}/${{ github.repository_owner }}/${{ github.event.repository.name }}/actions)</code>" >> $GITHUB_STEP_SUMMARY
+      
+          # Sign artifacts
+          - name: Sign Artifacts
+            if: ${{ inputs.minisign_private_key != '' }}
+            shell: bash
+            run: |-
+              pushd dist
+      
+              echo "**Signed Artifacts:**" >> $GITHUB_STEP_SUMMARY
+      
+              echo "${{ inputs.minisign_private_key }}" > /tmp/minisign.key
+      
+              for filename in *; do
+                echo "- ${filename} [${filename}.minisig]" >> $GITHUB_STEP_SUMMARY
+                uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file('/tmp/minisign.key').sign_file('${filename}', trusted_comment='${{ env.PACKAGE_NAME }} v${{ env.PACKAGE_VERSION }}', drop_signature=True)"
+              done
+      
+              rm /tmp/minisign.key
+      
+          - name: Upload Signatures
+            if: ${{ inputs.minisign_private_key != '' }}
+            uses: actions/upload-artifact@v4
+            with:
+              name: Minisign signatures
+              path: ./dist/*.minisig
+      
+          # Create the GitHub release
+          - name: Create GitHub Release
+            shell: bash
+            run: |-
+              gh release create "v${{ env.PACKAGE_VERSION }}" ./dist/* --generate-notes
+      
+          # Publish Python Package
+          - name: Publish Python Package
+            if: ${{ inputs.pypi_publish_token != '' }}
+            shell: bash
+            run: |-
+              uv publish --token "${{ inputs.pypi_publish_token }}" --verbose
+  
+    ''',
+    '.github/pull_request_template.md': '''
+      ## :pencil: Description
+      Please include a summary of the change.
+      
+      ## :gear: Work Item
+      Please include link to the corresponding GitHub Issue or Project work item.
+      
+      ## :movie_camera: Demo
+      Please provide any images, GIFs, or videos that show the effect of your changes (if applicable). A picture is worth a thousand words.
+  
+    ''',
+    '.github/release_sources.yaml': '''
+      # Changes to any of these files or a file within these directories will trigger a release.
+      src:
+        - 'src/**'
+        - 'pyproject.toml'
+        - 'README.md'
+        - 'uv.lock'
+  
+    ''',
+    '.github/workflows/CICD.yml': '''
+      name: "CI+CD"
+      run-name: ${{ github.run_number }} [${{ github.actor }}] on ${{ github.ref_name }}
+      
+      on:
+        pull_request:
+          branches:
+            - main
+        push:
+          branches:
+            - main
+        schedule:
+          - cron: '0 0 * * *' # Once a day at 12am UTC
+        workflow_dispatch:
+      
+      permissions: {}
+      
+      jobs:
+        CICD_Workflow:
+          name: "CI+CD Workflow"
+      
+          permissions:
+            contents: write
+      
+          uses: ./.github/workflows/CICD_impl.yml
+      
+          with:
+            # These values can be customized for your specific requirements.
+            operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
+            python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
+            python_package_version: "3.10"
+            coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
+            coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
+      
+          secrets:
+            # These values should be populated as GitHub Action secrets (https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions)
+            MINISIGN_PRIVATE_KEY: ${{ secrets.MINISIGN_PRIVATE_KEY }}
+            PYPI_PUBLISH_TOKEN: ${{ secrets.PYPI_PUBLISH_TOKEN }}
+            COVERAGE_BADGE_GIST_TOKEN: ${{ secrets.COVERAGE_BADGE_GIST_TOKEN }}
+  
+    ''',
+    '.github/workflows/CICD_impl.yml': '''
+      name: "[Callable] CI+CD Workflow Impl"
+      
+      on:
+        workflow_call:
+          inputs:
+            operating_system_json_string:
+              type: string
+              description: "The operating systems to run the job on. Note that this is JSON content embedded within a string."
+              required: true
+      
+            python_version_json_string:
+              type: string
+              description: "The Python versions to run the job with. Note that this is JSON content embedded within a string."
+              required: true
+      
+            python_package_version:
+              type: string
+              description: "The python version used when creating the python package."
+              required: true
+      
+            coverage_badge_gist_id:
+              type: string
+              description: "The ID of the Gist used to store coverage badge information. Code coverage information will not be persisted if this value is missing."
+              required: false
+      
+            coverage_badge_gist_username:
+              type: string
+              description: "The username used to access the Gist used to store coverage badge information. The current GitHub user will be used if this value is not provided."
+              required: false
+      
+          secrets:
+            MINISIGN_PRIVATE_KEY:
+              required: false
+              description: "Private key used to sign artifacts. Artifacts will not be signed if this value is missing."
+      
+            PYPI_PUBLISH_TOKEN:
+              required: false
+              description: "Token used to publish packages to PyPi. Packages will not be published if this value is missing."
+      
+            COVERAGE_BADGE_GIST_TOKEN:
+              required: false
+              description: "Token used to access the Gist used to store coverage badge information. Code coverage information will not be persisted if this value is missing."
+      
+      jobs:
+        # ----------------------------------------------------------------------
+        validate:
+          strategy:
+            fail-fast: false
+      
+            matrix:
+              os: ${{ fromJson(inputs.operating_system_json_string) }}
+              python_version: ${{ fromJson(inputs.python_version_json_string) }}
+      
+          name: Validate
+          runs-on: ${{ matrix.os }}
+      
+          permissions:
+            contents: read
+      
+          steps:
+            - uses: actions/checkout@v4
+      
+            - name: Install uv and python
+              uses: astral-sh/setup-uv@v5
+              with:
+                python-version: ${{ matrix.python_version }}
+                enable-cache: true
+      
+            - name: Run pre-commit scripts
+              run: uv run pre-commit run --verbose
+      
+            - name: Validate Tests
+              run: uv run pytest
+              env:
+                COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
+      
+            - name: Upload Coverage Data
+              uses: actions/upload-artifact@v4
+              with:
+                name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
+                path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
+                include-hidden-files: true
+      
+        # ----------------------------------------------------------------------
+        package_coverage:
+          needs: validate
+      
+          name: Postprocess Coverage Info
+          runs-on: ubuntu-latest
+      
+          outputs:
+            coverage_total: ${{ steps.combine_coverage_data.outputs.coverage_total }}
+      
+          permissions:
+            contents: read
+      
+          steps:
+            - uses: actions/checkout@v4
+      
+            - name: Install uv and python
+              uses: astral-sh/setup-uv@v5
+              with:
+                enable-cache: true
+      
+            - name: Install Dependencies
+              run: uv sync --frozen
+      
+            - name: Download Coverage Data
+              uses: actions/download-artifact@v4
+              with:
+                merge-multiple: true
+      
+            - name: Combine Coverage Data
+              id: combine_coverage_data
+              shell: bash
+              run: |
+                uv run coverage combine .
+                uv run coverage report --ignore-errors --show-missing --skip-covered
+                uv run coverage json --ignore-errors -o .coverage.json
+      
+                export TOTAL=$(uv run python -c "import json;print(json.load(open('.coverage.json'))['totals']['percent_covered_display'])")
+                echo "coverage_total=${TOTAL}" >> $GITHUB_OUTPUT
+                echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
+      
+            - name: Upload Coverage Data
+              uses: actions/upload-artifact@v4
+              with:
+                name: .coverage.json
+                path: .coverage.json
+                include-hidden-files: true
+      
+        # ----------------------------------------------------------------------
+        python_package:
+          needs: package_coverage
+      
+          name: Build Python Package
+          runs-on: ubuntu-latest
+      
+          outputs:
+            package_name: ${{ steps.package_name_and_version.outputs.package_name }}
+            package_version: ${{ steps.package_name_and_version.outputs.package_version }}
+      
+          permissions:
+            contents: read
+      
+          steps:
+            - uses: actions/checkout@v4
+              with:
+                fetch-depth: 0
+      
+            - name: Install uv and python
+              uses: astral-sh/setup-uv@v5
+              with:
+                enable-cache: true
+                python-version: ${{ inputs.python_package_version }}
+      
+            - name: Install Dependencies
+              run: uv sync --frozen
+      
+            - name: Update Version
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
+      
+            - name: Build Python Package
+              run: uv build
+      
+            - name: Save Package Name and Version
+              id: package_name_and_version
+              run: |-
+                cd dist
+      
+                export PACKAGE_NAME=$(ls *.whl)
+                echo "package_name=${PACKAGE_NAME}" >> $GITHUB_OUTPUT
+                echo "**Package Name:** ${PACKAGE_NAME}" >> $GITHUB_STEP_SUMMARY
+      
+                export PACKAGE_VERSION=$(uv run python -c "import this_is_the_project_name as package; print(package.__version__)")
+                echo "package_version=${PACKAGE_VERSION}" >> $GITHUB_OUTPUT
+                echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
+      
+            - name: Upload Python Package
+              uses: actions/upload-artifact@v4
+              with:
+                name: Python package
+                path: dist/**
+      
+        # ----------------------------------------------------------------------
+        validate_python_package:
+          needs: python_package
+      
+          strategy:
+            fail-fast: false
+      
+            matrix:
+              os: ${{ fromJson(inputs.operating_system_json_string) }}
+              python_version: ${{ fromJson(inputs.python_version_json_string) }}
+      
+          name: Validate Python Package
+          runs-on: ${{ matrix.os }}
+      
+          env:
+            PACKAGE_NAME: ${{ needs.python_package.outputs.package_name }}
+            PACKAGE_VERSION: ${{ needs.python_package.outputs.package_version }}
+      
+          permissions: {}
+      
+          steps:
+            - name: Install uv and python
+              uses: astral-sh/setup-uv@v5
+              with:
+                python-version: ${{ matrix.python_version }}
+                enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
+                ignore-empty-workdir: true
+      
+            - name: Download Python Package
+              uses: actions/download-artifact@v4
+              with:
+                name: Python package
+                path: dist
+      
+            - name: Install Python Package
+              run: uv pip install dist/${{ env.PACKAGE_NAME }}
+      
+            - name: Validate Python Package
+              run: uv run python -c "import this_is_the_project_name as package; assert package.__version__ == '${{ env.PACKAGE_VERSION }}', package.__version__"
+      
+        # ----------------------------------------------------------------------
+        release:
+          needs: [package_coverage, python_package, validate_python_package]
+      
+          name: Release
+          runs-on: ubuntu-latest
+      
+          env:
+            COVERAGE_TOTAL: ${{ needs.package_coverage.outputs.coverage_total }}
+            PACKAGE_NAME: ${{ needs.python_package.outputs.package_name }}
+            PACKAGE_VERSION: ${{ needs.python_package.outputs.package_version }}
+            GH_TOKEN: ${{ github.token }}
+      
+          permissions:
+            contents: write  # To tag the repository and create the release
+      
+          steps:
+            - uses: actions/checkout@v4
+      
+            - name: Has Release Changes?
+              id: has_release_changes
+              uses: dorny/paths-filter@v3
+              with:
+                filters: ./.github/release_sources.yaml
+      
+            - name: Release
+              if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.has_release_changes.outputs.src == 'true' }}
+              uses: ./.github/actions/release_impl
+              with:
+                minisign_private_key: ${{ secrets.MINISIGN_PRIVATE_KEY }}
+                pypi_publish_token: ${{ secrets.PYPI_PUBLISH_TOKEN }}
+                coverage_badge_gist_token: ${{ secrets.COVERAGE_BADGE_GIST_TOKEN }}
+                coverage_badge_gist_id: ${{ inputs.coverage_badge_gist_id }}
+                coverage_badge_gist_username: ${{ inputs.coverage_badge_gist_username }}
+  
+    ''',
+    '.github/workflows/codeql.yml': '''
+      # For most projects, this workflow file will not need changing; you simply need
+      # to commit it to your repository.
+      #
+      # You may wish to alter this file to override the set of languages analyzed,
+      # or to provide custom queries or build logic.
+      #
+      # ******** NOTE ********
+      # We have attempted to detect the languages in your repository. Please check
+      # the `language` matrix defined below to confirm you have the correct set of
+      # supported CodeQL languages.
+      #
+      name: "CodeQL"
+      
+      on:
+        push:
+          branches: [ "main" ]
+        pull_request:
+          branches: [ "main" ]
+        schedule:
+          - cron: '0 0 * * *'
+        workflow_dispatch:
+      
+      permissions: {}
+      
+      jobs:
+        analyze:
+          name: Analyze
+          # Runner size impacts CodeQL analysis time. To learn more, please see:
+          #   - https://gh.io/recommended-hardware-resources-for-running-codeql
+          #   - https://gh.io/supported-runners-and-hardware-resources
+          #   - https://gh.io/using-larger-runners
+          # Consider using larger runners for possible analysis time improvements.
+          runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+          timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
+          permissions:
+            # required for all workflows
+            security-events: write
+      
+            # only required for workflows in private repositories
+            actions: read
+            contents: read
+      
+          strategy:
+            fail-fast: false
+            matrix:
+              language: [ 'python' ]
+              # CodeQL supports [ 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift' ]
+              # Use only 'java-kotlin' to analyze code written in Java, Kotlin or both
+              # Use only 'javascript-typescript' to analyze code written in JavaScript, TypeScript or both
+              # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
+      
+          steps:
+          - name: Checkout repository
+            uses: actions/checkout@v4
+      
+          # Initializes the CodeQL tools for scanning.
+          - name: Initialize CodeQL
+            uses: github/codeql-action/init@v3
+            with:
+              languages: ${{ matrix.language }}
+              # If you wish to specify custom queries, you can do so here or in a config file.
+              # By default, queries listed here will override any specified in a config file.
+              # Prefix the list here with "+" to use these queries and those in the config file.
+      
+              # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+              # queries: security-extended,security-and-quality
+      
+      
+          # Autobuild attempts to build any compiled languages (C/C++, C#, Go, Java, or Swift).
+          # If this step fails, then you should remove it and run the build manually (see below)
+          - name: Autobuild
+            uses: github/codeql-action/autobuild@v3
+      
+          # ℹ️ Command-line programs to run using the OS shell.
+          # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+      
+          #   If the Autobuild fails above, remove it and uncomment the following three lines.
+          #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
+      
+          # - run: |
+          #     echo "Run, Build Application using script"
+          #     ./location_of_script_within_repo/buildscript.sh
+      
+          - name: Perform CodeQL Analysis
+            uses: github/codeql-action/analyze@v3
+            with:
+              category: "/language:${{matrix.language}}"
+  
+    ''',
+    '.gitignore': '''
+      # Python-generated files
+      __pycache__/
+      *.py[oc]
+      build/
+      dist/
+      wheels/
+      *.egg-info
+      
+      # Virtual environments
+      .venv
+      .coverage
+      .DS_Store
+      .vscode
+      minisign_key.pri
+    ''',
+    '.pre-commit-config.yaml': '''
+      # See https://pre-commit.com for more information
+      # See https://pre-commit.com/hooks.html for more hooks
+      repos:
+      - repo: local
+        hooks:
+        - id: uv sync --frozen
+          name: uv sync --frozen
+          entry: uv sync --frozen
+          language: system
+          pass_filenames: false
+          require_serial: true
+          always_run: true
+      
+        - id: uv run ruff format --check
+          name: uv run ruff format --check
+          entry: uv run ruff format --check
+          language: system
+          pass_filenames: false
+          always_run: true
+      
+        - id: uv run ruff check
+          name: uv run ruff check
+          entry: uv run ruff check
+          language: system
+          pass_filenames: false
+          always_run: true
+  
+    ''',
+    '.python-version': '<<python_version>>',
+    'CODE_OF_CONDUCT.md': '''
+      # Contributor Code of Conduct
+      
+      ## Principles
+      
+      These principles guide our data, product, and process decisions, architecture, and approach.
+      
+      - Open means transparent and participatory.
+      - We take a modular and modern approach to software development.
+      - We build open-source software and open-source process.
+      - We value ease of implementation.
+      - Fostering community includes building capacity and making our software and processes accessible to participants with diverse backgrounds and skillsets.
+      - Data (and data science) is as important as software and process. We build open data sets where possible.
+      - We strive for transparency for algorithms and places we might be introducing bias.
+      
+      ## Community Guidelines
+      
+      Information on contributing to this project is available in [CONTRIBUTING.md](CONTRIBUTING.md).
+      
+      When participating in this open source community's conversations and spaces, we ask individuals to follow the following guidelines:
+      
+      - Embrace a culture of learning, and educate each other. We are all entering this conversation from different starting points and with different backgrounds. There are no dumb questions.
+      - Take space and give space. We strive to create an equitable environment in which all are welcome and able to participate. We hope individuals feel comfortable voicing their opinions and providing contributions and will do our best to recognize and make space for individuals who may be struggling to find space here. Likewise, we expect individuals to recognize when they are taking up significant space and take a step back to allow room for others.
+      - Be respectful.
+      - Default to positive. Assume others' contributions are legitimate and valuable and that they are made with good intention.
+      - Accept responsibility and apologize to those affected by our mistakes, and learn from the experience.
+      - Focus on what is best not just for us as individuals, but for the overall community.
+      
+      ## Enforcement Responsibilities
+      
+      [Project maintainers](MAINTAINERS.md) are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any behavior that they deem inappropriate, threatening, offensive, or harmful.
+      
+      Project maintainers have the right and responsibility to remove, edit, or reject contributions, comments, code, wiki edits, issues, and other contributions that are not aligned with this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+      
+      ## Scope
+      
+      This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project email address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers.
+      
+      ## Acknowledgements
+      
+      This Code of Conduct was adapted from these resources:
+      
+      - The [Contributor Covenant](https://www.contributor-covenant.org), version 2.1, available [here](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html)
+      - The [United States Digital Service](https://usds.gov) [Justice40](https://thejustice40.com) open source [repository](https://github.com/usds/justice40-tool)
+  
+    ''',
+    'CONTRIBUTING.md': '''
+      # Contribution Guidelines
+      
+      Additional information is available at the following locations.
+      
+      | Topic | Description | Location |
+      | --- | --- | --- |
+      | Code of Conduct | How we welcome others to this community. | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
+      | Development Activities | How we create software in this community. | [DEVELOPMENT.md](DEVELOPMENT.md) |
+      | Security | How to report vulnerabilities in our software. | [SECURITY.md](SECURITY.md) |
+      
+      # Bug Reports
+      If you experience a problem with our software, please visit [issues](https://github.com/<<github_username>>/<<github_repo_name>>/issues) and create a `Bug report`.
+      
+      # Feature Requests
+      If you would like to suggest a new feature for our software, please visit [issues](https://github.com/<<github_username>>/<<github_repo_name>>/issues) and create a `Feature request`.
+      
+      # Issue Labels
+      We use these labels to help us track and manage `Bug reports` and `Feature requests`.
+      
+      | Label | Description |
+      | --- | --- |
+      | `bug` | Something isn't working. |
+      | `enhancement` | New feature or request. |
+      | `help wanted` | Extra attention is needed. |
+      | `good first issue` | Good for newcomers. |
+      | `documentation` | Improvements or additions to documentation. |
+  
+    ''',
+    'DEVELOPMENT.md': '''
+      # Local Development
+      
+      ## Enlistment
+      
+      | Step | Command Line | Additional Information |
+      | --- | --- | --- |
+      | 1. Clone the repository locally. | `git clone https://github.com/<<github_username>>/<<github_repo_name>>` | https://git-scm.com/docs/git-clone |
+      | 2. Install [uv](https://github.com/astral-sh/uv). | `curl -LsSf https://astral.sh/uv/install.sh \| sh` on macOS and Linux or <br/>`powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 \| iex"` on Windows | https://docs.astral.sh |
+      | 3. Install dependencies. | `uv sync` | https://docs.astral.sh/uv/concepts/projects/sync |
+      | 4. Install [pre-commit](https://pre-commit.com/) hooks | `uv run pre-commit install` | https://pre-commit.com/#1-install-pre-commit |
+      
+      ## Development Activities
+      
+      | Activity | Command Line | Description | Used During Local Development | Invoked by Continuous Integration |
+      | --- | --- | --- | :-: | :-: |
+      | Code Formatting | `uv run ruff format` or<br>`uv run ruff format --check` | Format source code using [ruff](https://github.com/astral-sh/ruff) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: (via [pre-commit](https://pre-commit.com/)) |
+      | Static Code Analysis | `uv run ruff check` | Validate source code using [ruff](https://github.com/astral-sh/ruff) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: (via [pre-commit](https://pre-commit.com/)) |
+      | Run pre-commit scripts | `uv run pre-commit run` | Run [pre-commit](https://pre-commit.com/) scripts based on settings in `.pre-commit-config.yaml`. | :white_check_mark: | :white_check_mark: |
+      | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
+      | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
+      | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
+      | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
+      
+      ## Contributing Changes
+      Pull requests are preferred, since they are specific. For more about how to create a pull request, see https://help.github.com/articles/using-pull-requests/.
+      
+      We recommend creating different branches for different (logical) changes, and creating a pull request into the `main` branch when you're done. For more information on creating branches, please see https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/.
+  
+    ''',
+    'GOVERNANCE.md': '''
+      # Governance
+      
+      This project is governed by our [Code of Conduct](CODE_OF_CONDUCT.md) and [Contribution](CONTRIBUTING.md) guidelines.
+  
+    ''',
+    'LICENSE': '''
+      MIT LICENSE
+      
+      Copyright (c) <<year>> <<author_name>>
+      
+      Permission is hereby granted, free of charge, to any person obtaining a copy
+      of this software and associated documentation files (the "Software"), to deal
+      in the Software without restriction, including without limitation the rights
+      to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+      copies of the Software, and to permit persons to whom the Software is
+      furnished to do so, subject to the following conditions:
+      
+      The above copyright notice and this permission notice shall be included in all
+      copies or substantial portions of the Software.
+      
+      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+      SOFTWARE.
+  
+    ''',
+    'MAINTAINERS.md': '''
+      # Maintainers Guide
+      
+      ## Current Maintainers
+      
+      The following individuals are responsible for maintaining this project. Feel free to reach out to any of them with questions or issues:
+      
+      | Maintainer        | GitHub Username   |
+      | ----------------- | ----------------- |
+      | Alice Smith       | `@alice`          |
+      | Bob Johnson       | `@bob`            |
+      | Carol Williams    | `@carol`          |
+      
+      ## Maintainer Responsibilities
+      
+      Maintainers are expected to:
+      1. **Review and Merge Pull Requests:** Ensure that contributions are reviewed in a timely manner and merged if they meet the project's standards.
+      2. **Issue Management:** Triage and respond to issues reported by the community. Prioritize and assign them as necessary.
+      3. **Project Roadmap:** Help define and communicate the project's roadmap and key milestones.
+      4. **Community Engagement:** Foster a positive and collaborative environment within the project's community. See [CONTRIBUTING.md](CONTRIBUTING.md) for additional information.
+      
+      ## Contribution Process
+      
+      To ensure a smooth contribution process, please follow these steps:
+      
+      1. **Fork the Repository:** Create a fork of the project repository.
+      2. **Create a Branch:** Create a new branch for your changes.
+      3. **Make Your Changes:** Implement your changes and commit them to your branch.
+      4. **Submit a Pull Request:** Open a pull request with a clear description of your changes and the problem they solve.
+      5. **Address Feedback:** Be responsive to any feedback or requested changes from the maintainers.
+      
+      ## Code of Conduct
+      
+      All contributors and maintainers are expected to adhere to the project's [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Please review it before participating in the project.
+      
+      ## Getting Help
+      
+      If you need help or have any questions, please contact one of the maintainers listed above or open an issue in the repository.
+      
+      Thank you for contributing to our project!
+  
+    ''',
+    'README.md': '''
+      **Project:**
+      [![License](https://img.shields.io/github/license/<<github_username>>/<<github_repo_name>>?color=dark-green)](https://github.com/<<github_username>>/<<github_repo_name>>/blob/master/LICENSE)
+      
+      **Package:**
+      [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/this_is_the_project_name?color=dark-green)](https://pypi.org/project/this_is_the_project_name/)
+      [![PyPI - Version](https://img.shields.io/pypi/v/this_is_the_project_name?color=dark-green)](https://pypi.org/project/this_is_the_project_name/)
+      [![PyPI - Downloads](https://img.shields.io/pypi/dm/this_is_the_project_name)](https://pypistats.org/packages/this_is_the_project_name)
+      
+      **Development:**
+      [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+      [![CI](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml/badge.svg)](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml)
+      [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/<<coverage_badge_gist_username>>/<<coverage_badge_gist_id>>/raw/<<github_repo_name>>_code_coverage.json)](https://github.com/<<github_username>>/<<github_repo_name>>/actions)
+      [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/<<github_username>>/<<github_repo_name>>?color=dark-green)](https://github.com/<<github_username>>/<<github_repo_name>>/commits/main/)
+      
+      <!-- Content above this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
+      
+      ## Contents
+      - [Overview](#overview)
+      - [Installation](#installation)
+      - [Development](#development)
+      - [Additional Information](#additional-information)
+      - [License](#license)
+      
+      ## Overview
+      TODO: Complete this section
+      
+      ### How to use this_is_the_project_name
+      TODO: Complete this section
+      
+      <!-- Content below this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
+      
+      ## Installation
+      
+      | Installation Method | Command |
+      | --- | --- |
+      | Via [uv](https://github.com/astral-sh/uv) | `uv add this_is_the_project_name` |
+      | Via [pip](https://pip.pypa.io/en/stable/) | `pip install this_is_the_project_name` |
+      
+      
+      
       ## Development
       Please visit [Contributing](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/CONTRIBUTING.md) and [Development](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/DEVELOPMENT.md) for information on contributing to this project.
       
@@ -6454,6 +7578,7 @@
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
       python_versions: 3.10, 3.11, 3.12, 3.13
+      sign_artifacts_question: true
   
     ''',
     '.github/ISSUE_TEMPLATE/bug_report.md': '''
@@ -7298,6 +8423,13 @@
       | --- | --- |
       | Via [uv](https://github.com/astral-sh/uv) | `uv add this_is_the_project_name` |
       | Via [pip](https://pip.pypa.io/en/stable/) | `pip install this_is_the_project_name` |
+      
+      ### Verifying Signed Artifacts
+      Artifacts are signed and validated using [py-minisign](https://github.com/x13a/py-minisign) and the public key in the file `./minisign_key.pub`.
+      
+      To verify that an artifact is valid, visit [the latest release](https://github.com/<<github_username>>/<<github_repo_name>>/releases/latest) and download the `.minisign` signature file that corresponds to the artifact, then run the following command, replacing `<filename>` with the name of the artifact to be verified:
+      
+      `uv run --with py-minisign python -c "import minisign; minisign.PublicKey.from_file('minisign_key.pub').verify_file('<filename>')"`
       
       ## Development
       Please visit [Contributing](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/CONTRIBUTING.md) and [Development](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/DEVELOPMENT.md) for information on contributing to this project.

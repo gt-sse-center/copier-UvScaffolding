@@ -40,6 +40,15 @@ TODO: Complete this section
 | Via [uv](https://github.com/astral-sh/uv) | `uv add {{ python_package_name }}` |
 | Via [pip](https://pip.pypa.io/en/stable/) | `pip install {{ python_package_name }}` |
 
+{% if sign_artifacts_public_key != "" -%}
+### Verifying Signed Artifacts
+Artifacts are signed and validated using [py-minisign](https://github.com/x13a/py-minisign) and the public key in the file `./minisign_key.pub`.
+
+To verify that an artifact is valid, visit [the latest release]({{ github_url }}/releases/latest) and download the `.minisign` signature file that corresponds to the artifact, then run the following command, replacing `<filename>` with the name of the artifact to be verified:
+
+`uv run --with py-minisign python -c "import minisign; minisign.PublicKey.from_file('minisign_key.pub').verify_file('<filename>')"`
+{%- endif %}
+
 ## Development
 Please visit [Contributing]({{ github_url }}/blob/main/CONTRIBUTING.md) and [Development]({{ github_url }}/blob/main/DEVELOPMENT.md) for information on contributing to this project.
 
