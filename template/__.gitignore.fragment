@@ -3,3 +3,4 @@
 .vscode
 __pycache__
 minisign_key.pri
+post_generation_instructions.html

@@ -647,6 +647,7 @@
       .DS_Store
       .vscode
       minisign_key.pri
+      post_generation_instructions.html
     ''',
     '.pre-commit-config.yaml': '''
       # See https://pre-commit.com for more information
@@ -775,6 +776,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
+      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -942,6 +944,423 @@
       
       ## Patches
       We gladly welcome patches to fix such vulnerabilities! See [CONTRIBUTING.md](CONTRIBUTING.md) for information about contributions.
+  
+    ''',
+    'post_generation_instructions.html': '''
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <title>this_is_the_project_name Post Generation Instructions</title>
+        </head>
+        <style>
+          body {
+            font-family: "Open Sans", sans-serif;
+          }
+      
+          details {
+            width: 100%;
+            overflow: hidden; /* Keep this line to prevent an odd blue outline around the element in Safari. */
+          }
+      
+          details summary {
+            display: block;
+          }
+      
+          details summary::-webkit-details-marker {
+            display: none;
+          }
+      
+          details summary span {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            background: #444;
+            color: #fff;
+            height: 4rem;
+          }
+      
+          details summary span:hover {
+            cursor: pointer;
+          }
+      
+          details summary span::before {
+            content: "►";
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            margin-right: 0.5rem;
+            transition: rotate 200ms 400ms ease-out;
+          }
+      
+          details[open] summary span::before {
+            rotate: 90deg;
+            transition: rotate 200ms ease-out;
+          }
+      
+          details summary span input {
+            margin-right: 0.75rem;
+          }
+      
+          div.details-content {
+            box-sizing: border-box;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            border: 2px solid transparent;
+            transition: max-height 400ms ease-out, border 0ms 400ms linear;
+            background-color: rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+          }
+      
+          details[open] + div.details-content {
+            max-height: 800px; /* Set a max-height value enough to show all the content */
+            border-color: #888;
+            transition: max-height 400ms ease-out, border 0ms linear;
+          }
+      
+          code {
+            background-color: rgba(0, 0, 0, 0.10);
+          }
+      
+        </style>
+        <body>
+          <h1>this_is_the_project_name Post Generation Instructions</h1>
+          <p>The following steps must be completed in the order listed now that your project has been generated. Check the box next to each step once it is completed.</p>
+      
+          <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will update GitHub settings to allow the creation of git tags during a release.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions</a>.</li>
+        <li>In the "Workflow permissions" section...</li>
+        <li>Select "Read and write permissions".</li>
+        <li>Click the "Save" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token used to publish the python package for the first time. The token created will be scoped to all of your projects on PyPi (which provides too much access). Once the package has been published for the first time, we will delete this temporary token and create a new one that is scoped to the single project.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>Temporary CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Entire account (all projects)</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>PYPI_PUBLISH_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a GitHub Personal Access Token (PAT) used when persisting code coverage information between Continuous Integration runs.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/settings/tokens?type=beta" target="_blank">https://github.com/settings/tokens?type=beta</a>.</li>
+        <li>Click the "Generate new token" button.</li>
+        <li>Name the token <code>GitHub Workflow Gist (<<github_repo_name>>)</code>.</li>
+        <li>In the Repository access section...</li>
+        <li>Select "Only select repositories"...</li>
+        <li>Select <code><<github_repo_name>></code>.</li>
+        <li>In the "Permissions" section...</li>
+        <li>Press the "Account permissions" dropdown...</li>
+        <li>Select the "Gists" section...</li>
+        <li>Click the "Access: No access" dropdown button...</li>
+        <li>Select "Read and write".</li>
+        <li>Click the "Generate token" button.</li>
+        <li>Copy the token for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the GitHub Personal Access Token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>COVERAGE_BADGE_GIST_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>MINISIGN_PRIVATE_KEY</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the private key previously copied&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+      <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will commit the files generated in git and push the changes.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following commands:</p>
+      
+      1. <code>git add --all</code><br/>
+      2. <code>git commit -m "🎉 Initial commit"</code><br/>
+      3. <code>git push</code><br/>
+      </p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will verify that the GitHub Action workflow completed successfully.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/actions</a>.</li>
+        <li>Select the most recent workflow.</li>
+        <li>Wait for the workflow to complete successfully.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In an earlier step, we created a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token. In this step, we will delete that token. A new token to replace it will be created in the steps that follow.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/" target="_blank">https://pypi.org/manage/account/</a>.</li>
+        <li>Find the token named <code>Temporary CI Publish Action (this_is_the_project_name)</code>...</li>
+        <li>Click the "Options" dropdown button...</li>
+        <li>Select "Remove token".</li>
+        <li>In the dialog box that appears...</li>
+        <li>Enter your password.</li>
+        <li>Click the "Remove API token" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we create a new token scoped only to "this_is_the_project_name".</p>
+      
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Project: this_is_the_project_name</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN</a>.</li>
+        <li>In the "Value" text window, paste the token generated in the previous step.</li>
+        <li>Click "Update secret".</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>After you have completed all the steps, you can delete this file.</p>
+      <p>Now your project is ready to go!</p>
+      
+      </div>
+      
+      
+          <script>
+            document.addEventListener(
+              "DOMContentLoaded",
+              () => {
+                document.querySelectorAll("details summary span input[type=checkbox]").forEach(
+                  function(checkbox) {
+                    var key = `${ location.href }-${ checkbox.id }`;
+      
+                    if(window.localStorage.getItem(key) === "true")
+                      checkbox.checked = true;
+      
+                    this.addEventListener(
+                      "change",
+                      function() {
+                        window.localStorage.setItem(key, checkbox.checked ? "true" : "false");
+                      },
+                    );
+                  }
+                );
+      
+                document.querySelectorAll("code").forEach(
+                  function(code) {
+                    const button = document.createElement("button");
+      
+                    button.textContent = "Copy";
+                    button.style.marginLeft = "10px";
+                    button.addEventListener(
+                      "click",
+                      () => {
+                        navigator.clipboard.writeText(code.textContent).then(
+                          () => {
+                            button.textContent = "Copied!";
+                            setTimeout(() => button.textContent = "Copy", 2000);
+                          },
+                        );
+                      },
+                    );
+      
+                    const wrapper = document.createElement("span");
+      
+                    code.parentNode.insertBefore(wrapper, code);
+                    wrapper.appendChild(code);
+                    wrapper.appendChild(button);
+                  },
+                );
+              },
+            );
+          </script>
+        </body>
+      </html>
   
     ''',
     'pyproject.toml': '''
@@ -1720,6 +2139,7 @@
       .DS_Store
       .vscode
       minisign_key.pri
+      post_generation_instructions.html
     ''',
     '.pre-commit-config.yaml': '''
       # See https://pre-commit.com for more information
@@ -1848,6 +2268,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
+      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -2029,6 +2450,423 @@
       
       ## Patches
       We gladly welcome patches to fix such vulnerabilities! See [CONTRIBUTING.md](CONTRIBUTING.md) for information about contributions.
+  
+    ''',
+    'post_generation_instructions.html': '''
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <title>this_is_the_project_name Post Generation Instructions</title>
+        </head>
+        <style>
+          body {
+            font-family: "Open Sans", sans-serif;
+          }
+      
+          details {
+            width: 100%;
+            overflow: hidden; /* Keep this line to prevent an odd blue outline around the element in Safari. */
+          }
+      
+          details summary {
+            display: block;
+          }
+      
+          details summary::-webkit-details-marker {
+            display: none;
+          }
+      
+          details summary span {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            background: #444;
+            color: #fff;
+            height: 4rem;
+          }
+      
+          details summary span:hover {
+            cursor: pointer;
+          }
+      
+          details summary span::before {
+            content: "►";
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            margin-right: 0.5rem;
+            transition: rotate 200ms 400ms ease-out;
+          }
+      
+          details[open] summary span::before {
+            rotate: 90deg;
+            transition: rotate 200ms ease-out;
+          }
+      
+          details summary span input {
+            margin-right: 0.75rem;
+          }
+      
+          div.details-content {
+            box-sizing: border-box;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            border: 2px solid transparent;
+            transition: max-height 400ms ease-out, border 0ms 400ms linear;
+            background-color: rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+          }
+      
+          details[open] + div.details-content {
+            max-height: 800px; /* Set a max-height value enough to show all the content */
+            border-color: #888;
+            transition: max-height 400ms ease-out, border 0ms linear;
+          }
+      
+          code {
+            background-color: rgba(0, 0, 0, 0.10);
+          }
+      
+        </style>
+        <body>
+          <h1>this_is_the_project_name Post Generation Instructions</h1>
+          <p>The following steps must be completed in the order listed now that your project has been generated. Check the box next to each step once it is completed.</p>
+      
+          <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will update GitHub settings to allow the creation of git tags during a release.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions</a>.</li>
+        <li>In the "Workflow permissions" section...</li>
+        <li>Select "Read and write permissions".</li>
+        <li>Click the "Save" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token used to publish the python package for the first time. The token created will be scoped to all of your projects on PyPi (which provides too much access). Once the package has been published for the first time, we will delete this temporary token and create a new one that is scoped to the single project.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>Temporary CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Entire account (all projects)</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>PYPI_PUBLISH_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a GitHub Personal Access Token (PAT) used when persisting code coverage information between Continuous Integration runs.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/settings/tokens?type=beta" target="_blank">https://github.com/settings/tokens?type=beta</a>.</li>
+        <li>Click the "Generate new token" button.</li>
+        <li>Name the token <code>GitHub Workflow Gist (<<github_repo_name>>)</code>.</li>
+        <li>In the Repository access section...</li>
+        <li>Select "Only select repositories"...</li>
+        <li>Select <code><<github_repo_name>></code>.</li>
+        <li>In the "Permissions" section...</li>
+        <li>Press the "Account permissions" dropdown...</li>
+        <li>Select the "Gists" section...</li>
+        <li>Click the "Access: No access" dropdown button...</li>
+        <li>Select "Read and write".</li>
+        <li>Click the "Generate token" button.</li>
+        <li>Copy the token for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the GitHub Personal Access Token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>COVERAGE_BADGE_GIST_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>MINISIGN_PRIVATE_KEY</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the private key previously copied&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+      <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will commit the files generated in git and push the changes.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following commands:</p>
+      
+      1. <code>git add --all</code><br/>
+      2. <code>git commit -m "🎉 Initial commit"</code><br/>
+      3. <code>git push</code><br/>
+      </p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will verify that the GitHub Action workflow completed successfully.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/actions</a>.</li>
+        <li>Select the most recent workflow.</li>
+        <li>Wait for the workflow to complete successfully.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In an earlier step, we created a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token. In this step, we will delete that token. A new token to replace it will be created in the steps that follow.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/" target="_blank">https://pypi.org/manage/account/</a>.</li>
+        <li>Find the token named <code>Temporary CI Publish Action (this_is_the_project_name)</code>...</li>
+        <li>Click the "Options" dropdown button...</li>
+        <li>Select "Remove token".</li>
+        <li>In the dialog box that appears...</li>
+        <li>Enter your password.</li>
+        <li>Click the "Remove API token" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we create a new token scoped only to "this_is_the_project_name".</p>
+      
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Project: this_is_the_project_name</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN</a>.</li>
+        <li>In the "Value" text window, paste the token generated in the previous step.</li>
+        <li>Click "Update secret".</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>After you have completed all the steps, you can delete this file.</p>
+      <p>Now your project is ready to go!</p>
+      
+      </div>
+      
+      
+          <script>
+            document.addEventListener(
+              "DOMContentLoaded",
+              () => {
+                document.querySelectorAll("details summary span input[type=checkbox]").forEach(
+                  function(checkbox) {
+                    var key = `${ location.href }-${ checkbox.id }`;
+      
+                    if(window.localStorage.getItem(key) === "true")
+                      checkbox.checked = true;
+      
+                    this.addEventListener(
+                      "change",
+                      function() {
+                        window.localStorage.setItem(key, checkbox.checked ? "true" : "false");
+                      },
+                    );
+                  }
+                );
+      
+                document.querySelectorAll("code").forEach(
+                  function(code) {
+                    const button = document.createElement("button");
+      
+                    button.textContent = "Copy";
+                    button.style.marginLeft = "10px";
+                    button.addEventListener(
+                      "click",
+                      () => {
+                        navigator.clipboard.writeText(code.textContent).then(
+                          () => {
+                            button.textContent = "Copied!";
+                            setTimeout(() => button.textContent = "Copy", 2000);
+                          },
+                        );
+                      },
+                    );
+      
+                    const wrapper = document.createElement("span");
+      
+                    code.parentNode.insertBefore(wrapper, code);
+                    wrapper.appendChild(code);
+                    wrapper.appendChild(button);
+                  },
+                );
+              },
+            );
+          </script>
+        </body>
+      </html>
   
     ''',
     'pyproject.toml': '''
@@ -2807,6 +3645,7 @@
       .DS_Store
       .vscode
       minisign_key.pri
+      post_generation_instructions.html
     ''',
     '.pre-commit-config.yaml': '''
       # See https://pre-commit.com for more information
@@ -2935,6 +3774,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
+      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -3114,6 +3954,423 @@
       
       ## Patches
       We gladly welcome patches to fix such vulnerabilities! See [CONTRIBUTING.md](CONTRIBUTING.md) for information about contributions.
+  
+    ''',
+    'post_generation_instructions.html': '''
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <title>this_is_the_project_name Post Generation Instructions</title>
+        </head>
+        <style>
+          body {
+            font-family: "Open Sans", sans-serif;
+          }
+      
+          details {
+            width: 100%;
+            overflow: hidden; /* Keep this line to prevent an odd blue outline around the element in Safari. */
+          }
+      
+          details summary {
+            display: block;
+          }
+      
+          details summary::-webkit-details-marker {
+            display: none;
+          }
+      
+          details summary span {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            background: #444;
+            color: #fff;
+            height: 4rem;
+          }
+      
+          details summary span:hover {
+            cursor: pointer;
+          }
+      
+          details summary span::before {
+            content: "►";
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            margin-right: 0.5rem;
+            transition: rotate 200ms 400ms ease-out;
+          }
+      
+          details[open] summary span::before {
+            rotate: 90deg;
+            transition: rotate 200ms ease-out;
+          }
+      
+          details summary span input {
+            margin-right: 0.75rem;
+          }
+      
+          div.details-content {
+            box-sizing: border-box;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            border: 2px solid transparent;
+            transition: max-height 400ms ease-out, border 0ms 400ms linear;
+            background-color: rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+          }
+      
+          details[open] + div.details-content {
+            max-height: 800px; /* Set a max-height value enough to show all the content */
+            border-color: #888;
+            transition: max-height 400ms ease-out, border 0ms linear;
+          }
+      
+          code {
+            background-color: rgba(0, 0, 0, 0.10);
+          }
+      
+        </style>
+        <body>
+          <h1>this_is_the_project_name Post Generation Instructions</h1>
+          <p>The following steps must be completed in the order listed now that your project has been generated. Check the box next to each step once it is completed.</p>
+      
+          <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will update GitHub settings to allow the creation of git tags during a release.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions</a>.</li>
+        <li>In the "Workflow permissions" section...</li>
+        <li>Select "Read and write permissions".</li>
+        <li>Click the "Save" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token used to publish the python package for the first time. The token created will be scoped to all of your projects on PyPi (which provides too much access). Once the package has been published for the first time, we will delete this temporary token and create a new one that is scoped to the single project.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>Temporary CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Entire account (all projects)</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>PYPI_PUBLISH_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a GitHub Personal Access Token (PAT) used when persisting code coverage information between Continuous Integration runs.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/settings/tokens?type=beta" target="_blank">https://github.com/settings/tokens?type=beta</a>.</li>
+        <li>Click the "Generate new token" button.</li>
+        <li>Name the token <code>GitHub Workflow Gist (<<github_repo_name>>)</code>.</li>
+        <li>In the Repository access section...</li>
+        <li>Select "Only select repositories"...</li>
+        <li>Select <code><<github_repo_name>></code>.</li>
+        <li>In the "Permissions" section...</li>
+        <li>Press the "Account permissions" dropdown...</li>
+        <li>Select the "Gists" section...</li>
+        <li>Click the "Access: No access" dropdown button...</li>
+        <li>Select "Read and write".</li>
+        <li>Click the "Generate token" button.</li>
+        <li>Copy the token for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the GitHub Personal Access Token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>COVERAGE_BADGE_GIST_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>MINISIGN_PRIVATE_KEY</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the private key previously copied&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+      <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will commit the files generated in git and push the changes.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following commands:</p>
+      
+      1. <code>git add --all</code><br/>
+      2. <code>git commit -m "🎉 Initial commit"</code><br/>
+      3. <code>git push</code><br/>
+      </p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will verify that the GitHub Action workflow completed successfully.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/actions</a>.</li>
+        <li>Select the most recent workflow.</li>
+        <li>Wait for the workflow to complete successfully.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In an earlier step, we created a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token. In this step, we will delete that token. A new token to replace it will be created in the steps that follow.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/" target="_blank">https://pypi.org/manage/account/</a>.</li>
+        <li>Find the token named <code>Temporary CI Publish Action (this_is_the_project_name)</code>...</li>
+        <li>Click the "Options" dropdown button...</li>
+        <li>Select "Remove token".</li>
+        <li>In the dialog box that appears...</li>
+        <li>Enter your password.</li>
+        <li>Click the "Remove API token" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we create a new token scoped only to "this_is_the_project_name".</p>
+      
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Project: this_is_the_project_name</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN</a>.</li>
+        <li>In the "Value" text window, paste the token generated in the previous step.</li>
+        <li>Click "Update secret".</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>After you have completed all the steps, you can delete this file.</p>
+      <p>Now your project is ready to go!</p>
+      
+      </div>
+      
+      
+          <script>
+            document.addEventListener(
+              "DOMContentLoaded",
+              () => {
+                document.querySelectorAll("details summary span input[type=checkbox]").forEach(
+                  function(checkbox) {
+                    var key = `${ location.href }-${ checkbox.id }`;
+      
+                    if(window.localStorage.getItem(key) === "true")
+                      checkbox.checked = true;
+      
+                    this.addEventListener(
+                      "change",
+                      function() {
+                        window.localStorage.setItem(key, checkbox.checked ? "true" : "false");
+                      },
+                    );
+                  }
+                );
+      
+                document.querySelectorAll("code").forEach(
+                  function(code) {
+                    const button = document.createElement("button");
+      
+                    button.textContent = "Copy";
+                    button.style.marginLeft = "10px";
+                    button.addEventListener(
+                      "click",
+                      () => {
+                        navigator.clipboard.writeText(code.textContent).then(
+                          () => {
+                            button.textContent = "Copied!";
+                            setTimeout(() => button.textContent = "Copy", 2000);
+                          },
+                        );
+                      },
+                    );
+      
+                    const wrapper = document.createElement("span");
+      
+                    code.parentNode.insertBefore(wrapper, code);
+                    wrapper.appendChild(code);
+                    wrapper.appendChild(button);
+                  },
+                );
+              },
+            );
+          </script>
+        </body>
+      </html>
   
     ''',
     'pyproject.toml': '''
@@ -3892,6 +5149,7 @@
       .DS_Store
       .vscode
       minisign_key.pri
+      post_generation_instructions.html
     ''',
     '.pre-commit-config.yaml': '''
       # See https://pre-commit.com for more information
@@ -4020,6 +5278,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
+      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -4188,6 +5447,423 @@
       
       ## Patches
       We gladly welcome patches to fix such vulnerabilities! See [CONTRIBUTING.md](CONTRIBUTING.md) for information about contributions.
+  
+    ''',
+    'post_generation_instructions.html': '''
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <title>this_is_the_project_name Post Generation Instructions</title>
+        </head>
+        <style>
+          body {
+            font-family: "Open Sans", sans-serif;
+          }
+      
+          details {
+            width: 100%;
+            overflow: hidden; /* Keep this line to prevent an odd blue outline around the element in Safari. */
+          }
+      
+          details summary {
+            display: block;
+          }
+      
+          details summary::-webkit-details-marker {
+            display: none;
+          }
+      
+          details summary span {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            background: #444;
+            color: #fff;
+            height: 4rem;
+          }
+      
+          details summary span:hover {
+            cursor: pointer;
+          }
+      
+          details summary span::before {
+            content: "►";
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            margin-right: 0.5rem;
+            transition: rotate 200ms 400ms ease-out;
+          }
+      
+          details[open] summary span::before {
+            rotate: 90deg;
+            transition: rotate 200ms ease-out;
+          }
+      
+          details summary span input {
+            margin-right: 0.75rem;
+          }
+      
+          div.details-content {
+            box-sizing: border-box;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            border: 2px solid transparent;
+            transition: max-height 400ms ease-out, border 0ms 400ms linear;
+            background-color: rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+          }
+      
+          details[open] + div.details-content {
+            max-height: 800px; /* Set a max-height value enough to show all the content */
+            border-color: #888;
+            transition: max-height 400ms ease-out, border 0ms linear;
+          }
+      
+          code {
+            background-color: rgba(0, 0, 0, 0.10);
+          }
+      
+        </style>
+        <body>
+          <h1>this_is_the_project_name Post Generation Instructions</h1>
+          <p>The following steps must be completed in the order listed now that your project has been generated. Check the box next to each step once it is completed.</p>
+      
+          <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will update GitHub settings to allow the creation of git tags during a release.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions</a>.</li>
+        <li>In the "Workflow permissions" section...</li>
+        <li>Select "Read and write permissions".</li>
+        <li>Click the "Save" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token used to publish the python package for the first time. The token created will be scoped to all of your projects on PyPi (which provides too much access). Once the package has been published for the first time, we will delete this temporary token and create a new one that is scoped to the single project.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>Temporary CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Entire account (all projects)</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>PYPI_PUBLISH_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a GitHub Personal Access Token (PAT) used when persisting code coverage information between Continuous Integration runs.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/settings/tokens?type=beta" target="_blank">https://github.com/settings/tokens?type=beta</a>.</li>
+        <li>Click the "Generate new token" button.</li>
+        <li>Name the token <code>GitHub Workflow Gist (<<github_repo_name>>)</code>.</li>
+        <li>In the Repository access section...</li>
+        <li>Select "Only select repositories"...</li>
+        <li>Select <code><<github_repo_name>></code>.</li>
+        <li>In the "Permissions" section...</li>
+        <li>Press the "Account permissions" dropdown...</li>
+        <li>Select the "Gists" section...</li>
+        <li>Click the "Access: No access" dropdown button...</li>
+        <li>Select "Read and write".</li>
+        <li>Click the "Generate token" button.</li>
+        <li>Copy the token for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the GitHub Personal Access Token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>COVERAGE_BADGE_GIST_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>MINISIGN_PRIVATE_KEY</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the private key previously copied&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+      <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will commit the files generated in git and push the changes.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following commands:</p>
+      
+      1. <code>git add --all</code><br/>
+      2. <code>git commit -m "🎉 Initial commit"</code><br/>
+      3. <code>git push</code><br/>
+      </p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will verify that the GitHub Action workflow completed successfully.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/actions</a>.</li>
+        <li>Select the most recent workflow.</li>
+        <li>Wait for the workflow to complete successfully.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In an earlier step, we created a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token. In this step, we will delete that token. A new token to replace it will be created in the steps that follow.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/" target="_blank">https://pypi.org/manage/account/</a>.</li>
+        <li>Find the token named <code>Temporary CI Publish Action (this_is_the_project_name)</code>...</li>
+        <li>Click the "Options" dropdown button...</li>
+        <li>Select "Remove token".</li>
+        <li>In the dialog box that appears...</li>
+        <li>Enter your password.</li>
+        <li>Click the "Remove API token" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we create a new token scoped only to "this_is_the_project_name".</p>
+      
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Project: this_is_the_project_name</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN</a>.</li>
+        <li>In the "Value" text window, paste the token generated in the previous step.</li>
+        <li>Click "Update secret".</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>After you have completed all the steps, you can delete this file.</p>
+      <p>Now your project is ready to go!</p>
+      
+      </div>
+      
+      
+          <script>
+            document.addEventListener(
+              "DOMContentLoaded",
+              () => {
+                document.querySelectorAll("details summary span input[type=checkbox]").forEach(
+                  function(checkbox) {
+                    var key = `${ location.href }-${ checkbox.id }`;
+      
+                    if(window.localStorage.getItem(key) === "true")
+                      checkbox.checked = true;
+      
+                    this.addEventListener(
+                      "change",
+                      function() {
+                        window.localStorage.setItem(key, checkbox.checked ? "true" : "false");
+                      },
+                    );
+                  }
+                );
+      
+                document.querySelectorAll("code").forEach(
+                  function(code) {
+                    const button = document.createElement("button");
+      
+                    button.textContent = "Copy";
+                    button.style.marginLeft = "10px";
+                    button.addEventListener(
+                      "click",
+                      () => {
+                        navigator.clipboard.writeText(code.textContent).then(
+                          () => {
+                            button.textContent = "Copied!";
+                            setTimeout(() => button.textContent = "Copy", 2000);
+                          },
+                        );
+                      },
+                    );
+      
+                    const wrapper = document.createElement("span");
+      
+                    code.parentNode.insertBefore(wrapper, code);
+                    wrapper.appendChild(code);
+                    wrapper.appendChild(button);
+                  },
+                );
+              },
+            );
+          </script>
+        </body>
+      </html>
   
     ''',
     'pyproject.toml': '''
@@ -4966,6 +6642,7 @@
       .DS_Store
       .vscode
       minisign_key.pri
+      post_generation_instructions.html
     ''',
     '.pre-commit-config.yaml': '''
       # See https://pre-commit.com for more information
@@ -5094,6 +6771,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
+      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -5269,6 +6947,423 @@
       
       ## Patches
       We gladly welcome patches to fix such vulnerabilities! See [CONTRIBUTING.md](CONTRIBUTING.md) for information about contributions.
+  
+    ''',
+    'post_generation_instructions.html': '''
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <title>this_is_the_project_name Post Generation Instructions</title>
+        </head>
+        <style>
+          body {
+            font-family: "Open Sans", sans-serif;
+          }
+      
+          details {
+            width: 100%;
+            overflow: hidden; /* Keep this line to prevent an odd blue outline around the element in Safari. */
+          }
+      
+          details summary {
+            display: block;
+          }
+      
+          details summary::-webkit-details-marker {
+            display: none;
+          }
+      
+          details summary span {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            background: #444;
+            color: #fff;
+            height: 4rem;
+          }
+      
+          details summary span:hover {
+            cursor: pointer;
+          }
+      
+          details summary span::before {
+            content: "►";
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            margin-right: 0.5rem;
+            transition: rotate 200ms 400ms ease-out;
+          }
+      
+          details[open] summary span::before {
+            rotate: 90deg;
+            transition: rotate 200ms ease-out;
+          }
+      
+          details summary span input {
+            margin-right: 0.75rem;
+          }
+      
+          div.details-content {
+            box-sizing: border-box;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            border: 2px solid transparent;
+            transition: max-height 400ms ease-out, border 0ms 400ms linear;
+            background-color: rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+          }
+      
+          details[open] + div.details-content {
+            max-height: 800px; /* Set a max-height value enough to show all the content */
+            border-color: #888;
+            transition: max-height 400ms ease-out, border 0ms linear;
+          }
+      
+          code {
+            background-color: rgba(0, 0, 0, 0.10);
+          }
+      
+        </style>
+        <body>
+          <h1>this_is_the_project_name Post Generation Instructions</h1>
+          <p>The following steps must be completed in the order listed now that your project has been generated. Check the box next to each step once it is completed.</p>
+      
+          <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will update GitHub settings to allow the creation of git tags during a release.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions</a>.</li>
+        <li>In the "Workflow permissions" section...</li>
+        <li>Select "Read and write permissions".</li>
+        <li>Click the "Save" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token used to publish the python package for the first time. The token created will be scoped to all of your projects on PyPi (which provides too much access). Once the package has been published for the first time, we will delete this temporary token and create a new one that is scoped to the single project.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>Temporary CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Entire account (all projects)</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>PYPI_PUBLISH_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a GitHub Personal Access Token (PAT) used when persisting code coverage information between Continuous Integration runs.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/settings/tokens?type=beta" target="_blank">https://github.com/settings/tokens?type=beta</a>.</li>
+        <li>Click the "Generate new token" button.</li>
+        <li>Name the token <code>GitHub Workflow Gist (<<github_repo_name>>)</code>.</li>
+        <li>In the Repository access section...</li>
+        <li>Select "Only select repositories"...</li>
+        <li>Select <code><<github_repo_name>></code>.</li>
+        <li>In the "Permissions" section...</li>
+        <li>Press the "Account permissions" dropdown...</li>
+        <li>Select the "Gists" section...</li>
+        <li>Click the "Access: No access" dropdown button...</li>
+        <li>Select "Read and write".</li>
+        <li>Click the "Generate token" button.</li>
+        <li>Copy the token for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the GitHub Personal Access Token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>COVERAGE_BADGE_GIST_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>MINISIGN_PRIVATE_KEY</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the private key previously copied&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+      <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will commit the files generated in git and push the changes.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following commands:</p>
+      
+      1. <code>git add --all</code><br/>
+      2. <code>git commit -m "🎉 Initial commit"</code><br/>
+      3. <code>git push</code><br/>
+      </p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will verify that the GitHub Action workflow completed successfully.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/actions</a>.</li>
+        <li>Select the most recent workflow.</li>
+        <li>Wait for the workflow to complete successfully.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In an earlier step, we created a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token. In this step, we will delete that token. A new token to replace it will be created in the steps that follow.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/" target="_blank">https://pypi.org/manage/account/</a>.</li>
+        <li>Find the token named <code>Temporary CI Publish Action (this_is_the_project_name)</code>...</li>
+        <li>Click the "Options" dropdown button...</li>
+        <li>Select "Remove token".</li>
+        <li>In the dialog box that appears...</li>
+        <li>Enter your password.</li>
+        <li>Click the "Remove API token" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we create a new token scoped only to "this_is_the_project_name".</p>
+      
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Project: this_is_the_project_name</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN</a>.</li>
+        <li>In the "Value" text window, paste the token generated in the previous step.</li>
+        <li>Click "Update secret".</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>After you have completed all the steps, you can delete this file.</p>
+      <p>Now your project is ready to go!</p>
+      
+      </div>
+      
+      
+          <script>
+            document.addEventListener(
+              "DOMContentLoaded",
+              () => {
+                document.querySelectorAll("details summary span input[type=checkbox]").forEach(
+                  function(checkbox) {
+                    var key = `${ location.href }-${ checkbox.id }`;
+      
+                    if(window.localStorage.getItem(key) === "true")
+                      checkbox.checked = true;
+      
+                    this.addEventListener(
+                      "change",
+                      function() {
+                        window.localStorage.setItem(key, checkbox.checked ? "true" : "false");
+                      },
+                    );
+                  }
+                );
+      
+                document.querySelectorAll("code").forEach(
+                  function(code) {
+                    const button = document.createElement("button");
+      
+                    button.textContent = "Copy";
+                    button.style.marginLeft = "10px";
+                    button.addEventListener(
+                      "click",
+                      () => {
+                        navigator.clipboard.writeText(code.textContent).then(
+                          () => {
+                            button.textContent = "Copied!";
+                            setTimeout(() => button.textContent = "Copy", 2000);
+                          },
+                        );
+                      },
+                    );
+      
+                    const wrapper = document.createElement("span");
+      
+                    code.parentNode.insertBefore(wrapper, code);
+                    wrapper.appendChild(code);
+                    wrapper.appendChild(button);
+                  },
+                );
+              },
+            );
+          </script>
+        </body>
+      </html>
   
     ''',
     'pyproject.toml': '''
@@ -6046,6 +8141,7 @@
       .DS_Store
       .vscode
       minisign_key.pri
+      post_generation_instructions.html
     ''',
     '.pre-commit-config.yaml': '''
       # See https://pre-commit.com for more information
@@ -6174,6 +8270,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
+      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -6348,6 +8445,369 @@
       
       ## Patches
       We gladly welcome patches to fix such vulnerabilities! See [CONTRIBUTING.md](CONTRIBUTING.md) for information about contributions.
+  
+    ''',
+    'post_generation_instructions.html': '''
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <title>this_is_the_project_name Post Generation Instructions</title>
+        </head>
+        <style>
+          body {
+            font-family: "Open Sans", sans-serif;
+          }
+      
+          details {
+            width: 100%;
+            overflow: hidden; /* Keep this line to prevent an odd blue outline around the element in Safari. */
+          }
+      
+          details summary {
+            display: block;
+          }
+      
+          details summary::-webkit-details-marker {
+            display: none;
+          }
+      
+          details summary span {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            background: #444;
+            color: #fff;
+            height: 4rem;
+          }
+      
+          details summary span:hover {
+            cursor: pointer;
+          }
+      
+          details summary span::before {
+            content: "►";
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            margin-right: 0.5rem;
+            transition: rotate 200ms 400ms ease-out;
+          }
+      
+          details[open] summary span::before {
+            rotate: 90deg;
+            transition: rotate 200ms ease-out;
+          }
+      
+          details summary span input {
+            margin-right: 0.75rem;
+          }
+      
+          div.details-content {
+            box-sizing: border-box;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            border: 2px solid transparent;
+            transition: max-height 400ms ease-out, border 0ms 400ms linear;
+            background-color: rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+          }
+      
+          details[open] + div.details-content {
+            max-height: 800px; /* Set a max-height value enough to show all the content */
+            border-color: #888;
+            transition: max-height 400ms ease-out, border 0ms linear;
+          }
+      
+          code {
+            background-color: rgba(0, 0, 0, 0.10);
+          }
+      
+        </style>
+        <body>
+          <h1>this_is_the_project_name Post Generation Instructions</h1>
+          <p>The following steps must be completed in the order listed now that your project has been generated. Check the box next to each step once it is completed.</p>
+      
+          <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will update GitHub settings to allow the creation of git tags during a release.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions</a>.</li>
+        <li>In the "Workflow permissions" section...</li>
+        <li>Select "Read and write permissions".</li>
+        <li>Click the "Save" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token used to publish the python package for the first time. The token created will be scoped to all of your projects on PyPi (which provides too much access). Once the package has been published for the first time, we will delete this temporary token and create a new one that is scoped to the single project.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>Temporary CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Entire account (all projects)</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>PYPI_PUBLISH_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">4) Save the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>MINISIGN_PRIVATE_KEY</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the private key previously copied&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">5) Store the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+      <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">6) Initialize the git repository</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will commit the files generated in git and push the changes.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following commands:</p>
+      
+      1. <code>git add --all</code><br/>
+      2. <code>git commit -m "🎉 Initial commit"</code><br/>
+      3. <code>git push</code><br/>
+      </p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">7) Verify the CI/CD Workflow</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will verify that the GitHub Action workflow completed successfully.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/actions</a>.</li>
+        <li>Select the most recent workflow.</li>
+        <li>Wait for the workflow to complete successfully.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">8) Delete the temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In an earlier step, we created a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token. In this step, we will delete that token. A new token to replace it will be created in the steps that follow.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/" target="_blank">https://pypi.org/manage/account/</a>.</li>
+        <li>Find the token named <code>Temporary CI Publish Action (this_is_the_project_name)</code>...</li>
+        <li>Click the "Options" dropdown button...</li>
+        <li>Select "Remove token".</li>
+        <li>In the dialog box that appears...</li>
+        <li>Enter your password.</li>
+        <li>Click the "Remove API token" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">9) Create an Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we create a new token scoped only to "this_is_the_project_name".</p>
+      
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Project: this_is_the_project_name</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">10) Update the GitHub Secret with the Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN</a>.</li>
+        <li>In the "Value" text window, paste the token generated in the previous step.</li>
+        <li>Click "Update secret".</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-this-file">11) Delete this file</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>After you have completed all the steps, you can delete this file.</p>
+      <p>Now your project is ready to go!</p>
+      
+      </div>
+      
+      
+          <script>
+            document.addEventListener(
+              "DOMContentLoaded",
+              () => {
+                document.querySelectorAll("details summary span input[type=checkbox]").forEach(
+                  function(checkbox) {
+                    var key = `${ location.href }-${ checkbox.id }`;
+      
+                    if(window.localStorage.getItem(key) === "true")
+                      checkbox.checked = true;
+      
+                    this.addEventListener(
+                      "change",
+                      function() {
+                        window.localStorage.setItem(key, checkbox.checked ? "true" : "false");
+                      },
+                    );
+                  }
+                );
+      
+                document.querySelectorAll("code").forEach(
+                  function(code) {
+                    const button = document.createElement("button");
+      
+                    button.textContent = "Copy";
+                    button.style.marginLeft = "10px";
+                    button.addEventListener(
+                      "click",
+                      () => {
+                        navigator.clipboard.writeText(code.textContent).then(
+                          () => {
+                            button.textContent = "Copied!";
+                            setTimeout(() => button.textContent = "Copy", 2000);
+                          },
+                        );
+                      },
+                    );
+      
+                    const wrapper = document.createElement("span");
+      
+                    code.parentNode.insertBefore(wrapper, code);
+                    wrapper.appendChild(code);
+                    wrapper.appendChild(button);
+                  },
+                );
+              },
+            );
+          </script>
+        </body>
+      </html>
   
     ''',
     'pyproject.toml': '''
@@ -7126,6 +9586,7 @@
       .DS_Store
       .vscode
       minisign_key.pri
+      post_generation_instructions.html
     ''',
     '.pre-commit-config.yaml': '''
       # See https://pre-commit.com for more information
@@ -7424,6 +9885,382 @@
       
       ## Patches
       We gladly welcome patches to fix such vulnerabilities! See [CONTRIBUTING.md](CONTRIBUTING.md) for information about contributions.
+  
+    ''',
+    'post_generation_instructions.html': '''
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <title>this_is_the_project_name Post Generation Instructions</title>
+        </head>
+        <style>
+          body {
+            font-family: "Open Sans", sans-serif;
+          }
+      
+          details {
+            width: 100%;
+            overflow: hidden; /* Keep this line to prevent an odd blue outline around the element in Safari. */
+          }
+      
+          details summary {
+            display: block;
+          }
+      
+          details summary::-webkit-details-marker {
+            display: none;
+          }
+      
+          details summary span {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            background: #444;
+            color: #fff;
+            height: 4rem;
+          }
+      
+          details summary span:hover {
+            cursor: pointer;
+          }
+      
+          details summary span::before {
+            content: "►";
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            margin-right: 0.5rem;
+            transition: rotate 200ms 400ms ease-out;
+          }
+      
+          details[open] summary span::before {
+            rotate: 90deg;
+            transition: rotate 200ms ease-out;
+          }
+      
+          details summary span input {
+            margin-right: 0.75rem;
+          }
+      
+          div.details-content {
+            box-sizing: border-box;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            border: 2px solid transparent;
+            transition: max-height 400ms ease-out, border 0ms 400ms linear;
+            background-color: rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+          }
+      
+          details[open] + div.details-content {
+            max-height: 800px; /* Set a max-height value enough to show all the content */
+            border-color: #888;
+            transition: max-height 400ms ease-out, border 0ms linear;
+          }
+      
+          code {
+            background-color: rgba(0, 0, 0, 0.10);
+          }
+      
+        </style>
+        <body>
+          <h1>this_is_the_project_name Post Generation Instructions</h1>
+          <p>The following steps must be completed in the order listed now that your project has been generated. Check the box next to each step once it is completed.</p>
+      
+          <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will update GitHub settings to allow the creation of git tags during a release.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions</a>.</li>
+        <li>In the "Workflow permissions" section...</li>
+        <li>Select "Read and write permissions".</li>
+        <li>Click the "Save" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token used to publish the python package for the first time. The token created will be scoped to all of your projects on PyPi (which provides too much access). Once the package has been published for the first time, we will delete this temporary token and create a new one that is scoped to the single project.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>Temporary CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Entire account (all projects)</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>PYPI_PUBLISH_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a GitHub Personal Access Token (PAT) used when persisting code coverage information between Continuous Integration runs.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/settings/tokens?type=beta" target="_blank">https://github.com/settings/tokens?type=beta</a>.</li>
+        <li>Click the "Generate new token" button.</li>
+        <li>Name the token <code>GitHub Workflow Gist (<<github_repo_name>>)</code>.</li>
+        <li>In the Repository access section...</li>
+        <li>Select "Only select repositories"...</li>
+        <li>Select <code><<github_repo_name>></code>.</li>
+        <li>In the "Permissions" section...</li>
+        <li>Press the "Account permissions" dropdown...</li>
+        <li>Select the "Gists" section...</li>
+        <li>Click the "Access: No access" dropdown button...</li>
+        <li>Select "Read and write".</li>
+        <li>Click the "Generate token" button.</li>
+        <li>Copy the token for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the GitHub Personal Access Token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>COVERAGE_BADGE_GIST_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">6) Initialize the git repository</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will commit the files generated in git and push the changes.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following commands:</p>
+      
+      1. <code>git add --all</code><br/>
+      2. <code>git commit -m "🎉 Initial commit"</code><br/>
+      3. <code>git push</code><br/>
+      </p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">7) Verify the CI/CD Workflow</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will verify that the GitHub Action workflow completed successfully.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/actions</a>.</li>
+        <li>Select the most recent workflow.</li>
+        <li>Wait for the workflow to complete successfully.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">8) Delete the temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In an earlier step, we created a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token. In this step, we will delete that token. A new token to replace it will be created in the steps that follow.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/" target="_blank">https://pypi.org/manage/account/</a>.</li>
+        <li>Find the token named <code>Temporary CI Publish Action (this_is_the_project_name)</code>...</li>
+        <li>Click the "Options" dropdown button...</li>
+        <li>Select "Remove token".</li>
+        <li>In the dialog box that appears...</li>
+        <li>Enter your password.</li>
+        <li>Click the "Remove API token" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">9) Create an Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we create a new token scoped only to "this_is_the_project_name".</p>
+      
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Project: this_is_the_project_name</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">10) Update the GitHub Secret with the Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN</a>.</li>
+        <li>In the "Value" text window, paste the token generated in the previous step.</li>
+        <li>Click "Update secret".</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-this-file">11) Delete this file</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>After you have completed all the steps, you can delete this file.</p>
+      <p>Now your project is ready to go!</p>
+      
+      </div>
+      
+      
+          <script>
+            document.addEventListener(
+              "DOMContentLoaded",
+              () => {
+                document.querySelectorAll("details summary span input[type=checkbox]").forEach(
+                  function(checkbox) {
+                    var key = `${ location.href }-${ checkbox.id }`;
+      
+                    if(window.localStorage.getItem(key) === "true")
+                      checkbox.checked = true;
+      
+                    this.addEventListener(
+                      "change",
+                      function() {
+                        window.localStorage.setItem(key, checkbox.checked ? "true" : "false");
+                      },
+                    );
+                  }
+                );
+      
+                document.querySelectorAll("code").forEach(
+                  function(code) {
+                    const button = document.createElement("button");
+      
+                    button.textContent = "Copy";
+                    button.style.marginLeft = "10px";
+                    button.addEventListener(
+                      "click",
+                      () => {
+                        navigator.clipboard.writeText(code.textContent).then(
+                          () => {
+                            button.textContent = "Copied!";
+                            setTimeout(() => button.textContent = "Copy", 2000);
+                          },
+                        );
+                      },
+                    );
+      
+                    const wrapper = document.createElement("span");
+      
+                    code.parentNode.insertBefore(wrapper, code);
+                    wrapper.appendChild(code);
+                    wrapper.appendChild(button);
+                  },
+                );
+              },
+            );
+          </script>
+        </body>
+      </html>
   
     ''',
     'pyproject.toml': '''
@@ -8202,6 +11039,7 @@
       .DS_Store
       .vscode
       minisign_key.pri
+      post_generation_instructions.html
     ''',
     '.pre-commit-config.yaml': '''
       # See https://pre-commit.com for more information
@@ -8330,6 +11168,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
+      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -8477,6 +11316,423 @@
       
       ## Patches
       We gladly welcome patches to fix such vulnerabilities! See [CONTRIBUTING.md](CONTRIBUTING.md) for information about contributions.
+  
+    ''',
+    'post_generation_instructions.html': '''
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <title>this_is_the_project_name Post Generation Instructions</title>
+        </head>
+        <style>
+          body {
+            font-family: "Open Sans", sans-serif;
+          }
+      
+          details {
+            width: 100%;
+            overflow: hidden; /* Keep this line to prevent an odd blue outline around the element in Safari. */
+          }
+      
+          details summary {
+            display: block;
+          }
+      
+          details summary::-webkit-details-marker {
+            display: none;
+          }
+      
+          details summary span {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            background: #444;
+            color: #fff;
+            height: 4rem;
+          }
+      
+          details summary span:hover {
+            cursor: pointer;
+          }
+      
+          details summary span::before {
+            content: "►";
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            margin-right: 0.5rem;
+            transition: rotate 200ms 400ms ease-out;
+          }
+      
+          details[open] summary span::before {
+            rotate: 90deg;
+            transition: rotate 200ms ease-out;
+          }
+      
+          details summary span input {
+            margin-right: 0.75rem;
+          }
+      
+          div.details-content {
+            box-sizing: border-box;
+            width: 100%;
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 10px;
+            border: 2px solid transparent;
+            transition: max-height 400ms ease-out, border 0ms 400ms linear;
+            background-color: rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+          }
+      
+          details[open] + div.details-content {
+            max-height: 800px; /* Set a max-height value enough to show all the content */
+            border-color: #888;
+            transition: max-height 400ms ease-out, border 0ms linear;
+          }
+      
+          code {
+            background-color: rgba(0, 0, 0, 0.10);
+          }
+      
+        </style>
+        <body>
+          <h1>this_is_the_project_name Post Generation Instructions</h1>
+          <p>The following steps must be completed in the order listed now that your project has been generated. Check the box next to each step once it is completed.</p>
+      
+          <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will update GitHub settings to allow the creation of git tags during a release.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/actions</a>.</li>
+        <li>In the "Workflow permissions" section...</li>
+        <li>Select "Read and write permissions".</li>
+        <li>Click the "Save" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token used to publish the python package for the first time. The token created will be scoped to all of your projects on PyPi (which provides too much access). Once the package has been published for the first time, we will delete this temporary token and create a new one that is scoped to the single project.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>Temporary CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Entire account (all projects)</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>PYPI_PUBLISH_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will create a GitHub Personal Access Token (PAT) used when persisting code coverage information between Continuous Integration runs.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/settings/tokens?type=beta" target="_blank">https://github.com/settings/tokens?type=beta</a>.</li>
+        <li>Click the "Generate new token" button.</li>
+        <li>Name the token <code>GitHub Workflow Gist (<<github_repo_name>>)</code>.</li>
+        <li>In the Repository access section...</li>
+        <li>Select "Only select repositories"...</li>
+        <li>Select <code><<github_repo_name>></code>.</li>
+        <li>In the "Permissions" section...</li>
+        <li>Press the "Account permissions" dropdown...</li>
+        <li>Select the "Gists" section...</li>
+        <li>Click the "Access: No access" dropdown button...</li>
+        <li>Select "Read and write".</li>
+        <li>Click the "Generate token" button.</li>
+        <li>Copy the token for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the GitHub Personal Access Token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>COVERAGE_BADGE_GIST_TOKEN</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the token generated in the previous step&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><code>MINISIGN_PRIVATE_KEY</code></td>
+              </tr>
+              <tr>
+                <th>Secret:</th>
+                <td>&lt;paste the private key previously copied&gt;</td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Add secret" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+      <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will commit the files generated in git and push the changes.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following commands:</p>
+      
+      1. <code>git add --all</code><br/>
+      2. <code>git commit -m "🎉 Initial commit"</code><br/>
+      3. <code>git push</code><br/>
+      </p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will verify that the GitHub Action workflow completed successfully.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/actions" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/actions</a>.</li>
+        <li>Select the most recent workflow.</li>
+        <li>Wait for the workflow to complete successfully.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In an earlier step, we created a temporary <a href="https://pypi.org" target="_blank">PyPi</a> token. In this step, we will delete that token. A new token to replace it will be created in the steps that follow.</p>
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/" target="_blank">https://pypi.org/manage/account/</a>.</li>
+        <li>Find the token named <code>Temporary CI Publish Action (this_is_the_project_name)</code>...</li>
+        <li>Click the "Options" dropdown button...</li>
+        <li>Select "Remove token".</li>
+        <li>In the dialog box that appears...</li>
+        <li>Enter your password.</li>
+        <li>Click the "Remove API token" button.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we create a new token scoped only to "this_is_the_project_name".</p>
+      
+      <ol>
+        <li>Visit <a href="https://pypi.org/manage/account/token/" target="_blank">https://pypi.org/manage/account/token/</a>.</li>
+        <li>
+          <p>Enter the values:</p>
+          <p>
+            <table>
+              <tr>
+                <th>Token name:</th>
+                <td><code>CI Publish Action (this_is_the_project_name)</code></td>
+              </tr>
+              <tr>
+                <th>Scope:</th>
+                <td><code>Project: this_is_the_project_name</code></td>
+              </tr>
+            </table>
+          </p>
+        </li>
+        <li>Click the "Create token" button.</li>
+        <li>Click the "Copy token" button for use in the next step.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+      <ol>
+        <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/PYPI_PUBLISH_TOKEN</a>.</li>
+        <li>In the "Value" text window, paste the token generated in the previous step.</li>
+        <li>Click "Update secret".</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>After you have completed all the steps, you can delete this file.</p>
+      <p>Now your project is ready to go!</p>
+      
+      </div>
+      
+      
+          <script>
+            document.addEventListener(
+              "DOMContentLoaded",
+              () => {
+                document.querySelectorAll("details summary span input[type=checkbox]").forEach(
+                  function(checkbox) {
+                    var key = `${ location.href }-${ checkbox.id }`;
+      
+                    if(window.localStorage.getItem(key) === "true")
+                      checkbox.checked = true;
+      
+                    this.addEventListener(
+                      "change",
+                      function() {
+                        window.localStorage.setItem(key, checkbox.checked ? "true" : "false");
+                      },
+                    );
+                  }
+                );
+      
+                document.querySelectorAll("code").forEach(
+                  function(code) {
+                    const button = document.createElement("button");
+      
+                    button.textContent = "Copy";
+                    button.style.marginLeft = "10px";
+                    button.addEventListener(
+                      "click",
+                      () => {
+                        navigator.clipboard.writeText(code.textContent).then(
+                          () => {
+                            button.textContent = "Copied!";
+                            setTimeout(() => button.textContent = "Copy", 2000);
+                          },
+                        );
+                      },
+                    );
+      
+                    const wrapper = document.createElement("span");
+      
+                    code.parentNode.insertBefore(wrapper, code);
+                    wrapper.appendChild(code);
+                    wrapper.appendChild(button);
+                  },
+                );
+              },
+            );
+          </script>
+        </body>
+      </html>
   
     ''',
     'pyproject.toml': '''

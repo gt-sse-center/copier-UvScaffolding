@@ -8,7 +8,7 @@ DELIMITER2 = "<!-- Content below this delimiter will be copied to the generated 
 
 def Execute():
     # Load the information form the fragment
-    fragment_filename = Path(__file__).parent.parent / "__README.fragment.md"
+    fragment_filename = Path(__file__).parent / "__README.fragment.md"
     assert fragment_filename.is_file(), fragment_filename
 
     fragment_content = _Content.Load(fragment_filename, missing_delimiter_is_error=True)
@@ -29,8 +29,6 @@ def Execute():
         assert fragment_content.post_content is not None
         f.write(fragment_content.post_content)
         f.write("\n")
-
-    fragment_filename.unlink()
 
 
 # ----------------------------------------------------------------------
