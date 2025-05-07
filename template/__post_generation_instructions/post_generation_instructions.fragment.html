@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ project_name }} Post Generation Instructions</title>
+  </head>
+  <style>
+    body {
+      font-family: "Open Sans", sans-serif;
+    }
+
+    details {
+      width: 100%;
+      overflow: hidden; /* Keep this line to prevent an odd blue outline around the element in Safari. */
+    }
+
+    details summary {
+      display: block;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details summary span {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-left: 1rem;
+      background: #444;
+      color: #fff;
+      height: 4rem;
+    }
+
+    details summary span:hover {
+      cursor: pointer;
+    }
+
+    details summary span::before {
+      content: "►";
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      margin-right: 0.5rem;
+      transition: rotate 200ms 400ms ease-out;
+    }
+
+    details[open] summary span::before {
+      rotate: 90deg;
+      transition: rotate 200ms ease-out;
+    }
+
+    details summary span input {
+      margin-right: 0.75rem;
+    }
+
+    div.details-content {
+      box-sizing: border-box;
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 10px;
+      border: 2px solid transparent;
+      transition: max-height 400ms ease-out, border 0ms 400ms linear;
+      background-color: rgba(0, 0, 0, 0.05);
+      margin-bottom: 1rem;
+    }
+
+    details[open] + div.details-content {
+      max-height: 800px; /* Set a max-height value enough to show all the content */
+      border-color: #888;
+      transition: max-height 400ms ease-out, border 0ms linear;
+    }
+
+    code {
+      background-color: rgba(0, 0, 0, 0.10);
+    }
+
+  </style>
+  <body>
+    <h1>{{ project_name }} Post Generation Instructions</h1>
+    <p>The following steps must be completed in the order listed now that your project has been generated. Check the box next to each step once it is completed.</p>
+
+    <!-- REPLACE ME -->
+
+    <script>
+      document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+          document.querySelectorAll("details summary span input[type=checkbox]").forEach(
+            function(checkbox) {
+              var key = `${ location.href }-${ checkbox.id }`;
+
+              if(window.localStorage.getItem(key) === "true")
+                checkbox.checked = true;
+
+              this.addEventListener(
+                "change",
+                function() {
+                  window.localStorage.setItem(key, checkbox.checked ? "true" : "false");
+                },
+              );
+            }
+          );
+
+          document.querySelectorAll("code").forEach(
+            function(code) {
+              const button = document.createElement("button");
+
+              button.textContent = "Copy";
+              button.style.marginLeft = "10px";
+              button.addEventListener(
+                "click",
+                () => {
+                  navigator.clipboard.writeText(code.textContent).then(
+                    () => {
+                      button.textContent = "Copied!";
+                      setTimeout(() => button.textContent = "Copy", 2000);
+                    },
+                  );
+                },
+              );
+
+              const wrapper = document.createElement("span");
+
+              code.parentNode.insertBefore(wrapper, code);
+              wrapper.appendChild(code);
+              wrapper.appendChild(button);
+            },
+          );
+        },
+      );
+    </script>
+  </body>
+</html>

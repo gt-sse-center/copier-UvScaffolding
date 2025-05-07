@@ -124,7 +124,7 @@ coverage_badge_gist_username:
 
 sign_artifacts_question:
   type: bool
-  help: Would you like to sign artifacts created using minisign during the Continuous Integration process?
+  help: Would you like to sign artifacts created during the Continuous Integration process using minisign?
   default: true
 
 sign_artifacts_public_key:
@@ -143,8 +143,9 @@ _templates_suffix: ""
 
 _tasks:
   - python __tools/UvInit.py
-  - python __tools/PostprocessReadme.py
   - python __licenses/__postprocess.py
+  - python __post_generation_instructions/__postprocess.py
+  - python __readme/__postprocess.py
   - python __tools/Cleanup.py
   - python -c "import shutil; shutil.rmtree('__tools');"
 
