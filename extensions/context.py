@@ -28,6 +28,11 @@ class ContextUpdater(ContextHook):
     # ----------------------------------------------------------------------
     def hook(self, context: dict[str, Any]) -> None:  # noqa: D102
         if self._is_update_invocation is None:
+            # This hook is called multiple times. Ensure that all questions have been answered
+            # before processing the data.
+            if context.get("all_questions_have_been_answered", False) is False:
+                return
+
             # This is the first time that this method is called, update the class variables.
             assert self._updated_context is None, self._updated_context
             assert self._dest_path is None, self._dest_path

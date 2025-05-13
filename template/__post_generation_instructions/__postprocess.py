@@ -9,6 +9,7 @@ PLACEHOLDER = "<!-- REPLACE ME -->"
 def Execute():
     instructions: dict[str, str] = {}
 
+    _CreateUpdateInstructions(instructions)
     _CreateGitHubSettings(instructions)
     _CreateTemporaryPyPiToken(instructions)
     _CreateMinisignSecret(instructions)
@@ -55,6 +56,29 @@ def Execute():
 
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
+# ----------------------------------------------------------------------
+def _CreateUpdateInstructions(instructions: dict[str, str]) -> None:
+    instructions["Update MAINTAINERS.md"] = textwrap.dedent(
+        """\
+        <p>In this step, we will replace placeholder information in <code>MAINTAINERS.md</code> with information specific to your repository.</p>
+        <ol>
+          <li>Open <code>MAINTAINERS.md</code> in a text editor.</li>
+          <li>Replace the placeholder maintainers in the table with your own information.</li>
+        </ol>
+        """,
+    )
+
+    instructions["Update pyproject.toml"] = textwrap.dedent(
+        """\
+        <p>In this step, we will replace information in <code>pyproject.toml</code> with information specific to your repository.</p>
+        <ol>
+          <li>Open <code>pyproject.toml</code> in a text editor.</li>
+          <li>Scan the generated content and update it as necessary.</li>
+        </ol>
+        """,
+    )
+
+
 # ----------------------------------------------------------------------
 def _CreateGitHubSettings(instructions: dict[str, str]) -> None:
     instructions["Update GitHub Settings"] = textwrap.dedent(

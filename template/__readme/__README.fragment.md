@@ -28,7 +28,7 @@
 ## Overview
 TODO: Complete this section
 
-### How to use {{ project_name }}
+### How to use `{{ project_name }}`
 TODO: Complete this section
 
 <!-- Content below this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
@@ -66,5 +66,5 @@ Additional information can be found at these locations.
 
 {% if license != "None" -%}
 ## License
-{{ project_name }} is licensed under the <a href="https://choosealicense.com/licenses/{{ license }}/" target="_blank">{{ license }}</a> license.
+`{{ project_name }}` is licensed under the <a href="https://choosealicense.com/licenses/{{ license }}/" target="_blank">{{ license }}</a> license.
 {%- endif %}
