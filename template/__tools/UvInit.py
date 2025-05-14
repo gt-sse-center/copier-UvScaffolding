@@ -63,6 +63,10 @@ def _RunUvInit(indented_stream: StreamDecorator) -> bool:
                 "ruff",
             ]
 
+{% if sign_artifacts_question %}
+            dev_dependencies.append("py-minisign")
+{% endif %}
+
             command_line = f"uv add {' '.join(dev_dependencies)} --dev"
 
             dm.WriteVerbose(f"Command line: {command_line}\n\n")
@@ -246,7 +250,14 @@ def _AugmentHelper(
 
         decorated_content = decorate_callback(source_content, fragment_content)
         if decorated_content is not None:
-            source_filename.write_text(decorated_content, encoding="utf-8")
+            # Ensure that we write the content using the same newline convention as the original file
+            is_crlf = b"\r\n" in source_filename.read_bytes()
+
+            source_filename.write_text(
+                decorated_content,
+                encoding="utf-8",
+                newline="\r\n" if is_crlf else "\n",
+            )
 
         fragment_filename.unlink()
 

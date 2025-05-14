@@ -63,8 +63,8 @@ python_package_name:
   help: Enter the name of the Python package.
   default: "{{ project_name | pythonpackageify }}"
   validator: |-
-    {% if not (python_package_name | regex_search('^[a-z_][a-z0-9_]*$')) %}
-    Python package names must 1) Start with a lowercase letter or underscore and 2) Only contain alphanumeric characters and underscores.
+    {% if not (python_package_name | regex_search('^[a-zA-Z0-9_]+$')) %}
+    Python package names may only contain alphanumeric characters and underscores.
     {% endif %}
 
 python_versions:
@@ -131,6 +131,19 @@ sign_artifacts_public_key:
   type: str
   help: This value will be populated automatically.
   default: ""
+  when: False
+
+all_questions_have_been_answered:
+  type: bool
+  help: |-
+    This value must remain the last value in this list of copier configuration values. It will be
+    populated automatically by copier and never displayed to the user. copier will set this value
+    to True when all the other values have been populated based on the user's answers to the
+    questions.
+
+    `context.py` uses this value to determine if the user has answered all questions. Once all
+    questions have been answered, it will update the copier context based on those answers.
+  default: True
   when: False
 
 # ----------------------------------------------------------------------

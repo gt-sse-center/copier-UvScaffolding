@@ -27,7 +27,7 @@ def test_PreserveContentModifications(copie) -> None:
 
     assert "## Contents" in readme_content, readme_content
     assert "## Overview" in readme_content, readme_content
-    assert "### How to use this_is_the_project_name" in readme_content, readme_content
+    assert "### How to use `this_is_the_project_name`" in readme_content, readme_content
 
     # Update the content
     assert "## Updated Contents" not in readme_content, readme_content

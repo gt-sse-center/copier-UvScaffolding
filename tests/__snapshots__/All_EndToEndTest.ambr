@@ -776,7 +776,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
-      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
+      | Sign Artifacts | `uv run python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -876,7 +876,7 @@
       ## Overview
       TODO: Complete this section
       
-      ### How to use this_is_the_project_name
+      ### How to use `this_is_the_project_name`
       TODO: Complete this section
       
       <!-- Content below this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
@@ -911,7 +911,7 @@
       | Security | [SECURITY.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/SECURITY.md) | Information about how to privately report security issues associated with this project. |
       
       ## License
-      this_is_the_project_name is licensed under the <a href="https://choosealicense.com/licenses/Apache-2.0/" target="_blank">Apache-2.0</a> license.
+      `this_is_the_project_name` is licensed under the <a href="https://choosealicense.com/licenses/Apache-2.0/" target="_blank">Apache-2.0</a> license.
   
     ''',
     'SECURITY.md': '''
@@ -1034,7 +1034,35 @@
       
           <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+          <span role="term"><input type="checkbox" id="update-maintainers.md">1) Update MAINTAINERS.md</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace placeholder information in <code>MAINTAINERS.md</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>MAINTAINERS.md</code> in a text editor.</li>
+        <li>Replace the placeholder maintainers in the table with your own information.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-pyproject.toml">2) Update pyproject.toml</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace information in <code>pyproject.toml</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>pyproject.toml</code> in a text editor.</li>
+        <li>Scan the generated content and update it as necessary.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">3) Update GitHub Settings</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1050,7 +1078,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">4) Create a Temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1080,7 +1108,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">5) Save the Temporary PyPi Token as a GitHub Secret</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1109,7 +1137,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">6) Create a GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1134,7 +1162,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">7) Save the GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1163,7 +1191,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">8) Save the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1193,7 +1221,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">9) Store the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1204,7 +1232,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1221,7 +1249,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1236,7 +1264,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1255,7 +1283,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1286,7 +1314,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1301,7 +1329,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1395,7 +1423,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -2268,7 +2296,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
-      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
+      | Sign Artifacts | `uv run python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -2382,7 +2410,7 @@
       ## Overview
       TODO: Complete this section
       
-      ### How to use this_is_the_project_name
+      ### How to use `this_is_the_project_name`
       TODO: Complete this section
       
       <!-- Content below this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
@@ -2417,7 +2445,7 @@
       | Security | [SECURITY.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/SECURITY.md) | Information about how to privately report security issues associated with this project. |
       
       ## License
-      this_is_the_project_name is licensed under the <a href="https://choosealicense.com/licenses/BSD-3-Clause-Clear/" target="_blank">BSD-3-Clause-Clear</a> license.
+      `this_is_the_project_name` is licensed under the <a href="https://choosealicense.com/licenses/BSD-3-Clause-Clear/" target="_blank">BSD-3-Clause-Clear</a> license.
   
     ''',
     'SECURITY.md': '''
@@ -2540,7 +2568,35 @@
       
           <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+          <span role="term"><input type="checkbox" id="update-maintainers.md">1) Update MAINTAINERS.md</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace placeholder information in <code>MAINTAINERS.md</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>MAINTAINERS.md</code> in a text editor.</li>
+        <li>Replace the placeholder maintainers in the table with your own information.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-pyproject.toml">2) Update pyproject.toml</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace information in <code>pyproject.toml</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>pyproject.toml</code> in a text editor.</li>
+        <li>Scan the generated content and update it as necessary.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">3) Update GitHub Settings</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2556,7 +2612,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">4) Create a Temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2586,7 +2642,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">5) Save the Temporary PyPi Token as a GitHub Secret</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2615,7 +2671,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">6) Create a GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2640,7 +2696,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">7) Save the GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2669,7 +2725,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">8) Save the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2699,7 +2755,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">9) Store the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2710,7 +2766,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2727,7 +2783,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2742,7 +2798,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2761,7 +2817,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2792,7 +2848,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2807,7 +2863,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2901,7 +2957,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -3774,7 +3830,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
-      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
+      | Sign Artifacts | `uv run python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -3886,7 +3942,7 @@
       ## Overview
       TODO: Complete this section
       
-      ### How to use this_is_the_project_name
+      ### How to use `this_is_the_project_name`
       TODO: Complete this section
       
       <!-- Content below this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
@@ -3921,7 +3977,7 @@
       | Security | [SECURITY.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/SECURITY.md) | Information about how to privately report security issues associated with this project. |
       
       ## License
-      this_is_the_project_name is licensed under the <a href="https://choosealicense.com/licenses/BSL-1.0/" target="_blank">BSL-1.0</a> license.
+      `this_is_the_project_name` is licensed under the <a href="https://choosealicense.com/licenses/BSL-1.0/" target="_blank">BSL-1.0</a> license.
   
     ''',
     'SECURITY.md': '''
@@ -4044,7 +4100,35 @@
       
           <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+          <span role="term"><input type="checkbox" id="update-maintainers.md">1) Update MAINTAINERS.md</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace placeholder information in <code>MAINTAINERS.md</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>MAINTAINERS.md</code> in a text editor.</li>
+        <li>Replace the placeholder maintainers in the table with your own information.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-pyproject.toml">2) Update pyproject.toml</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace information in <code>pyproject.toml</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>pyproject.toml</code> in a text editor.</li>
+        <li>Scan the generated content and update it as necessary.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">3) Update GitHub Settings</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4060,7 +4144,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">4) Create a Temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4090,7 +4174,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">5) Save the Temporary PyPi Token as a GitHub Secret</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4119,7 +4203,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">6) Create a GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4144,7 +4228,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">7) Save the GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4173,7 +4257,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">8) Save the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4203,7 +4287,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">9) Store the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4214,7 +4298,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4231,7 +4315,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4246,7 +4330,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4265,7 +4349,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4296,7 +4380,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4311,7 +4395,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4405,7 +4489,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -5278,7 +5362,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
-      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
+      | Sign Artifacts | `uv run python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -5379,7 +5463,7 @@
       ## Overview
       TODO: Complete this section
       
-      ### How to use this_is_the_project_name
+      ### How to use `this_is_the_project_name`
       TODO: Complete this section
       
       <!-- Content below this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
@@ -5414,7 +5498,7 @@
       | Security | [SECURITY.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/SECURITY.md) | Information about how to privately report security issues associated with this project. |
       
       ## License
-      this_is_the_project_name is licensed under the <a href="https://choosealicense.com/licenses/GPL-3.0-or-later/" target="_blank">GPL-3.0-or-later</a> license.
+      `this_is_the_project_name` is licensed under the <a href="https://choosealicense.com/licenses/GPL-3.0-or-later/" target="_blank">GPL-3.0-or-later</a> license.
   
     ''',
     'SECURITY.md': '''
@@ -5537,7 +5621,35 @@
       
           <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+          <span role="term"><input type="checkbox" id="update-maintainers.md">1) Update MAINTAINERS.md</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace placeholder information in <code>MAINTAINERS.md</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>MAINTAINERS.md</code> in a text editor.</li>
+        <li>Replace the placeholder maintainers in the table with your own information.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-pyproject.toml">2) Update pyproject.toml</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace information in <code>pyproject.toml</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>pyproject.toml</code> in a text editor.</li>
+        <li>Scan the generated content and update it as necessary.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">3) Update GitHub Settings</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5553,7 +5665,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">4) Create a Temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5583,7 +5695,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">5) Save the Temporary PyPi Token as a GitHub Secret</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5612,7 +5724,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">6) Create a GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5637,7 +5749,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">7) Save the GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5666,7 +5778,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">8) Save the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5696,7 +5808,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">9) Store the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5707,7 +5819,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5724,7 +5836,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5739,7 +5851,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5758,7 +5870,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5789,7 +5901,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5804,7 +5916,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5898,7 +6010,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -6771,7 +6883,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
-      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
+      | Sign Artifacts | `uv run python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -6879,7 +6991,7 @@
       ## Overview
       TODO: Complete this section
       
-      ### How to use this_is_the_project_name
+      ### How to use `this_is_the_project_name`
       TODO: Complete this section
       
       <!-- Content below this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
@@ -6914,7 +7026,7 @@
       | Security | [SECURITY.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/SECURITY.md) | Information about how to privately report security issues associated with this project. |
       
       ## License
-      this_is_the_project_name is licensed under the <a href="https://choosealicense.com/licenses/MIT/" target="_blank">MIT</a> license.
+      `this_is_the_project_name` is licensed under the <a href="https://choosealicense.com/licenses/MIT/" target="_blank">MIT</a> license.
   
     ''',
     'SECURITY.md': '''
@@ -7037,7 +7149,35 @@
       
           <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+          <span role="term"><input type="checkbox" id="update-maintainers.md">1) Update MAINTAINERS.md</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace placeholder information in <code>MAINTAINERS.md</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>MAINTAINERS.md</code> in a text editor.</li>
+        <li>Replace the placeholder maintainers in the table with your own information.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-pyproject.toml">2) Update pyproject.toml</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace information in <code>pyproject.toml</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>pyproject.toml</code> in a text editor.</li>
+        <li>Scan the generated content and update it as necessary.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">3) Update GitHub Settings</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7053,7 +7193,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">4) Create a Temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7083,7 +7223,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">5) Save the Temporary PyPi Token as a GitHub Secret</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7112,7 +7252,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">6) Create a GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7137,7 +7277,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">7) Save the GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7166,7 +7306,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">8) Save the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7196,7 +7336,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">9) Store the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7207,7 +7347,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7224,7 +7364,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7239,7 +7379,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7258,7 +7398,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7289,7 +7429,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7304,7 +7444,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7398,7 +7538,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -8270,7 +8410,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
-      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
+      | Sign Artifacts | `uv run python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -8377,7 +8517,7 @@
       ## Overview
       TODO: Complete this section
       
-      ### How to use this_is_the_project_name
+      ### How to use `this_is_the_project_name`
       TODO: Complete this section
       
       <!-- Content below this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
@@ -8412,7 +8552,7 @@
       | Security | [SECURITY.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/SECURITY.md) | Information about how to privately report security issues associated with this project. |
       
       ## License
-      this_is_the_project_name is licensed under the <a href="https://choosealicense.com/licenses/MIT/" target="_blank">MIT</a> license.
+      `this_is_the_project_name` is licensed under the <a href="https://choosealicense.com/licenses/MIT/" target="_blank">MIT</a> license.
   
     ''',
     'SECURITY.md': '''
@@ -8535,7 +8675,35 @@
       
           <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+          <span role="term"><input type="checkbox" id="update-maintainers.md">1) Update MAINTAINERS.md</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace placeholder information in <code>MAINTAINERS.md</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>MAINTAINERS.md</code> in a text editor.</li>
+        <li>Replace the placeholder maintainers in the table with your own information.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-pyproject.toml">2) Update pyproject.toml</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace information in <code>pyproject.toml</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>pyproject.toml</code> in a text editor.</li>
+        <li>Scan the generated content and update it as necessary.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">3) Update GitHub Settings</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8551,7 +8719,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">4) Create a Temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8581,7 +8749,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">5) Save the Temporary PyPi Token as a GitHub Secret</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8610,7 +8778,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">4) Save the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8640,7 +8808,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">5) Store the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8651,7 +8819,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">6) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8668,7 +8836,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">7) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8683,7 +8851,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">8) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8702,7 +8870,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">9) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8733,7 +8901,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">10) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8748,7 +8916,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">11) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8842,7 +9010,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
@@ -9822,7 +9990,7 @@
       ## Overview
       TODO: Complete this section
       
-      ### How to use this_is_the_project_name
+      ### How to use `this_is_the_project_name`
       TODO: Complete this section
       
       <!-- Content below this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
@@ -9852,7 +10020,7 @@
       | Security | [SECURITY.md](https://github.com/<<github_username>>/<<github_repo_name>>/blob/main/SECURITY.md) | Information about how to privately report security issues associated with this project. |
       
       ## License
-      this_is_the_project_name is licensed under the <a href="https://choosealicense.com/licenses/MIT/" target="_blank">MIT</a> license.
+      `this_is_the_project_name` is licensed under the <a href="https://choosealicense.com/licenses/MIT/" target="_blank">MIT</a> license.
   
     ''',
     'SECURITY.md': '''
@@ -9975,7 +10143,35 @@
       
           <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+          <span role="term"><input type="checkbox" id="update-maintainers.md">1) Update MAINTAINERS.md</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace placeholder information in <code>MAINTAINERS.md</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>MAINTAINERS.md</code> in a text editor.</li>
+        <li>Replace the placeholder maintainers in the table with your own information.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-pyproject.toml">2) Update pyproject.toml</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace information in <code>pyproject.toml</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>pyproject.toml</code> in a text editor.</li>
+        <li>Scan the generated content and update it as necessary.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">3) Update GitHub Settings</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -9991,7 +10187,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">4) Create a Temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10021,7 +10217,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">5) Save the Temporary PyPi Token as a GitHub Secret</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10050,7 +10246,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">6) Create a GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10075,7 +10271,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">7) Save the GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10104,7 +10300,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">6) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10121,7 +10317,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">7) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10136,7 +10332,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">8) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10155,7 +10351,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">9) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10186,7 +10382,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">10) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10201,7 +10397,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">11) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11168,7 +11364,7 @@
       | Automated Testing | `uv run pytest` or<br/>`uv run pytest --no-cov` | Run automated tests using [pytest](https://docs.pytest.org/) and extract code coverage using [coverage](https://coverage.readthedocs.io/) based on settings in `pyproject.toml`. | :white_check_mark: | :white_check_mark: |
       | Semantic Version Generation | `uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src` | Generate a new [Semantic Version](https://semver.org/) based on git commits using [AutoGitSemVer](https://github.com/davidbrownell/AutoGitSemVer). Version information is stored in `./src/this_is_the_project_name/__init__.py`. | | :white_check_mark: |
       | Python Package Creation | `uv build` | Create a python package using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. Generated packages will be written to `./dist`. | | :white_check_mark: |
-      | Sign Artifacts | `uv run --with py-minisign python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
+      | Sign Artifacts | `uv run python -c "import minisign; minisign.SecretKey.from_file(<temp_filename>).sign_file(<filename>, trusted_comment='<package_name> v<package_version>', drop_signature=True)` | Signs artifacts using [py-minisign](https://github.com/x13a/py-minisign). Note that the private key is stored as a [GitHub secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions). | | :white_check_mark: |
       | Python Package Publishing | `uv publish` | Publish a python package to [PyPi](https://pypi.org/) using [uv](https://github.com/astral-sh/uv) based on settings in `pyproject.toml`. | | :white_check_mark: |
       
       ## Contributing Changes
@@ -11251,7 +11447,7 @@
       ## Overview
       TODO: Complete this section
       
-      ### How to use this_is_the_project_name
+      ### How to use `this_is_the_project_name`
       TODO: Complete this section
       
       <!-- Content below this delimiter will be copied to the generated README.md file. DO NOT REMOVE THIS COMMENT, as it will cause regeneration to fail. -->
@@ -11406,7 +11602,35 @@
       
           <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-github-settings">1) Update GitHub Settings</span>
+          <span role="term"><input type="checkbox" id="update-maintainers.md">1) Update MAINTAINERS.md</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace placeholder information in <code>MAINTAINERS.md</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>MAINTAINERS.md</code> in a text editor.</li>
+        <li>Replace the placeholder maintainers in the table with your own information.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-pyproject.toml">2) Update pyproject.toml</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will replace information in <code>pyproject.toml</code> with information specific to your repository.</p>
+      <ol>
+        <li>Open <code>pyproject.toml</code> in a text editor.</li>
+        <li>Scan the generated content and update it as necessary.</li>
+      </ol>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="update-github-settings">3) Update GitHub Settings</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11422,7 +11646,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">2) Create a Temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-a-temporary-pypi-token">4) Create a Temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11452,7 +11676,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">3) Save the Temporary PyPi Token as a GitHub Secret</span>
+          <span role="term"><input type="checkbox" id="save-the-temporary-pypi-token-as-a-github-secret">5) Save the Temporary PyPi Token as a GitHub Secret</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11481,7 +11705,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">4) Create a GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="create-a-github-personal-access-token-for-gists">6) Create a GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11506,7 +11730,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">5) Save the GitHub Personal Access Token for gists</span>
+          <span role="term"><input type="checkbox" id="save-the-github-personal-access-token-for-gists">7) Save the GitHub Personal Access Token for gists</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11535,7 +11759,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">6) Save the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="save-the-minisign-private-key">8) Save the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11565,7 +11789,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">7) Store the Minisign Private Key</span>
+          <span role="term"><input type="checkbox" id="store-the-minisign-private-key">9) Store the Minisign Private Key</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11576,7 +11800,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11593,7 +11817,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11608,7 +11832,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11627,7 +11851,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11658,7 +11882,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11673,7 +11897,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11764,7 +11988,7 @@
       build-backend = "hatchling.build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
       [tool.hatch.version]
       path = "src/this_is_the_project_name/__init__.py"
