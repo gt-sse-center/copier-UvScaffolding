@@ -51,8 +51,9 @@ def RunTest(
     configuration: dict[str, Any],
     *,
     expect_failure: bool = False,
+    ref: str | None = None,
 ) -> Path | None:
-    result = copie.copy(extra_answers=configuration)
+    result = copie.copy(extra_answers=configuration, vcs_ref=ref or "HEAD")
 
     if expect_failure:
         assert result.exit_code != 0, result.exit_code

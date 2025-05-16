@@ -54,7 +54,7 @@ class ContextUpdater(ContextHook):
             # Detect when we are in the update process and then take care to generate dummy values
             # that will be consistent across invocations, thereby preventing a diff that would
             # overwrite content in the destination directory.
-            self._is_update_invocation = context["_folder_name"].startswith("copier.main")
+            self._is_update_invocation = context["_folder_name"].startswith("copier._main")
 
             self._GenerateMinisignKey(context)
 
