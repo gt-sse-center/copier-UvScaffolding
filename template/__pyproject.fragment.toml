@@ -24,7 +24,7 @@ Repository = "{{ github_url }}"
 path = "src/{{ python_package_name }}/__init__.py"
 
 [tool.pytest.ini_options]
-addopts = "--verbose -vv --capture=no --cov={{ python_package_name }} --cov-fail-under=95.0"
+addopts = "--verbose -vv --capture=no --cov={{ python_package_name }} --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
 
 [tool.ruff]
 line-length = 110
@@ -45,6 +45,7 @@ ignore = [
     "N802", # Function name `xxx` should be lowercase
     "N999", # Invalid module name
     "S101", # Use of assert detected
+    "TC006", # Add quotes to type expression in `typing.cast()`
     "UP032", # Use f-string instead of `format` call
 ]
 
