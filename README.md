@@ -17,7 +17,7 @@ Copier (https://copier.readthedocs.io/) template to create [uv](https://docs.ast
 - GitHub [Issue Templates](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository)
 - GitHub [Pull Request Template](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/creating-a-pull-request-template-for-your-repository)
 - Standard documentation (`CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `DEVELOPMENT.md`, `GOVERNANCE.md`, `MAINTAINERS.md`, `README.md`, `SECURITY.md`)
-- [Optional] Generation of code coverage badge on `README.md`
+- [Optional] Generation of code coverage badge displayed on `README.md`
 - [Optional] Artifact signing via [py-minisign](https://github.com/x13a/py-minisign)
 
 ## How to use copier-UvScaffolding
