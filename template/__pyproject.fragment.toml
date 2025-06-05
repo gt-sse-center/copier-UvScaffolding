@@ -39,13 +39,21 @@ ignore = [
     "ANN003", # Missing type annotation for `**kwargs`
     "BLE001", # Do not catch blind exception: `Exception`
     "COM812", # Trailing comma missing
+    "D105", # Missing docstring in magic method
+    "D107", # Missing docstring in `__init__` method
     "D202", # No blank lines allowed after function docstring
     "E501", # Line too long
+    "FIX002", # Line contains TODO, consider resolving the issue
     "I001", # Import block is un-sorted or un-formatted
     "N802", # Function name `xxx` should be lowercase
     "N999", # Invalid module name
+    "RSE102", # Unnecessary parentheses on raise exception
     "S101", # Use of assert detected
     "TC006", # Add quotes to type expression in `typing.cast()`
+    "TD002", # Missing author in TODO
+    "TD003", # Missing issue link for this TODO
+    "TRY002", # Create your own exception
+    "TRY300", # Consider moving this statement to an `else` block
     "UP032", # Use f-string instead of `format` call
 ]
 
