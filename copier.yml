@@ -29,7 +29,7 @@ author_email:
 
 github_host:
   type: str
-  help: Enter the GitHub URL.
+  help: Enter the GitHub URL (note that this should not include the user/organization or repository names).
   default: https://github.com
   validator: |-
     {% if not github_host %}
@@ -41,7 +41,7 @@ github_username:
   help: Enter your GitHub user/organization name.
   validator: |-
     {% if not github_username %}
-    Please enter a valid GitHub user/organization name
+    Please enter a valid GitHub user/organization name.
     {% endif %}
 
 github_repo_name:
