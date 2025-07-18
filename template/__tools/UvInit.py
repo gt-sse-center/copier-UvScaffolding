@@ -43,7 +43,13 @@ def _RunUvInit(indented_stream: StreamDecorator) -> bool:
             dm.WriteLine("'pyproject.toml' already exists.")
         else:
             # Run uv init
-            command_line = 'uv init --name "{{ python_package_name }}" --package --lib'
+
+            # uv v0.8.0 changed the default build backend from `hatch` to `uv_build`. However, it
+            # seems that the means by which dynamic version numbers are specified within `pyproject.toml`
+            # has changed between `hatch` and `uv_build`. For now, to prevent CI failures, hard-code the
+            # build backend to `hatch` until we can figure out how to make it work with `uv_build`.
+            # https://github.com/gt-sse-center/copier-UvScaffolding/issues/26
+            command_line = 'uv init --name "{{ python_package_name }}" --package --lib --build-backend hatch'
 
             dm.WriteVerbose(f"Command line: {command_line}\n\n")
 
