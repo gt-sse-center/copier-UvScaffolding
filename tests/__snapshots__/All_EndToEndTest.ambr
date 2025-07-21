@@ -442,7 +442,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -1397,11 +1397,17 @@
     'pyproject.toml': '''
       [project]
       name = "this-is-the-project-name"
+      version = "0.0.0" 
+      #          ^^^^^
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
+      
       description = "Add your description here"
       readme = "README.md"
       requires-python = ">= 3.10"
       dependencies = []
-      dynamic = ["version"]
       classifiers = [
           "Operating System :: MacOS",
           "Operating System :: Microsoft :: Windows",
@@ -1422,17 +1428,14 @@
       Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
       
       [build-system]
-      requires = ["hatchling"]
-      build-backend = "hatchling.build"
+      requires = ["uv_build>=0.8.5,<0.9.0"]
+      build-backend = "uv_build"
       
       [dependency-groups]
       dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
-      [tool.hatch.version]
-      path = "src/this_is_the_project_name/__init__.py"
-      
       [tool.pytest.ini_options]
-      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
       
       [tool.ruff]
       line-length = 110
@@ -1506,12 +1509,9 @@
       
       # noqa: D104
       
-      # Wheel names will be generated according to this value. Do not manually modify this value; instead
-      # update it according to committed changes by running this command from the root of the repository:
-      #
-      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
-      #
-      __version__ = "0.1.0"
+      from importlib.metadata import version  # noqa: E402
+      
+      __version__ = version("this_is_the_project_name")
   
     ''',
     'src/this_is_the_project_name/py.typed': '',
@@ -1974,7 +1974,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -2943,11 +2943,17 @@
     'pyproject.toml': '''
       [project]
       name = "this-is-the-project-name"
+      version = "0.0.0" 
+      #          ^^^^^
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
+      
       description = "Add your description here"
       readme = "README.md"
       requires-python = ">= 3.10"
       dependencies = []
-      dynamic = ["version"]
       classifiers = [
           "Operating System :: MacOS",
           "Operating System :: Microsoft :: Windows",
@@ -2968,17 +2974,14 @@
       Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
       
       [build-system]
-      requires = ["hatchling"]
-      build-backend = "hatchling.build"
+      requires = ["uv_build>=0.8.5,<0.9.0"]
+      build-backend = "uv_build"
       
       [dependency-groups]
       dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
-      [tool.hatch.version]
-      path = "src/this_is_the_project_name/__init__.py"
-      
       [tool.pytest.ini_options]
-      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
       
       [tool.ruff]
       line-length = 110
@@ -3052,12 +3055,9 @@
       
       # noqa: D104
       
-      # Wheel names will be generated according to this value. Do not manually modify this value; instead
-      # update it according to committed changes by running this command from the root of the repository:
-      #
-      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
-      #
-      __version__ = "0.1.0"
+      from importlib.metadata import version  # noqa: E402
+      
+      __version__ = version("this_is_the_project_name")
   
     ''',
     'src/this_is_the_project_name/py.typed': '',
@@ -3520,7 +3520,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -4487,11 +4487,17 @@
     'pyproject.toml': '''
       [project]
       name = "this-is-the-project-name"
+      version = "0.0.0" 
+      #          ^^^^^
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
+      
       description = "Add your description here"
       readme = "README.md"
       requires-python = ">= 3.10"
       dependencies = []
-      dynamic = ["version"]
       classifiers = [
           "Operating System :: MacOS",
           "Operating System :: Microsoft :: Windows",
@@ -4512,17 +4518,14 @@
       Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
       
       [build-system]
-      requires = ["hatchling"]
-      build-backend = "hatchling.build"
+      requires = ["uv_build>=0.8.5,<0.9.0"]
+      build-backend = "uv_build"
       
       [dependency-groups]
       dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
-      [tool.hatch.version]
-      path = "src/this_is_the_project_name/__init__.py"
-      
       [tool.pytest.ini_options]
-      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
       
       [tool.ruff]
       line-length = 110
@@ -4596,12 +4599,9 @@
       
       # noqa: D104
       
-      # Wheel names will be generated according to this value. Do not manually modify this value; instead
-      # update it according to committed changes by running this command from the root of the repository:
-      #
-      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
-      #
-      __version__ = "0.1.0"
+      from importlib.metadata import version  # noqa: E402
+      
+      __version__ = version("this_is_the_project_name")
   
     ''',
     'src/this_is_the_project_name/py.typed': '',
@@ -5064,7 +5064,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -6020,11 +6020,17 @@
     'pyproject.toml': '''
       [project]
       name = "this-is-the-project-name"
+      version = "0.0.0" 
+      #          ^^^^^
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
+      
       description = "Add your description here"
       readme = "README.md"
       requires-python = ">= 3.10"
       dependencies = []
-      dynamic = ["version"]
       classifiers = [
           "Operating System :: MacOS",
           "Operating System :: Microsoft :: Windows",
@@ -6045,17 +6051,14 @@
       Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
       
       [build-system]
-      requires = ["hatchling"]
-      build-backend = "hatchling.build"
+      requires = ["uv_build>=0.8.5,<0.9.0"]
+      build-backend = "uv_build"
       
       [dependency-groups]
       dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
-      [tool.hatch.version]
-      path = "src/this_is_the_project_name/__init__.py"
-      
       [tool.pytest.ini_options]
-      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
       
       [tool.ruff]
       line-length = 110
@@ -6129,12 +6132,9 @@
       
       # noqa: D104
       
-      # Wheel names will be generated according to this value. Do not manually modify this value; instead
-      # update it according to committed changes by running this command from the root of the repository:
-      #
-      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
-      #
-      __version__ = "0.1.0"
+      from importlib.metadata import version  # noqa: E402
+      
+      __version__ = version("this_is_the_project_name")
   
     ''',
     'src/this_is_the_project_name/py.typed': '',
@@ -6597,7 +6597,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -7560,11 +7560,17 @@
     'pyproject.toml': '''
       [project]
       name = "this-is-the-project-name"
+      version = "0.0.0" 
+      #          ^^^^^
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
+      
       description = "Add your description here"
       readme = "README.md"
       requires-python = ">= 3.10"
       dependencies = []
-      dynamic = ["version"]
       classifiers = [
           "Operating System :: MacOS",
           "Operating System :: Microsoft :: Windows",
@@ -7585,17 +7591,14 @@
       Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
       
       [build-system]
-      requires = ["hatchling"]
-      build-backend = "hatchling.build"
+      requires = ["uv_build>=0.8.5,<0.9.0"]
+      build-backend = "uv_build"
       
       [dependency-groups]
       dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
-      [tool.hatch.version]
-      path = "src/this_is_the_project_name/__init__.py"
-      
       [tool.pytest.ini_options]
-      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
       
       [tool.ruff]
       line-length = 110
@@ -7669,12 +7672,9 @@
       
       # noqa: D104
       
-      # Wheel names will be generated according to this value. Do not manually modify this value; instead
-      # update it according to committed changes by running this command from the root of the repository:
-      #
-      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
-      #
-      __version__ = "0.1.0"
+      from importlib.metadata import version  # noqa: E402
+      
+      __version__ = version("this_is_the_project_name")
   
     ''',
     'src/this_is_the_project_name/py.typed': '',
@@ -8136,7 +8136,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -9044,11 +9044,17 @@
     'pyproject.toml': '''
       [project]
       name = "this-is-the-project-name"
+      version = "0.0.0" 
+      #          ^^^^^
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
+      
       description = "Add your description here"
       readme = "README.md"
       requires-python = ">= 3.10"
       dependencies = []
-      dynamic = ["version"]
       classifiers = [
           "Operating System :: MacOS",
           "Operating System :: Microsoft :: Windows",
@@ -9069,17 +9075,14 @@
       Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
       
       [build-system]
-      requires = ["hatchling"]
-      build-backend = "hatchling.build"
+      requires = ["uv_build>=0.8.5,<0.9.0"]
+      build-backend = "uv_build"
       
       [dependency-groups]
       dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
-      [tool.hatch.version]
-      path = "src/this_is_the_project_name/__init__.py"
-      
       [tool.pytest.ini_options]
-      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
       
       [tool.ruff]
       line-length = 110
@@ -9153,12 +9156,9 @@
       
       # noqa: D104
       
-      # Wheel names will be generated according to this value. Do not manually modify this value; instead
-      # update it according to committed changes by running this command from the root of the repository:
-      #
-      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
-      #
-      __version__ = "0.1.0"
+      from importlib.metadata import version  # noqa: E402
+      
+      __version__ = version("this_is_the_project_name")
   
     ''',
     'src/this_is_the_project_name/py.typed': '',
@@ -9621,7 +9621,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -10535,11 +10535,17 @@
     'pyproject.toml': '''
       [project]
       name = "this-is-the-project-name"
+      version = "0.0.0" 
+      #          ^^^^^
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
+      
       description = "Add your description here"
       readme = "README.md"
       requires-python = ">= 3.10"
       dependencies = []
-      dynamic = ["version"]
       classifiers = [
           "Operating System :: MacOS",
           "Operating System :: Microsoft :: Windows",
@@ -10560,17 +10566,14 @@
       Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
       
       [build-system]
-      requires = ["hatchling"]
-      build-backend = "hatchling.build"
+      requires = ["uv_build>=0.8.5,<0.9.0"]
+      build-backend = "uv_build"
       
       [dependency-groups]
       dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
       
-      [tool.hatch.version]
-      path = "src/this_is_the_project_name/__init__.py"
-      
       [tool.pytest.ini_options]
-      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
       
       [tool.ruff]
       line-length = 110
@@ -10644,12 +10647,9 @@
       
       # noqa: D104
       
-      # Wheel names will be generated according to this value. Do not manually modify this value; instead
-      # update it according to committed changes by running this command from the root of the repository:
-      #
-      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
-      #
-      __version__ = "0.1.0"
+      from importlib.metadata import version  # noqa: E402
+      
+      __version__ = version("this_is_the_project_name")
   
     ''',
     'src/this_is_the_project_name/py.typed': '',
@@ -11112,7 +11112,7 @@
               run: uv sync --frozen
       
             - name: Update Version
-              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src --verbose
+              run: uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src --verbose
       
             - name: Build Python Package
               run: uv build
@@ -12047,11 +12047,17 @@
     'pyproject.toml': '''
       [project]
       name = "this-is-the-project-name"
+      version = "0.0.0" 
+      #          ^^^^^
+      # Wheel names will be generated according to this value. Do not manually modify this value; instead
+      # update it according to committed changes by running this command from the root of the repository:
+      #
+      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
+      
       description = "Add your description here"
       readme = "README.md"
       requires-python = ">= 3.10"
       dependencies = []
-      dynamic = ["version"]
       classifiers = [
           "Operating System :: MacOS",
           "Operating System :: Microsoft :: Windows",
@@ -12069,17 +12075,14 @@
       Repository = "https://github.com/<<github_username>>/<<github_repo_name>>"
       
       [build-system]
-      requires = ["hatchling"]
-      build-backend = "hatchling.build"
+      requires = ["uv_build>=0.8.5,<0.9.0"]
+      build-backend = "uv_build"
       
       [dependency-groups]
       dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
       
-      [tool.hatch.version]
-      path = "src/this_is_the_project_name/__init__.py"
-      
       [tool.pytest.ini_options]
-      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
+      addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
       
       [tool.ruff]
       line-length = 110
@@ -12153,12 +12156,9 @@
       
       # noqa: D104
       
-      # Wheel names will be generated according to this value. Do not manually modify this value; instead
-      # update it according to committed changes by running this command from the root of the repository:
-      #
-      #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./src/this_is_the_project_name/__init__.py ./src
-      #
-      __version__ = "0.1.0"
+      from importlib.metadata import version  # noqa: E402
+      
+      __version__ = version("this_is_the_project_name")
   
     ''',
     'src/this_is_the_project_name/py.typed': '',

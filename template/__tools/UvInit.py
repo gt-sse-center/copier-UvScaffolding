@@ -1,5 +1,6 @@
 # noqa: D100
 import sys
+import textwrap
 
 from collections.abc import Callable
 from pathlib import Path
@@ -43,13 +44,7 @@ def _RunUvInit(indented_stream: StreamDecorator) -> bool:
             dm.WriteLine("'pyproject.toml' already exists.")
         else:
             # Run uv init
-
-            # uv v0.8.0 changed the default build backend from `hatch` to `uv_build`. However, it
-            # seems that the means by which dynamic version numbers are specified within `pyproject.toml`
-            # has changed between `hatch` and `uv_build`. For now, to prevent CI failures, hard-code the
-            # build backend to `hatch` until we can figure out how to make it work with `uv_build`.
-            # https://github.com/gt-sse-center/copier-UvScaffolding/issues/26
-            command_line = 'uv init --name "{{ python_package_name }}" --package --lib --build-backend hatch'
+            command_line = 'uv init --name "{{ python_package_name }}" --package --lib'
 
             dm.WriteVerbose(f"Command line: {command_line}\n\n")
 
@@ -170,8 +165,22 @@ def _AugmentPyProject(indented_stream: StreamDecorator) -> bool:
 
         project_section = cast("tomlkit.TOMLDocument", destination["project"])
 
-        # Remove the hard-coded version, as __pyproject.fragment.toml is making it dynamic
-        project_section.pop("version", None)
+        # Add the version information, including a comment that explains how to update it
+        version_item = tomlkit.item("0.0.0")
+        version_item.comment(
+            textwrap.dedent(
+                """\
+
+                #          ^^^^^
+                # Wheel names will be generated according to this value. Do not manually modify this value; instead
+                # update it according to committed changes by running this command from the root of the repository:
+                #
+                #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
+                """,
+            ),
+        )
+
+        project_section["version"] = version_item
 
         # Always overwrite the license value, as it may have changed between invocations
         if "{{ license }}" == "None":  # noqa: PLR0133

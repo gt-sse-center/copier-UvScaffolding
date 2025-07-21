@@ -4,8 +4,6 @@
 # (without a lot of manual effort in this template) if we overwrote the file.
 
 [project]
-dynamic = ["version"]
-
 classifiers = [
     "Operating System :: MacOS",
     "Operating System :: Microsoft :: Windows",
@@ -20,11 +18,8 @@ Homepage = "{{ github_url }}"
 Documentation = "{{ github_url }}"
 Repository = "{{ github_url }}"
 
-[tool.hatch.version]
-path = "src/{{ python_package_name }}/__init__.py"
-
 [tool.pytest.ini_options]
-addopts = "--verbose -vv --capture=no --cov={{ python_package_name }} --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
+addopts = "--verbose -vv --capture=no --cov={{ python_package_name }} --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
 
 [tool.ruff]
 line-length = 110
