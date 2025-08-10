@@ -104,6 +104,17 @@ def test_All(configuration_info, copie, snapshot) -> None:
 
                 dependency_group_section["dev"] = sorted(versionless_dev_dependencies)
 
+                # build-system
+                build_system_section = cast(tomlkit.TOMLDocument, toml_content["build-system"])
+
+                requires = cast(list, build_system_section["requires"])
+
+                for require_index, require in enumerate(requires):
+                    if require.startswith("uv_build"):
+                        requires[require_index] = "<<uv_build>>"
+                        break
+
+                # Save the content
                 content = tomlkit.dumps(toml_content)
 
             results[(relative_path / filename).as_posix()] = content
