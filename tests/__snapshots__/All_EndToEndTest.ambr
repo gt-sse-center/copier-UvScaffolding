@@ -1475,6 +1475,9 @@
       max-args = 10
       max-branches = 20
       max-returns = 20
+      
+      [tool.uv.build-backend]
+      module-name = "this_is_the_project_name"
   
     ''',
     'src/AutoGitSemVer.yaml': '''
@@ -1510,6 +1513,7 @@
       # noqa: D104
       
       from importlib.metadata import version  # noqa: E402
+      
       
       __version__ = version("this_is_the_project_name")
   
@@ -3021,6 +3025,9 @@
       max-args = 10
       max-branches = 20
       max-returns = 20
+      
+      [tool.uv.build-backend]
+      module-name = "this_is_the_project_name"
   
     ''',
     'src/AutoGitSemVer.yaml': '''
@@ -3056,6 +3063,7 @@
       # noqa: D104
       
       from importlib.metadata import version  # noqa: E402
+      
       
       __version__ = version("this_is_the_project_name")
   
@@ -4565,6 +4573,9 @@
       max-args = 10
       max-branches = 20
       max-returns = 20
+      
+      [tool.uv.build-backend]
+      module-name = "this_is_the_project_name"
   
     ''',
     'src/AutoGitSemVer.yaml': '''
@@ -4600,6 +4611,7 @@
       # noqa: D104
       
       from importlib.metadata import version  # noqa: E402
+      
       
       __version__ = version("this_is_the_project_name")
   
@@ -6098,6 +6110,9 @@
       max-args = 10
       max-branches = 20
       max-returns = 20
+      
+      [tool.uv.build-backend]
+      module-name = "this_is_the_project_name"
   
     ''',
     'src/AutoGitSemVer.yaml': '''
@@ -6133,6 +6148,7 @@
       # noqa: D104
       
       from importlib.metadata import version  # noqa: E402
+      
       
       __version__ = version("this_is_the_project_name")
   
@@ -7638,6 +7654,9 @@
       max-args = 10
       max-branches = 20
       max-returns = 20
+      
+      [tool.uv.build-backend]
+      module-name = "this_is_the_project_name"
   
     ''',
     'src/AutoGitSemVer.yaml': '''
@@ -7673,6 +7692,7 @@
       # noqa: D104
       
       from importlib.metadata import version  # noqa: E402
+      
       
       __version__ = version("this_is_the_project_name")
   
@@ -9122,6 +9142,9 @@
       max-args = 10
       max-branches = 20
       max-returns = 20
+      
+      [tool.uv.build-backend]
+      module-name = "this_is_the_project_name"
   
     ''',
     'src/AutoGitSemVer.yaml': '''
@@ -9157,6 +9180,7 @@
       # noqa: D104
       
       from importlib.metadata import version  # noqa: E402
+      
       
       __version__ = version("this_is_the_project_name")
   
@@ -10613,6 +10637,9 @@
       max-args = 10
       max-branches = 20
       max-returns = 20
+      
+      [tool.uv.build-backend]
+      module-name = "this_is_the_project_name"
   
     ''',
     'src/AutoGitSemVer.yaml': '''
@@ -10648,6 +10675,7 @@
       # noqa: D104
       
       from importlib.metadata import version  # noqa: E402
+      
       
       __version__ = version("this_is_the_project_name")
   
@@ -12122,6 +12150,9 @@
       max-args = 10
       max-branches = 20
       max-returns = 20
+      
+      [tool.uv.build-backend]
+      module-name = "this_is_the_project_name"
   
     ''',
     'src/AutoGitSemVer.yaml': '''
@@ -12157,6 +12188,7 @@
       # noqa: D104
       
       from importlib.metadata import version  # noqa: E402
+      
       
       __version__ = version("this_is_the_project_name")
   
