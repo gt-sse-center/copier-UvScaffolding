@@ -1115,7 +1115,7 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://pypi.org" target="_blank">PyPi</a> token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
@@ -1153,10 +1153,11 @@
         <li>Select "Only select repositories"...</li>
         <li>Select <code><<github_repo_name>></code>.</li>
         <li>In the "Permissions" section...</li>
-        <li>Press the "Account permissions" dropdown...</li>
-        <li>Select the "Gists" section...</li>
-        <li>Click the "Access: No access" dropdown button...</li>
-        <li>Select "Read and write".</li>
+        <li>Click on the "Account" tab...</li>
+        <li>Click on the "Add permissions" button...</li>
+        <li>Select the "Gists" checkbox.</li>
+        <li>In the "Gists" list item that appears in the list of permissions...</li>
+        <li>Ensure that "Access" is set to "Read and write".</li>
         <li>Click the "Generate token" button.</li>
         <li>Copy the token for use in the next step.</li>
       </ol>
@@ -1198,9 +1199,9 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
-        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy all of the contents.</li>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
           <p>Enter the values:</p>
@@ -1228,14 +1229,46 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+        <p>Store the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
       <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
+      
+      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+      
+      <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv sync</code><br/>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="install-pre-commit">11) Install pre-commit</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will initialize <a href="https://pre-commit.com/" target="_blank">pre-commit</a> so that checks are run as a part of every commit.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv run pre-commit install</code>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">12) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1246,13 +1279,13 @@
       1. <code>git add --all</code><br/>
       2. <code>git commit -m "🎉 Initial commit"</code><br/>
       3. <code>git push</code><br/>
-      </p>
+      <p></p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">13) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1267,7 +1300,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">14) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1286,7 +1319,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">15) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1317,7 +1350,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">16) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -1332,7 +1365,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">17) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2665,7 +2698,7 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://pypi.org" target="_blank">PyPi</a> token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
@@ -2703,10 +2736,11 @@
         <li>Select "Only select repositories"...</li>
         <li>Select <code><<github_repo_name>></code>.</li>
         <li>In the "Permissions" section...</li>
-        <li>Press the "Account permissions" dropdown...</li>
-        <li>Select the "Gists" section...</li>
-        <li>Click the "Access: No access" dropdown button...</li>
-        <li>Select "Read and write".</li>
+        <li>Click on the "Account" tab...</li>
+        <li>Click on the "Add permissions" button...</li>
+        <li>Select the "Gists" checkbox.</li>
+        <li>In the "Gists" list item that appears in the list of permissions...</li>
+        <li>Ensure that "Access" is set to "Read and write".</li>
         <li>Click the "Generate token" button.</li>
         <li>Copy the token for use in the next step.</li>
       </ol>
@@ -2748,9 +2782,9 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
-        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy all of the contents.</li>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
           <p>Enter the values:</p>
@@ -2778,14 +2812,46 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+        <p>Store the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
       <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
+      
+      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+      
+      <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv sync</code><br/>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="install-pre-commit">11) Install pre-commit</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will initialize <a href="https://pre-commit.com/" target="_blank">pre-commit</a> so that checks are run as a part of every commit.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv run pre-commit install</code>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">12) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2796,13 +2862,13 @@
       1. <code>git add --all</code><br/>
       2. <code>git commit -m "🎉 Initial commit"</code><br/>
       3. <code>git push</code><br/>
-      </p>
+      <p></p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">13) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2817,7 +2883,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">14) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2836,7 +2902,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">15) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2867,7 +2933,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">16) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -2882,7 +2948,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">17) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4213,7 +4279,7 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://pypi.org" target="_blank">PyPi</a> token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
@@ -4251,10 +4317,11 @@
         <li>Select "Only select repositories"...</li>
         <li>Select <code><<github_repo_name>></code>.</li>
         <li>In the "Permissions" section...</li>
-        <li>Press the "Account permissions" dropdown...</li>
-        <li>Select the "Gists" section...</li>
-        <li>Click the "Access: No access" dropdown button...</li>
-        <li>Select "Read and write".</li>
+        <li>Click on the "Account" tab...</li>
+        <li>Click on the "Add permissions" button...</li>
+        <li>Select the "Gists" checkbox.</li>
+        <li>In the "Gists" list item that appears in the list of permissions...</li>
+        <li>Ensure that "Access" is set to "Read and write".</li>
         <li>Click the "Generate token" button.</li>
         <li>Copy the token for use in the next step.</li>
       </ol>
@@ -4296,9 +4363,9 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
-        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy all of the contents.</li>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
           <p>Enter the values:</p>
@@ -4326,14 +4393,46 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+        <p>Store the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
       <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
+      
+      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+      
+      <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv sync</code><br/>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="install-pre-commit">11) Install pre-commit</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will initialize <a href="https://pre-commit.com/" target="_blank">pre-commit</a> so that checks are run as a part of every commit.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv run pre-commit install</code>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">12) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4344,13 +4443,13 @@
       1. <code>git add --all</code><br/>
       2. <code>git commit -m "🎉 Initial commit"</code><br/>
       3. <code>git push</code><br/>
-      </p>
+      <p></p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">13) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4365,7 +4464,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">14) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4384,7 +4483,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">15) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4415,7 +4514,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">16) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -4430,7 +4529,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">17) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5750,7 +5849,7 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://pypi.org" target="_blank">PyPi</a> token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
@@ -5788,10 +5887,11 @@
         <li>Select "Only select repositories"...</li>
         <li>Select <code><<github_repo_name>></code>.</li>
         <li>In the "Permissions" section...</li>
-        <li>Press the "Account permissions" dropdown...</li>
-        <li>Select the "Gists" section...</li>
-        <li>Click the "Access: No access" dropdown button...</li>
-        <li>Select "Read and write".</li>
+        <li>Click on the "Account" tab...</li>
+        <li>Click on the "Add permissions" button...</li>
+        <li>Select the "Gists" checkbox.</li>
+        <li>In the "Gists" list item that appears in the list of permissions...</li>
+        <li>Ensure that "Access" is set to "Read and write".</li>
         <li>Click the "Generate token" button.</li>
         <li>Copy the token for use in the next step.</li>
       </ol>
@@ -5833,9 +5933,9 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
-        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy all of the contents.</li>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
           <p>Enter the values:</p>
@@ -5863,14 +5963,46 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+        <p>Store the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
       <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
+      
+      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+      
+      <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv sync</code><br/>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="install-pre-commit">11) Install pre-commit</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will initialize <a href="https://pre-commit.com/" target="_blank">pre-commit</a> so that checks are run as a part of every commit.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv run pre-commit install</code>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">12) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5881,13 +6013,13 @@
       1. <code>git add --all</code><br/>
       2. <code>git commit -m "🎉 Initial commit"</code><br/>
       3. <code>git push</code><br/>
-      </p>
+      <p></p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">13) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5902,7 +6034,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">14) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5921,7 +6053,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">15) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5952,7 +6084,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">16) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -5967,7 +6099,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">17) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7294,7 +7426,7 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://pypi.org" target="_blank">PyPi</a> token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
@@ -7332,10 +7464,11 @@
         <li>Select "Only select repositories"...</li>
         <li>Select <code><<github_repo_name>></code>.</li>
         <li>In the "Permissions" section...</li>
-        <li>Press the "Account permissions" dropdown...</li>
-        <li>Select the "Gists" section...</li>
-        <li>Click the "Access: No access" dropdown button...</li>
-        <li>Select "Read and write".</li>
+        <li>Click on the "Account" tab...</li>
+        <li>Click on the "Add permissions" button...</li>
+        <li>Select the "Gists" checkbox.</li>
+        <li>In the "Gists" list item that appears in the list of permissions...</li>
+        <li>Ensure that "Access" is set to "Read and write".</li>
         <li>Click the "Generate token" button.</li>
         <li>Copy the token for use in the next step.</li>
       </ol>
@@ -7377,9 +7510,9 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
-        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy all of the contents.</li>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
           <p>Enter the values:</p>
@@ -7407,14 +7540,46 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+        <p>Store the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
       <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
+      
+      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+      
+      <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv sync</code><br/>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="install-pre-commit">11) Install pre-commit</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will initialize <a href="https://pre-commit.com/" target="_blank">pre-commit</a> so that checks are run as a part of every commit.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv run pre-commit install</code>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">12) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7425,13 +7590,13 @@
       1. <code>git add --all</code><br/>
       2. <code>git commit -m "🎉 Initial commit"</code><br/>
       3. <code>git push</code><br/>
-      </p>
+      <p></p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">13) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7446,7 +7611,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">14) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7465,7 +7630,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">15) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7496,7 +7661,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">16) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -7511,7 +7676,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">17) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8836,7 +9001,7 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://pypi.org" target="_blank">PyPi</a> token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
@@ -8865,9 +9030,9 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
-        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy all of the contents.</li>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
           <p>Enter the values:</p>
@@ -8895,14 +9060,46 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+        <p>Store the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
       <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="install-uv-locally">8) Install uv locally</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
+      
+      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+      
+      <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv sync</code><br/>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="install-pre-commit">9) Install pre-commit</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will initialize <a href="https://pre-commit.com/" target="_blank">pre-commit</a> so that checks are run as a part of every commit.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv run pre-commit install</code>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8913,13 +9110,13 @@
       1. <code>git add --all</code><br/>
       2. <code>git commit -m "🎉 Initial commit"</code><br/>
       3. <code>git push</code><br/>
-      </p>
+      <p></p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8934,7 +9131,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8953,7 +9150,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8984,7 +9181,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -8999,7 +9196,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10318,7 +10515,7 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://pypi.org" target="_blank">PyPi</a> token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
@@ -10356,10 +10553,11 @@
         <li>Select "Only select repositories"...</li>
         <li>Select <code><<github_repo_name>></code>.</li>
         <li>In the "Permissions" section...</li>
-        <li>Press the "Account permissions" dropdown...</li>
-        <li>Select the "Gists" section...</li>
-        <li>Click the "Access: No access" dropdown button...</li>
-        <li>Select "Read and write".</li>
+        <li>Click on the "Account" tab...</li>
+        <li>Click on the "Add permissions" button...</li>
+        <li>Select the "Gists" checkbox.</li>
+        <li>In the "Gists" list item that appears in the list of permissions...</li>
+        <li>Ensure that "Access" is set to "Read and write".</li>
         <li>Click the "Generate token" button.</li>
         <li>Copy the token for use in the next step.</li>
       </ol>
@@ -10397,7 +10595,39 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">8) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="install-uv-locally">8) Install uv locally</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
+      
+      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+      
+      <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv sync</code><br/>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="install-pre-commit">9) Install pre-commit</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will initialize <a href="https://pre-commit.com/" target="_blank">pre-commit</a> so that checks are run as a part of every commit.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv run pre-commit install</code>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10408,13 +10638,13 @@
       1. <code>git add --all</code><br/>
       2. <code>git commit -m "🎉 Initial commit"</code><br/>
       3. <code>git push</code><br/>
-      </p>
+      <p></p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">9) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10429,7 +10659,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">10) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10448,7 +10678,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">11) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10479,7 +10709,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">12) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -10494,7 +10724,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">13) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11793,7 +12023,7 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://pypi.org" target="_blank">PyPi</a> token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
@@ -11831,10 +12061,11 @@
         <li>Select "Only select repositories"...</li>
         <li>Select <code><<github_repo_name>></code>.</li>
         <li>In the "Permissions" section...</li>
-        <li>Press the "Account permissions" dropdown...</li>
-        <li>Select the "Gists" section...</li>
-        <li>Click the "Access: No access" dropdown button...</li>
-        <li>Select "Read and write".</li>
+        <li>Click on the "Account" tab...</li>
+        <li>Click on the "Add permissions" button...</li>
+        <li>Select the "Gists" checkbox.</li>
+        <li>In the "Gists" list item that appears in the list of permissions...</li>
+        <li>Ensure that "Access" is set to "Read and write".</li>
         <li>Click the "Generate token" button.</li>
         <li>Copy the token for use in the next step.</li>
       </ol>
@@ -11876,9 +12107,9 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
       <ol>
-        <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+        <li>Open <code>minisign_key.pri</code> in a text editor and copy all of the contents.</li>
         <li>Visit <a href="https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new" target="_blank">https://github.com/<<github_username>>/<<github_repo_name>>/settings/secrets/actions/new</a>.</li>
         <li>
           <p>Enter the values:</p>
@@ -11906,14 +12137,46 @@
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+        <p>Store the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
       <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="initialize-the-git-repository">10) Initialize the git repository</span>
+          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
+      
+      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+      
+      <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv sync</code><br/>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="install-pre-commit">11) Install pre-commit</span>
+        </summary>
+      </details>
+      <div role="definition" class="details-content">
+        <p>In this step, we will initialize <a href="https://pre-commit.com/" target="_blank">pre-commit</a> so that checks are run as a part of every commit.</p>
+      
+      <p>Open a terminal window, navigate to your repository, and run the following command:</p>
+      
+      1. <code>uv run pre-commit install</code>
+      <p></p>
+      
+      </div>
+      
+      <details>
+        <summary>
+          <span role="term"><input type="checkbox" id="initialize-the-git-repository">12) Initialize the git repository</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11924,13 +12187,13 @@
       1. <code>git add --all</code><br/>
       2. <code>git commit -m "🎉 Initial commit"</code><br/>
       3. <code>git push</code><br/>
-      </p>
+      <p></p>
       
       </div>
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">11) Verify the CI/CD Workflow</span>
+          <span role="term"><input type="checkbox" id="verify-the-ci/cd-workflow">13) Verify the CI/CD Workflow</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11945,7 +12208,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">12) Delete the temporary PyPi Token</span>
+          <span role="term"><input type="checkbox" id="delete-the-temporary-pypi-token">14) Delete the temporary PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11964,7 +12227,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">13) Create an Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="create-an-official-pypi-token">15) Create an Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -11995,7 +12258,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">14) Update the GitHub Secret with the Official PyPi Token</span>
+          <span role="term"><input type="checkbox" id="update-the-github-secret-with-the-official-pypi-token">16) Update the GitHub Secret with the Official PyPi Token</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
@@ -12010,7 +12273,7 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="delete-this-file">15) Delete this file</span>
+          <span role="term"><input type="checkbox" id="delete-this-file">17) Delete this file</span>
         </summary>
       </details>
       <div role="definition" class="details-content">

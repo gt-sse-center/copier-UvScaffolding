@@ -13,7 +13,8 @@ def Execute():
     _CreateGitHubSettings(instructions)
     _CreateTemporaryPyPiToken(instructions)
     _CreateMinisignSecret(instructions)
-
+    _CreateUvInstructions(instructions)
+    _CreatePreCommitInstructions(instructions)
     _CreateCommitInstructions(instructions)
 
     _CreateFinalPyPiToken(instructions)
@@ -126,7 +127,7 @@ def _CreateTemporaryPyPiToken(instructions: dict[str, str]) -> None:
 
     instructions["Save the Temporary PyPi Token as a GitHub Secret"] = textwrap.dedent(
         """\
-        <p>In this step, we will save the PyPi token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://pypi.org" target="_blank">PyPi</a> token just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
         <ol>
           <li>Visit <a href="{{ github_url }}/settings/secrets/actions/new" target="_blank">{{ github_url }}/settings/secrets/actions/new</a>.</li>
           <li>
@@ -161,10 +162,11 @@ def _CreateTemporaryPyPiToken(instructions: dict[str, str]) -> None:
           <li>Select "Only select repositories"...</li>
           <li>Select <code>{{ github_repo_name }}</code>.</li>
           <li>In the "Permissions" section...</li>
-          <li>Press the "Account permissions" dropdown...</li>
-          <li>Select the "Gists" section...</li>
-          <li>Click the "Access: No access" dropdown button...</li>
-          <li>Select "Read and write".</li>
+          <li>Click on the "Account" tab...</li>
+          <li>Click on the "Add permissions" button...</li>
+          <li>Select the "Gists" checkbox.</li>
+          <li>In the "Gists" list item that appears in the list of permissions...</li>
+          <li>Ensure that "Access" is set to "Read and write".</li>
           <li>Click the "Generate token" button.</li>
           <li>Copy the token for use in the next step.</li>
         </ol>
@@ -203,9 +205,9 @@ def _CreateMinisignSecret(instructions: dict[str, str]) -> None:
 {% if sign_artifacts_question %}
     instructions["Save the Minisign Private Key"] = textwrap.dedent(
         """\
-        <p>In this step, we will save the Minisign private key just created as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
+        <p>In this step, we will save the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key as a <a href="https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions" target="_blank">GitHub Action secret</a>.</p>
         <ol>
-          <li>Open <code>minisign_key.pri</code> in a text editor and copy the contents.</li>
+          <li>Open <code>minisign_key.pri</code> in a text editor and copy all of the contents.</li>
           <li>Visit <a href="{{ github_url }}/settings/secrets/actions/new" target="_blank">{{ github_url }}/settings/secrets/actions/new</a>.</li>
           <li>
             <p>Enter the values:</p>
@@ -229,13 +231,43 @@ def _CreateMinisignSecret(instructions: dict[str, str]) -> None:
 
     instructions["Store the Minisign Private Key"] = textwrap.dedent(
         """\
-        <p>Store the Minisign private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
+        <p>Store the <a href="https://github.com/x13a/py-minisign" target="_blank">Minisign</a> private key in a secure location. Once you have stored the key, you can delete it from your local machine.</p>
         <p>Note that you should NEVER force <code>minisign_key.pri</code> into source control.</p>
         """,
     )
 {% else %}
     pass
 {% endif %}
+
+
+# ----------------------------------------------------------------------
+def _CreateUvInstructions(instructions: dict[str, str]) -> None:
+    instructions["Install uv locally"] = textwrap.dedent(
+        """\
+        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
+
+        <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+
+        <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
+
+        1. <code>uv sync</code><br/>
+        <p></p>
+        """,
+    )
+
+
+# ----------------------------------------------------------------------
+def _CreatePreCommitInstructions(instructions: dict[str, str]) -> None:
+    instructions["Install pre-commit"] = textwrap.dedent(
+        """\
+        <p>In this step, we will initialize <a href="https://pre-commit.com/" target="_blank">pre-commit</a> so that checks are run as a part of every commit.</p>
+
+        <p>Open a terminal window, navigate to your repository, and run the following command:</p>
+
+        1. <code>uv run pre-commit install</code>
+        <p></p>
+        """,
+    )
 
 
 # ----------------------------------------------------------------------
@@ -249,7 +281,7 @@ def _CreateCommitInstructions(instructions: dict[str, str]) -> None:
         1. <code>git add --all</code><br/>
         2. <code>git commit -m "🎉 Initial commit"</code><br/>
         3. <code>git push</code><br/>
-        </p>
+        <p></p>
         """,
     )
 
