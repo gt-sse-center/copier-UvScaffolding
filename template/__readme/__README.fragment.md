@@ -4,7 +4,7 @@
 **Package:**
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/{{ python_package_name }}?color=dark-green)](https://pypi.org/project/{{ python_package_name }}/)
 [![PyPI - Version](https://img.shields.io/pypi/v/{{ python_package_name }}?color=dark-green)](https://pypi.org/project/{{ python_package_name }}/)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/{{ python_package_name }})](https://pypistats.org/packages/{{ python_package_name }})
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/{{ python_package_name }})](https://pypistats.org/packages/{{ python_package_name | strictpythonpackageify }})
 
 **Development:**
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)

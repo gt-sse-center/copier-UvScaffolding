@@ -167,4 +167,5 @@ _jinja_extensions:
   - extensions/context.py:ContextUpdater
   - extensions/slugify.py:SlugifyExtension
   - extensions/slugify.py:PythonPackageifyExtension
+  - extensions/slugify.py:PythonStrictPackageifyExtension
   - extensions/to_python_list.py:ToPythonListExtension
