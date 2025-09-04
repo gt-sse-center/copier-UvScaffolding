@@ -58,3 +58,16 @@ class PythonPackageifyExtension(Extension):
         func = create_ify_func("_")
 
         environment.filters["pythonpackageify"] = lambda *args, **kwargs: func(*args, **kwargs).lower()
+
+
+class PythonStrictPackageifyExtension(Extension):
+    """Extension to convert a string to a strict python package name (all lowercase, underscores are converted to dashes)."""
+
+    def __init__(self, environment: Environment) -> None:  # noqa: D107
+        super().__init__(environment)
+
+        func = create_ify_func("_")
+
+        environment.filters["strictpythonpackageify"] = (
+            lambda *args, **kwargs: func(*args, **kwargs).lower().replace("_", "-")
+        )
