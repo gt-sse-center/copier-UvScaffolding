@@ -22,7 +22,7 @@
       license: Apache-2.0
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
-      python_versions: 3.10, 3.11, 3.12, 3.13
+      python_versions: 3.10, 3.11, 3.12, 3.13, 3.14
       sign_artifacts_question: true
   
     ''',
@@ -54,7 +54,7 @@
       
       ## Environment (please complete the following information):
        - OS: [e.g. iOS]
-       - Python Version: [e.g. 3.13, 3.12, 3.11, etc.]
+       - Python Version: [e.g. 3.14, 3.13, 3.12, 3.11, etc.]
        - this_is_the_project_name Version [e.g. 1.2.3]
       
       ## Additional context
@@ -269,7 +269,7 @@
           with:
             # These values can be customized for your specific requirements.
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
-            python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
+            python_version_json_string: "['3.14', '3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
             coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
             coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
@@ -861,6 +861,8 @@
       
       **Development:**
       [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+      [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+      [![pytest](https://img.shields.io/badge/pytest-enabled-brightgreen)](https://docs.pytest.org/)
       [![CI](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml/badge.svg)](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml)
       [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/<<coverage_badge_gist_username>>/<<coverage_badge_gist_id>>/raw/<<github_repo_name>>_code_coverage.json)](https://github.com/<<github_username>>/<<github_repo_name>>/actions)
       [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/<<github_username>>/<<github_repo_name>>?color=dark-green)](https://github.com/<<github_username>>/<<github_repo_name>>/commits/main/)
@@ -1446,6 +1448,7 @@
           "Operating System :: Microsoft :: Windows",
           "Operating System :: POSIX :: Linux",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 3.14",
           "Programming Language :: Python :: 3.13",
           "Programming Language :: Python :: 3.12",
           "Programming Language :: Python :: 3.11",
@@ -1591,7 +1594,7 @@
       license: BSD-3-Clause-Clear
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
-      python_versions: 3.10, 3.11, 3.12, 3.13
+      python_versions: 3.10, 3.11, 3.12, 3.13, 3.14
       sign_artifacts_question: true
   
     ''',
@@ -1623,7 +1626,7 @@
       
       ## Environment (please complete the following information):
        - OS: [e.g. iOS]
-       - Python Version: [e.g. 3.13, 3.12, 3.11, etc.]
+       - Python Version: [e.g. 3.14, 3.13, 3.12, 3.11, etc.]
        - this_is_the_project_name Version [e.g. 1.2.3]
       
       ## Additional context
@@ -1838,7 +1841,7 @@
           with:
             # These values can be customized for your specific requirements.
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
-            python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
+            python_version_json_string: "['3.14', '3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
             coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
             coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
@@ -2444,6 +2447,8 @@
       
       **Development:**
       [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+      [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+      [![pytest](https://img.shields.io/badge/pytest-enabled-brightgreen)](https://docs.pytest.org/)
       [![CI](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml/badge.svg)](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml)
       [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/<<coverage_badge_gist_username>>/<<coverage_badge_gist_id>>/raw/<<github_repo_name>>_code_coverage.json)](https://github.com/<<github_username>>/<<github_repo_name>>/actions)
       [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/<<github_username>>/<<github_repo_name>>?color=dark-green)](https://github.com/<<github_username>>/<<github_repo_name>>/commits/main/)
@@ -3029,6 +3034,7 @@
           "Operating System :: Microsoft :: Windows",
           "Operating System :: POSIX :: Linux",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 3.14",
           "Programming Language :: Python :: 3.13",
           "Programming Language :: Python :: 3.12",
           "Programming Language :: Python :: 3.11",
@@ -3174,7 +3180,7 @@
       license: BSL-1.0
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
-      python_versions: 3.10, 3.11, 3.12, 3.13
+      python_versions: 3.10, 3.11, 3.12, 3.13, 3.14
       sign_artifacts_question: true
   
     ''',
@@ -3206,7 +3212,7 @@
       
       ## Environment (please complete the following information):
        - OS: [e.g. iOS]
-       - Python Version: [e.g. 3.13, 3.12, 3.11, etc.]
+       - Python Version: [e.g. 3.14, 3.13, 3.12, 3.11, etc.]
        - this_is_the_project_name Version [e.g. 1.2.3]
       
       ## Additional context
@@ -3421,7 +3427,7 @@
           with:
             # These values can be customized for your specific requirements.
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
-            python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
+            python_version_json_string: "['3.14', '3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
             coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
             coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
@@ -4025,6 +4031,8 @@
       
       **Development:**
       [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+      [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+      [![pytest](https://img.shields.io/badge/pytest-enabled-brightgreen)](https://docs.pytest.org/)
       [![CI](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml/badge.svg)](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml)
       [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/<<coverage_badge_gist_username>>/<<coverage_badge_gist_id>>/raw/<<github_repo_name>>_code_coverage.json)](https://github.com/<<github_username>>/<<github_repo_name>>/actions)
       [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/<<github_username>>/<<github_repo_name>>?color=dark-green)](https://github.com/<<github_username>>/<<github_repo_name>>/commits/main/)
@@ -4610,6 +4618,7 @@
           "Operating System :: Microsoft :: Windows",
           "Operating System :: POSIX :: Linux",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 3.14",
           "Programming Language :: Python :: 3.13",
           "Programming Language :: Python :: 3.12",
           "Programming Language :: Python :: 3.11",
@@ -4755,7 +4764,7 @@
       license: GPL-3.0-or-later
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
-      python_versions: 3.10, 3.11, 3.12, 3.13
+      python_versions: 3.10, 3.11, 3.12, 3.13, 3.14
       sign_artifacts_question: true
   
     ''',
@@ -4787,7 +4796,7 @@
       
       ## Environment (please complete the following information):
        - OS: [e.g. iOS]
-       - Python Version: [e.g. 3.13, 3.12, 3.11, etc.]
+       - Python Version: [e.g. 3.14, 3.13, 3.12, 3.11, etc.]
        - this_is_the_project_name Version [e.g. 1.2.3]
       
       ## Additional context
@@ -5002,7 +5011,7 @@
           with:
             # These values can be customized for your specific requirements.
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
-            python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
+            python_version_json_string: "['3.14', '3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
             coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
             coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
@@ -5595,6 +5604,8 @@
       
       **Development:**
       [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+      [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+      [![pytest](https://img.shields.io/badge/pytest-enabled-brightgreen)](https://docs.pytest.org/)
       [![CI](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml/badge.svg)](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml)
       [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/<<coverage_badge_gist_username>>/<<coverage_badge_gist_id>>/raw/<<github_repo_name>>_code_coverage.json)](https://github.com/<<github_username>>/<<github_repo_name>>/actions)
       [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/<<github_username>>/<<github_repo_name>>?color=dark-green)](https://github.com/<<github_username>>/<<github_repo_name>>/commits/main/)
@@ -6180,6 +6191,7 @@
           "Operating System :: Microsoft :: Windows",
           "Operating System :: POSIX :: Linux",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 3.14",
           "Programming Language :: Python :: 3.13",
           "Programming Language :: Python :: 3.12",
           "Programming Language :: Python :: 3.11",
@@ -6325,7 +6337,7 @@
       license: MIT
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
-      python_versions: 3.10, 3.11, 3.12, 3.13
+      python_versions: 3.10, 3.11, 3.12, 3.13, 3.14
       sign_artifacts_question: true
   
     ''',
@@ -6357,7 +6369,7 @@
       
       ## Environment (please complete the following information):
        - OS: [e.g. iOS]
-       - Python Version: [e.g. 3.13, 3.12, 3.11, etc.]
+       - Python Version: [e.g. 3.14, 3.13, 3.12, 3.11, etc.]
        - this_is_the_project_name Version [e.g. 1.2.3]
       
       ## Additional context
@@ -6572,7 +6584,7 @@
           with:
             # These values can be customized for your specific requirements.
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
-            python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
+            python_version_json_string: "['3.14', '3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
             coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
             coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
@@ -7172,6 +7184,8 @@
       
       **Development:**
       [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+      [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+      [![pytest](https://img.shields.io/badge/pytest-enabled-brightgreen)](https://docs.pytest.org/)
       [![CI](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml/badge.svg)](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml)
       [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/<<coverage_badge_gist_username>>/<<coverage_badge_gist_id>>/raw/<<github_repo_name>>_code_coverage.json)](https://github.com/<<github_username>>/<<github_repo_name>>/actions)
       [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/<<github_username>>/<<github_repo_name>>?color=dark-green)](https://github.com/<<github_username>>/<<github_repo_name>>/commits/main/)
@@ -7757,6 +7771,7 @@
           "Operating System :: Microsoft :: Windows",
           "Operating System :: POSIX :: Linux",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 3.14",
           "Programming Language :: Python :: 3.13",
           "Programming Language :: Python :: 3.12",
           "Programming Language :: Python :: 3.11",
@@ -7901,7 +7916,7 @@
       license: MIT
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
-      python_versions: 3.10, 3.11, 3.12, 3.13
+      python_versions: 3.10, 3.11, 3.12, 3.13, 3.14
       sign_artifacts_question: true
   
     ''',
@@ -7933,7 +7948,7 @@
       
       ## Environment (please complete the following information):
        - OS: [e.g. iOS]
-       - Python Version: [e.g. 3.13, 3.12, 3.11, etc.]
+       - Python Version: [e.g. 3.14, 3.13, 3.12, 3.11, etc.]
        - this_is_the_project_name Version [e.g. 1.2.3]
       
       ## Additional context
@@ -8148,7 +8163,7 @@
           with:
             # These values can be customized for your specific requirements.
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
-            python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
+            python_version_json_string: "['3.14', '3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
             coverage_badge_gist_id: ""
             coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
@@ -8748,6 +8763,8 @@
       
       **Development:**
       [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+      [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+      [![pytest](https://img.shields.io/badge/pytest-enabled-brightgreen)](https://docs.pytest.org/)
       [![CI](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml/badge.svg)](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml)
       [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/<<github_username>>/<<github_repo_name>>?color=dark-green)](https://github.com/<<github_username>>/<<github_repo_name>>/commits/main/)
       
@@ -9277,6 +9294,7 @@
           "Operating System :: Microsoft :: Windows",
           "Operating System :: POSIX :: Linux",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 3.14",
           "Programming Language :: Python :: 3.13",
           "Programming Language :: Python :: 3.12",
           "Programming Language :: Python :: 3.11",
@@ -9422,7 +9440,7 @@
       license: MIT
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
-      python_versions: 3.10, 3.11, 3.12, 3.13
+      python_versions: 3.10, 3.11, 3.12, 3.13, 3.14
       sign_artifacts_question: false
   
     ''',
@@ -9454,7 +9472,7 @@
       
       ## Environment (please complete the following information):
        - OS: [e.g. iOS]
-       - Python Version: [e.g. 3.13, 3.12, 3.11, etc.]
+       - Python Version: [e.g. 3.14, 3.13, 3.12, 3.11, etc.]
        - this_is_the_project_name Version [e.g. 1.2.3]
       
       ## Additional context
@@ -9669,7 +9687,7 @@
           with:
             # These values can be customized for your specific requirements.
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
-            python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
+            python_version_json_string: "['3.14', '3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
             coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
             coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
@@ -10268,6 +10286,8 @@
       
       **Development:**
       [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+      [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+      [![pytest](https://img.shields.io/badge/pytest-enabled-brightgreen)](https://docs.pytest.org/)
       [![CI](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml/badge.svg)](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml)
       [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/<<coverage_badge_gist_username>>/<<coverage_badge_gist_id>>/raw/<<github_repo_name>>_code_coverage.json)](https://github.com/<<github_username>>/<<github_repo_name>>/actions)
       [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/<<github_username>>/<<github_repo_name>>?color=dark-green)](https://github.com/<<github_username>>/<<github_repo_name>>/commits/main/)
@@ -10805,6 +10825,7 @@
           "Operating System :: Microsoft :: Windows",
           "Operating System :: POSIX :: Linux",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 3.14",
           "Programming Language :: Python :: 3.13",
           "Programming Language :: Python :: 3.12",
           "Programming Language :: Python :: 3.11",
@@ -10950,7 +10971,7 @@
       license: None
       project_name: this_is_the_project_name
       python_package_name: this_is_the_project_name
-      python_versions: 3.10, 3.11, 3.12, 3.13
+      python_versions: 3.10, 3.11, 3.12, 3.13, 3.14
       sign_artifacts_question: true
   
     ''',
@@ -10982,7 +11003,7 @@
       
       ## Environment (please complete the following information):
        - OS: [e.g. iOS]
-       - Python Version: [e.g. 3.13, 3.12, 3.11, etc.]
+       - Python Version: [e.g. 3.14, 3.13, 3.12, 3.11, etc.]
        - this_is_the_project_name Version [e.g. 1.2.3]
       
       ## Additional context
@@ -11197,7 +11218,7 @@
           with:
             # These values can be customized for your specific requirements.
             operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
-            python_version_json_string: "['3.13', '3.12', '3.11', '3.10']"
+            python_version_json_string: "['3.14', '3.13', '3.12', '3.11', '3.10']"
             python_package_version: "3.10"
             coverage_badge_gist_id: "<<coverage_badge_gist_id>>"
             coverage_badge_gist_username: "<<coverage_badge_gist_username>>"
@@ -11773,6 +11794,8 @@
       
       **Development:**
       [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+      [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+      [![pytest](https://img.shields.io/badge/pytest-enabled-brightgreen)](https://docs.pytest.org/)
       [![CI](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml/badge.svg)](https://github.com/<<github_username>>/<<github_repo_name>>/actions/workflows/CICD.yml)
       [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/<<coverage_badge_gist_username>>/<<coverage_badge_gist_id>>/raw/<<github_repo_name>>_code_coverage.json)](https://github.com/<<github_username>>/<<github_repo_name>>/actions)
       [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/<<github_username>>/<<github_repo_name>>?color=dark-green)](https://github.com/<<github_username>>/<<github_repo_name>>/commits/main/)
@@ -12354,6 +12377,7 @@
           "Operating System :: Microsoft :: Windows",
           "Operating System :: POSIX :: Linux",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 3.14",
           "Programming Language :: Python :: 3.13",
           "Programming Language :: Python :: 3.12",
           "Programming Language :: Python :: 3.11",
