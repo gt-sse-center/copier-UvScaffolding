@@ -8,6 +8,8 @@
 
 **Development:**
 [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+[![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![pytest](https://img.shields.io/badge/pytest-enabled-brightgreen)](https://docs.pytest.org/)
 [![CI]({{ github_url }}/actions/workflows/CICD.yml/badge.svg)]({{ github_url }}/actions/workflows/CICD.yml)
 {%- if coverage_badge_gist_id != "" %}
 [![Code Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/{{ coverage_badge_gist_username }}/{{ coverage_badge_gist_id }}/raw/{{ github_repo_name }}_code_coverage.json)]({{ github_url }}/actions)
