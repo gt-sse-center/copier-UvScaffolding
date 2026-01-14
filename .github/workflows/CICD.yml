@@ -26,4 +26,4 @@ jobs:
     with:
       # These values can be customized for your specific requirements.
       operating_system_json_string: "[ 'macos-latest', 'ubuntu-latest', 'windows-latest' ]"
-      python_version_json_string: "[ '3.13', '3.12', '3.11', '3.10' ]"
+      python_version_json_string: "[ '3.14', '3.13', '3.12', '3.11', '3.10' ]"

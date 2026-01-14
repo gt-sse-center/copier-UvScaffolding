@@ -70,9 +70,9 @@ python_package_name:
 python_versions:
   type: str
   help: Enter a comma-delimited list of Python versions to support.
-  default: "3.10, 3.11, 3.12, 3.13"
+  default: "3.10, 3.11, 3.12, 3.13, 3.14"
   validator: |-
-    {% if not (python_versions | regex_search('^(\d+\.\d+)(\s*,\s*\d+\.\d+)*,?$')) %}
+    {% if not (python_versions | regex_search('^(\\d+\\.\\d+)(\\s*,\\s*\\d+\\.\\d+)*,?$')) %}
     Please enter one or more valid Python versions, separated by commas.
     {% endif %}
 
@@ -163,7 +163,7 @@ _tasks:
   - python -c "import shutil; shutil.rmtree('__tools');"
 
 _jinja_extensions:
-  - copier_templates_extensions.TemplateExtensionLoader
+  - copier_template_extensions.TemplateExtensionLoader
   - extensions/context.py:ContextUpdater
   - extensions/slugify.py:SlugifyExtension
   - extensions/slugify.py:PythonPackageifyExtension
