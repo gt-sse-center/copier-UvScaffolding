@@ -36,6 +36,6 @@ In each scenario, navigate to your local `copier-UvScaffolding` enlistment and r
 
 | Scenario | Description | Command Line |
 | --- | --- | --- |
-| Copy | Command used to initialize a repository. | `uv run copier copy . <output_dir> --trust` |
-| Recopy | Command used to recopy template content. | `uv run copier recopy <output_dir> --trust` |
-| Update | Command used to update a repository with old template content with new template content. | `uv run copier update <output_dir> --trust` |
+| Copy | Command used to initialize a repository. | `uv run run.py Copy <output_dir>` |
+| Recopy | Command used to recopy template content. | `uv run run.py Recopy <output_dir>` |
+| Update | Command used to update a repository with old template content with new template content. | `uv run run.py Update <output_dir>` |

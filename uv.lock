@@ -113,6 +113,7 @@ dependencies = [
     { name = "dbrownell-common" },
     { name = "rich" },
     { name = "tomlkit" },
+    { name = "typer" },
 ]
 
 [package.dev-dependencies]
@@ -134,6 +135,7 @@ requires-dist = [
     { name = "dbrownell-common", specifier = ">=0.14.4" },
     { name = "rich", specifier = ">=13.9.4" },
     { name = "tomlkit", specifier = ">=0.13.2" },
+    { name = "typer", specifier = ">=0.21.1" },
 ]
 
 [package.metadata.requires-dev]
