@@ -133,6 +133,11 @@ sign_artifacts_public_key:
   default: ""
   when: False
 
+install_ty:
+  type: bool
+  help: Would you like to add ty (a static type checker for Python [https://github.com/astral-sh/ty]) as a dependency?
+  default: false
+
 all_questions_have_been_answered:
   type: bool
   help: |-

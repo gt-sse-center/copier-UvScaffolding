@@ -152,3 +152,10 @@ def _EnumerateConfigurations(
         name_parts.append("NoSignArtifacts")
         with ExitStack(name_parts.pop):
             yield ConfigurationInfo("-".join(name_parts), configuration)
+
+    # With ty
+    configuration["install_ty"] = True
+    with ExitStack(lambda: configuration.pop("install_ty")):
+        name_parts.append("WithTy")
+        with ExitStack(name_parts.pop):
+            yield ConfigurationInfo("-".join(name_parts), configuration)

@@ -68,6 +68,10 @@ def _RunUvInit(indented_stream: StreamDecorator) -> bool:
             dev_dependencies.append("py-minisign")
 {% endif %}
 
+{% if install_ty %}
+            dev_dependencies.append("ty")
+{% endif %}
+
             command_line = f"uv add {' '.join(dev_dependencies)} --dev"
 
             dm.WriteVerbose(f"Command line: {command_line}\n\n")

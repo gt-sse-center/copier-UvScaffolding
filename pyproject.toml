@@ -9,7 +9,7 @@ dependencies = [
     "copier-template-extensions>=0.3.3",
     "dbrownell-common>=0.14.4",
     "rich>=13.9.4",
-    "tomlkit>=0.13.2",
+    "tomlkit>=0.14.0",
     "typer>=0.21.1",
 ]
 
