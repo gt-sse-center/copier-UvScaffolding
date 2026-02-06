@@ -160,6 +160,9 @@ def _AugmentPyProject(indented_stream: StreamDecorator) -> bool:
         assert fragment_file.is_file(), fragment_file
 
         with pyproject_file.open() as f:
+            has_version_comment = "#   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion" in f.read()
+            f.seek(0)
+
             destination = tomlkit.load(f)
 
         with fragment_file.open() as f:
@@ -170,21 +173,22 @@ def _AugmentPyProject(indented_stream: StreamDecorator) -> bool:
         project_section = cast("tomlkit.TOMLDocument", destination["project"])
 
         # Add the version information, including a comment that explains how to update it
-        version_item = tomlkit.item("0.0.0")
-        version_item.comment(
-            textwrap.dedent(
-                """\
+        if not has_version_comment:
+            version_item = tomlkit.item("0.0.0")
+            version_item.comment(
+                textwrap.dedent(
+                    """\
 
-                #          ^^^^^
-                # Wheel names will be generated according to this value. Do not manually modify this value; instead
-                # update it according to committed changes by running this command from the root of the repository:
-                #
-                #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
-                """,
-            ),
-        )
+                    #          ^^^^^
+                    # Wheel names will be generated according to this value. Do not manually modify this value; instead
+                    # update it according to committed changes by running this command from the root of the repository:
+                    #
+                    #   uv run python -m AutoGitSemVer.scripts.UpdatePythonVersion ./pyproject.toml ./src
+                    """,
+                ),
+            )
 
-        project_section["version"] = version_item
+            project_section["version"] = version_item
 
         # Always overwrite the license value, as it may have changed between invocations
         if "{{ license }}" == "None":  # noqa: PLR0133
