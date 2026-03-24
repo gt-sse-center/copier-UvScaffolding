@@ -137,12 +137,12 @@
         using: composite
         steps:
           - name: Install uv and python
-            uses: astral-sh/setup-uv@v5
+            uses: astral-sh/setup-uv@v7
             with:
               enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
       
           - name: Download Python Package
-            uses: actions/download-artifact@v4
+            uses: actions/download-artifact@v8
             with:
               name: Python package
               path: dist
@@ -203,7 +203,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-artifact@v8
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -344,10 +344,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: true
@@ -361,7 +361,7 @@
                 COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
                 path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
@@ -381,10 +381,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
       
@@ -392,7 +392,7 @@
               run: uv sync --frozen
       
             - name: Download Coverage Data
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 merge-multiple: true
       
@@ -409,7 +409,7 @@
                 echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.json
                 path: .coverage.json
@@ -430,12 +430,12 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                 fetch-depth: 0
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
                 python-version: ${{ inputs.python_package_version }}
@@ -463,7 +463,7 @@
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Python Package
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: Python package
                 path: dist/**
@@ -490,14 +490,17 @@
       
           steps:
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
                 ignore-empty-workdir: true
       
+            - name: Create a virtual environment (since pyproject.toml doesn't exist)
+              run: uv venv
+      
             - name: Download Python Package
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 name: Python package
                 path: dist
@@ -525,7 +528,7 @@
             contents: write  # To tag the repository and create the release
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Has Release Changes?
               id: has_release_changes
@@ -598,7 +601,7 @@
       
           steps:
           - name: Checkout repository
-            uses: actions/checkout@v4
+            uses: actions/checkout@v6
       
           # Initializes the CodeQL tools for scanning.
           - name: Initialize CodeQL
@@ -1711,12 +1714,12 @@
         using: composite
         steps:
           - name: Install uv and python
-            uses: astral-sh/setup-uv@v5
+            uses: astral-sh/setup-uv@v7
             with:
               enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
       
           - name: Download Python Package
-            uses: actions/download-artifact@v4
+            uses: actions/download-artifact@v8
             with:
               name: Python package
               path: dist
@@ -1777,7 +1780,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-artifact@v8
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -1918,10 +1921,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: true
@@ -1935,7 +1938,7 @@
                 COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
                 path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
@@ -1955,10 +1958,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
       
@@ -1966,7 +1969,7 @@
               run: uv sync --frozen
       
             - name: Download Coverage Data
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 merge-multiple: true
       
@@ -1983,7 +1986,7 @@
                 echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.json
                 path: .coverage.json
@@ -2004,12 +2007,12 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                 fetch-depth: 0
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
                 python-version: ${{ inputs.python_package_version }}
@@ -2037,7 +2040,7 @@
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Python Package
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: Python package
                 path: dist/**
@@ -2064,14 +2067,17 @@
       
           steps:
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
                 ignore-empty-workdir: true
       
+            - name: Create a virtual environment (since pyproject.toml doesn't exist)
+              run: uv venv
+      
             - name: Download Python Package
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 name: Python package
                 path: dist
@@ -2099,7 +2105,7 @@
             contents: write  # To tag the repository and create the release
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Has Release Changes?
               id: has_release_changes
@@ -2172,7 +2178,7 @@
       
           steps:
           - name: Checkout repository
-            uses: actions/checkout@v4
+            uses: actions/checkout@v6
       
           # Initializes the CodeQL tools for scanning.
           - name: Initialize CodeQL
@@ -3299,12 +3305,12 @@
         using: composite
         steps:
           - name: Install uv and python
-            uses: astral-sh/setup-uv@v5
+            uses: astral-sh/setup-uv@v7
             with:
               enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
       
           - name: Download Python Package
-            uses: actions/download-artifact@v4
+            uses: actions/download-artifact@v8
             with:
               name: Python package
               path: dist
@@ -3365,7 +3371,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-artifact@v8
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -3506,10 +3512,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: true
@@ -3523,7 +3529,7 @@
                 COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
                 path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
@@ -3543,10 +3549,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
       
@@ -3554,7 +3560,7 @@
               run: uv sync --frozen
       
             - name: Download Coverage Data
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 merge-multiple: true
       
@@ -3571,7 +3577,7 @@
                 echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.json
                 path: .coverage.json
@@ -3592,12 +3598,12 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                 fetch-depth: 0
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
                 python-version: ${{ inputs.python_package_version }}
@@ -3625,7 +3631,7 @@
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Python Package
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: Python package
                 path: dist/**
@@ -3652,14 +3658,17 @@
       
           steps:
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
                 ignore-empty-workdir: true
       
+            - name: Create a virtual environment (since pyproject.toml doesn't exist)
+              run: uv venv
+      
             - name: Download Python Package
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 name: Python package
                 path: dist
@@ -3687,7 +3696,7 @@
             contents: write  # To tag the repository and create the release
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Has Release Changes?
               id: has_release_changes
@@ -3760,7 +3769,7 @@
       
           steps:
           - name: Checkout repository
-            uses: actions/checkout@v4
+            uses: actions/checkout@v6
       
           # Initializes the CodeQL tools for scanning.
           - name: Initialize CodeQL
@@ -4885,12 +4894,12 @@
         using: composite
         steps:
           - name: Install uv and python
-            uses: astral-sh/setup-uv@v5
+            uses: astral-sh/setup-uv@v7
             with:
               enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
       
           - name: Download Python Package
-            uses: actions/download-artifact@v4
+            uses: actions/download-artifact@v8
             with:
               name: Python package
               path: dist
@@ -4951,7 +4960,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-artifact@v8
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -5092,10 +5101,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: true
@@ -5109,7 +5118,7 @@
                 COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
                 path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
@@ -5129,10 +5138,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
       
@@ -5140,7 +5149,7 @@
               run: uv sync --frozen
       
             - name: Download Coverage Data
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 merge-multiple: true
       
@@ -5157,7 +5166,7 @@
                 echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.json
                 path: .coverage.json
@@ -5178,12 +5187,12 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                 fetch-depth: 0
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
                 python-version: ${{ inputs.python_package_version }}
@@ -5211,7 +5220,7 @@
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Python Package
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: Python package
                 path: dist/**
@@ -5238,14 +5247,17 @@
       
           steps:
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
                 ignore-empty-workdir: true
       
+            - name: Create a virtual environment (since pyproject.toml doesn't exist)
+              run: uv venv
+      
             - name: Download Python Package
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 name: Python package
                 path: dist
@@ -5273,7 +5285,7 @@
             contents: write  # To tag the repository and create the release
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Has Release Changes?
               id: has_release_changes
@@ -5346,7 +5358,7 @@
       
           steps:
           - name: Checkout repository
-            uses: actions/checkout@v4
+            uses: actions/checkout@v6
       
           # Initializes the CodeQL tools for scanning.
           - name: Initialize CodeQL
@@ -6460,12 +6472,12 @@
         using: composite
         steps:
           - name: Install uv and python
-            uses: astral-sh/setup-uv@v5
+            uses: astral-sh/setup-uv@v7
             with:
               enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
       
           - name: Download Python Package
-            uses: actions/download-artifact@v4
+            uses: actions/download-artifact@v8
             with:
               name: Python package
               path: dist
@@ -6526,7 +6538,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-artifact@v8
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -6667,10 +6679,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: true
@@ -6684,7 +6696,7 @@
                 COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
                 path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
@@ -6704,10 +6716,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
       
@@ -6715,7 +6727,7 @@
               run: uv sync --frozen
       
             - name: Download Coverage Data
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 merge-multiple: true
       
@@ -6732,7 +6744,7 @@
                 echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.json
                 path: .coverage.json
@@ -6753,12 +6765,12 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                 fetch-depth: 0
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
                 python-version: ${{ inputs.python_package_version }}
@@ -6786,7 +6798,7 @@
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Python Package
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: Python package
                 path: dist/**
@@ -6813,14 +6825,17 @@
       
           steps:
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
                 ignore-empty-workdir: true
       
+            - name: Create a virtual environment (since pyproject.toml doesn't exist)
+              run: uv venv
+      
             - name: Download Python Package
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 name: Python package
                 path: dist
@@ -6848,7 +6863,7 @@
             contents: write  # To tag the repository and create the release
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Has Release Changes?
               id: has_release_changes
@@ -6921,7 +6936,7 @@
       
           steps:
           - name: Checkout repository
-            uses: actions/checkout@v4
+            uses: actions/checkout@v6
       
           # Initializes the CodeQL tools for scanning.
           - name: Initialize CodeQL
@@ -8041,12 +8056,12 @@
         using: composite
         steps:
           - name: Install uv and python
-            uses: astral-sh/setup-uv@v5
+            uses: astral-sh/setup-uv@v7
             with:
               enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
       
           - name: Download Python Package
-            uses: actions/download-artifact@v4
+            uses: actions/download-artifact@v8
             with:
               name: Python package
               path: dist
@@ -8107,7 +8122,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-artifact@v8
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -8248,10 +8263,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: true
@@ -8265,7 +8280,7 @@
                 COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
                 path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
@@ -8285,10 +8300,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
       
@@ -8296,7 +8311,7 @@
               run: uv sync --frozen
       
             - name: Download Coverage Data
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 merge-multiple: true
       
@@ -8313,7 +8328,7 @@
                 echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.json
                 path: .coverage.json
@@ -8334,12 +8349,12 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                 fetch-depth: 0
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
                 python-version: ${{ inputs.python_package_version }}
@@ -8367,7 +8382,7 @@
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Python Package
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: Python package
                 path: dist/**
@@ -8394,14 +8409,17 @@
       
           steps:
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
                 ignore-empty-workdir: true
       
+            - name: Create a virtual environment (since pyproject.toml doesn't exist)
+              run: uv venv
+      
             - name: Download Python Package
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 name: Python package
                 path: dist
@@ -8429,7 +8447,7 @@
             contents: write  # To tag the repository and create the release
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Has Release Changes?
               id: has_release_changes
@@ -8502,7 +8520,7 @@
       
           steps:
           - name: Checkout repository
-            uses: actions/checkout@v4
+            uses: actions/checkout@v6
       
           # Initializes the CodeQL tools for scanning.
           - name: Initialize CodeQL
@@ -9567,12 +9585,12 @@
         using: composite
         steps:
           - name: Install uv and python
-            uses: astral-sh/setup-uv@v5
+            uses: astral-sh/setup-uv@v7
             with:
               enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
       
           - name: Download Python Package
-            uses: actions/download-artifact@v4
+            uses: actions/download-artifact@v8
             with:
               name: Python package
               path: dist
@@ -9633,7 +9651,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-artifact@v8
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -9774,10 +9792,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: true
@@ -9791,7 +9809,7 @@
                 COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
                 path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
@@ -9811,10 +9829,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
       
@@ -9822,7 +9840,7 @@
               run: uv sync --frozen
       
             - name: Download Coverage Data
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 merge-multiple: true
       
@@ -9839,7 +9857,7 @@
                 echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.json
                 path: .coverage.json
@@ -9860,12 +9878,12 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                 fetch-depth: 0
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
                 python-version: ${{ inputs.python_package_version }}
@@ -9893,7 +9911,7 @@
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Python Package
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: Python package
                 path: dist/**
@@ -9920,14 +9938,17 @@
       
           steps:
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
                 ignore-empty-workdir: true
       
+            - name: Create a virtual environment (since pyproject.toml doesn't exist)
+              run: uv venv
+      
             - name: Download Python Package
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 name: Python package
                 path: dist
@@ -9955,7 +9976,7 @@
             contents: write  # To tag the repository and create the release
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Has Release Changes?
               id: has_release_changes
@@ -10028,7 +10049,7 @@
       
           steps:
           - name: Checkout repository
-            uses: actions/checkout@v4
+            uses: actions/checkout@v6
       
           # Initializes the CodeQL tools for scanning.
           - name: Initialize CodeQL
@@ -11100,12 +11121,12 @@
         using: composite
         steps:
           - name: Install uv and python
-            uses: astral-sh/setup-uv@v5
+            uses: astral-sh/setup-uv@v7
             with:
               enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
       
           - name: Download Python Package
-            uses: actions/download-artifact@v4
+            uses: actions/download-artifact@v8
             with:
               name: Python package
               path: dist
@@ -11166,7 +11187,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-artifact@v8
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -11307,10 +11328,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: true
@@ -11324,7 +11345,7 @@
                 COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
                 path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
@@ -11344,10 +11365,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
       
@@ -11355,7 +11376,7 @@
               run: uv sync --frozen
       
             - name: Download Coverage Data
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 merge-multiple: true
       
@@ -11372,7 +11393,7 @@
                 echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.json
                 path: .coverage.json
@@ -11393,12 +11414,12 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                 fetch-depth: 0
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
                 python-version: ${{ inputs.python_package_version }}
@@ -11426,7 +11447,7 @@
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Python Package
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: Python package
                 path: dist/**
@@ -11453,14 +11474,17 @@
       
           steps:
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
                 ignore-empty-workdir: true
       
+            - name: Create a virtual environment (since pyproject.toml doesn't exist)
+              run: uv venv
+      
             - name: Download Python Package
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 name: Python package
                 path: dist
@@ -11488,7 +11512,7 @@
             contents: write  # To tag the repository and create the release
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Has Release Changes?
               id: has_release_changes
@@ -11561,7 +11585,7 @@
       
           steps:
           - name: Checkout repository
-            uses: actions/checkout@v4
+            uses: actions/checkout@v6
       
           # Initializes the CodeQL tools for scanning.
           - name: Initialize CodeQL
@@ -12651,12 +12675,12 @@
         using: composite
         steps:
           - name: Install uv and python
-            uses: astral-sh/setup-uv@v5
+            uses: astral-sh/setup-uv@v7
             with:
               enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
       
           - name: Download Python Package
-            uses: actions/download-artifact@v4
+            uses: actions/download-artifact@v8
             with:
               name: Python package
               path: dist
@@ -12717,7 +12741,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v4
+            uses: actions/upload-artifact@v8
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -12858,10 +12882,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: true
@@ -12875,7 +12899,7 @@
                 COVERAGE_FILE: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
                 path: .coverage.${{ matrix.os }}.${{ matrix.python_version }}
@@ -12895,10 +12919,10 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
       
@@ -12906,7 +12930,7 @@
               run: uv sync --frozen
       
             - name: Download Coverage Data
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 merge-multiple: true
       
@@ -12923,7 +12947,7 @@
                 echo "**Total coverage:** ${TOTAL}%" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Coverage Data
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: .coverage.json
                 path: .coverage.json
@@ -12944,12 +12968,12 @@
             contents: read
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
                 fetch-depth: 0
       
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 enable-cache: true
                 python-version: ${{ inputs.python_package_version }}
@@ -12977,7 +13001,7 @@
                 echo "**Package Version:** ${PACKAGE_VERSION}" >> $GITHUB_STEP_SUMMARY
       
             - name: Upload Python Package
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@v6
               with:
                 name: Python package
                 path: dist/**
@@ -13004,14 +13028,17 @@
       
           steps:
             - name: Install uv and python
-              uses: astral-sh/setup-uv@v5
+              uses: astral-sh/setup-uv@v7
               with:
                 python-version: ${{ matrix.python_version }}
                 enable-cache: false # No uv.lock or requirements.txt files, so nothing to cache on
                 ignore-empty-workdir: true
       
+            - name: Create a virtual environment (since pyproject.toml doesn't exist)
+              run: uv venv
+      
             - name: Download Python Package
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v8
               with:
                 name: Python package
                 path: dist
@@ -13039,7 +13066,7 @@
             contents: write  # To tag the repository and create the release
       
           steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
       
             - name: Has Release Changes?
               id: has_release_changes
@@ -13112,7 +13139,7 @@
       
           steps:
           - name: Checkout repository
-            uses: actions/checkout@v4
+            uses: actions/checkout@v6
       
           # Initializes the CodeQL tools for scanning.
           - name: Initialize CodeQL
