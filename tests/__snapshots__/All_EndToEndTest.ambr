@@ -532,7 +532,7 @@
       
             - name: Has Release Changes?
               id: has_release_changes
-              uses: dorny/paths-filter@v3
+              uses: dorny/paths-filter@v4
               with:
                 filters: ./.github/release_sources.yaml
       
@@ -2109,7 +2109,7 @@
       
             - name: Has Release Changes?
               id: has_release_changes
-              uses: dorny/paths-filter@v3
+              uses: dorny/paths-filter@v4
               with:
                 filters: ./.github/release_sources.yaml
       
@@ -3700,7 +3700,7 @@
       
             - name: Has Release Changes?
               id: has_release_changes
-              uses: dorny/paths-filter@v3
+              uses: dorny/paths-filter@v4
               with:
                 filters: ./.github/release_sources.yaml
       
@@ -5289,7 +5289,7 @@
       
             - name: Has Release Changes?
               id: has_release_changes
-              uses: dorny/paths-filter@v3
+              uses: dorny/paths-filter@v4
               with:
                 filters: ./.github/release_sources.yaml
       
@@ -6867,7 +6867,7 @@
       
             - name: Has Release Changes?
               id: has_release_changes
-              uses: dorny/paths-filter@v3
+              uses: dorny/paths-filter@v4
               with:
                 filters: ./.github/release_sources.yaml
       
@@ -8451,7 +8451,7 @@
       
             - name: Has Release Changes?
               id: has_release_changes
-              uses: dorny/paths-filter@v3
+              uses: dorny/paths-filter@v4
               with:
                 filters: ./.github/release_sources.yaml
       
@@ -9980,7 +9980,7 @@
       
             - name: Has Release Changes?
               id: has_release_changes
-              uses: dorny/paths-filter@v3
+              uses: dorny/paths-filter@v4
               with:
                 filters: ./.github/release_sources.yaml
       
@@ -11516,7 +11516,7 @@
       
             - name: Has Release Changes?
               id: has_release_changes
-              uses: dorny/paths-filter@v3
+              uses: dorny/paths-filter@v4
               with:
                 filters: ./.github/release_sources.yaml
       
@@ -13070,7 +13070,7 @@
       
             - name: Has Release Changes?
               id: has_release_changes
-              uses: dorny/paths-filter@v3
+              uses: dorny/paths-filter@v4
               with:
                 filters: ./.github/release_sources.yaml
       
