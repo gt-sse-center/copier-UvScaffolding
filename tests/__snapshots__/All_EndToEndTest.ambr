@@ -203,7 +203,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v8
+            uses: actions/upload-artifact@v6
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -1780,7 +1780,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v8
+            uses: actions/upload-artifact@v6
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -3371,7 +3371,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v8
+            uses: actions/upload-artifact@v6
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -4960,7 +4960,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v8
+            uses: actions/upload-artifact@v6
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -6538,7 +6538,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v8
+            uses: actions/upload-artifact@v6
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -8122,7 +8122,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v8
+            uses: actions/upload-artifact@v6
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -9651,7 +9651,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v8
+            uses: actions/upload-artifact@v6
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -11187,7 +11187,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v8
+            uses: actions/upload-artifact@v6
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
@@ -12741,7 +12741,7 @@
       
           - name: Upload Signatures
             if: ${{ inputs.minisign_private_key != '' }}
-            uses: actions/upload-artifact@v8
+            uses: actions/upload-artifact@v6
             with:
               name: Minisign signatures
               path: ./dist/*.minisig
