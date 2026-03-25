@@ -98,7 +98,7 @@ runs:
 
     - name: Upload Signatures
       if: {% raw %}${{ inputs.minisign_private_key != '' }}{% endraw %}
-      uses: actions/upload-artifact@v8
+      uses: actions/upload-artifact@v6
       with:
         name: Minisign signatures
         path: ./dist/*.minisig
