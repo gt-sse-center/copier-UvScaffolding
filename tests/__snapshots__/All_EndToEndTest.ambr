@@ -160,7 +160,7 @@
           # Commit code coverage
           - name: Create Code Coverage Badge
             if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
-            uses: schneegans/dynamic-badges-action@v1.7.0
+            uses: schneegans/dynamic-badges-action@v1.8.0
             with:
               auth: ${{ inputs.coverage_badge_gist_token }}
               gistID: ${{ inputs.coverage_badge_gist_id }}
@@ -1737,7 +1737,7 @@
           # Commit code coverage
           - name: Create Code Coverage Badge
             if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
-            uses: schneegans/dynamic-badges-action@v1.7.0
+            uses: schneegans/dynamic-badges-action@v1.8.0
             with:
               auth: ${{ inputs.coverage_badge_gist_token }}
               gistID: ${{ inputs.coverage_badge_gist_id }}
@@ -3328,7 +3328,7 @@
           # Commit code coverage
           - name: Create Code Coverage Badge
             if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
-            uses: schneegans/dynamic-badges-action@v1.7.0
+            uses: schneegans/dynamic-badges-action@v1.8.0
             with:
               auth: ${{ inputs.coverage_badge_gist_token }}
               gistID: ${{ inputs.coverage_badge_gist_id }}
@@ -4917,7 +4917,7 @@
           # Commit code coverage
           - name: Create Code Coverage Badge
             if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
-            uses: schneegans/dynamic-badges-action@v1.7.0
+            uses: schneegans/dynamic-badges-action@v1.8.0
             with:
               auth: ${{ inputs.coverage_badge_gist_token }}
               gistID: ${{ inputs.coverage_badge_gist_id }}
@@ -6495,7 +6495,7 @@
           # Commit code coverage
           - name: Create Code Coverage Badge
             if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
-            uses: schneegans/dynamic-badges-action@v1.7.0
+            uses: schneegans/dynamic-badges-action@v1.8.0
             with:
               auth: ${{ inputs.coverage_badge_gist_token }}
               gistID: ${{ inputs.coverage_badge_gist_id }}
@@ -8079,7 +8079,7 @@
           # Commit code coverage
           - name: Create Code Coverage Badge
             if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
-            uses: schneegans/dynamic-badges-action@v1.7.0
+            uses: schneegans/dynamic-badges-action@v1.8.0
             with:
               auth: ${{ inputs.coverage_badge_gist_token }}
               gistID: ${{ inputs.coverage_badge_gist_id }}
@@ -9608,7 +9608,7 @@
           # Commit code coverage
           - name: Create Code Coverage Badge
             if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
-            uses: schneegans/dynamic-badges-action@v1.7.0
+            uses: schneegans/dynamic-badges-action@v1.8.0
             with:
               auth: ${{ inputs.coverage_badge_gist_token }}
               gistID: ${{ inputs.coverage_badge_gist_id }}
@@ -11144,7 +11144,7 @@
           # Commit code coverage
           - name: Create Code Coverage Badge
             if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
-            uses: schneegans/dynamic-badges-action@v1.7.0
+            uses: schneegans/dynamic-badges-action@v1.8.0
             with:
               auth: ${{ inputs.coverage_badge_gist_token }}
               gistID: ${{ inputs.coverage_badge_gist_id }}
@@ -12698,7 +12698,7 @@
           # Commit code coverage
           - name: Create Code Coverage Badge
             if: ${{ inputs.coverage_badge_gist_token != '' && inputs.coverage_badge_gist_id != '' }}
-            uses: schneegans/dynamic-badges-action@v1.7.0
+            uses: schneegans/dynamic-badges-action@v1.8.0
             with:
               auth: ${{ inputs.coverage_badge_gist_token }}
               gistID: ${{ inputs.coverage_badge_gist_id }}
