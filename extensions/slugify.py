@@ -68,6 +68,6 @@ class PythonStrictPackageifyExtension(Extension):
 
         func = create_ify_func("_")
 
-        environment.filters["strictpythonpackageify"] = (
-            lambda *args, **kwargs: func(*args, **kwargs).lower().replace("_", "-")
+        environment.filters["strictpythonpackageify"] = lambda *args, **kwargs: (
+            func(*args, **kwargs).lower().replace("_", "-")
         )
