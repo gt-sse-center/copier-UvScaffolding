@@ -28,7 +28,7 @@ This repository is a [copier](https://copier.readthedocs.io/) template. However,
 | Description | Command Line |
 | --- | --- |
 | 1) Install uv (if it isn't already installed). | https://docs.astral.sh/uv/getting-started/installation/ |
-| 2) Clone this repository. | `git clone https://github.com/gt-sse-center/copier-UvScaffolding`
+| 2) Clone this repository. | `git clone https://github.com/gt-csse/copier-UvScaffolding`
 | 3) Initialize your local enlistment. | `uv sync` |
 
 ### Invoke `copier`
