@@ -118,7 +118,7 @@ def Update(
 # ----------------------------------------------------------------------
 def _CheckUvVersion() -> bool:
     result = subprocess.run(
-        ["uv", "self", "update", "--dry-run"],
+        ["uv", "self", "update", "--dry-run"],  # noqa: S607
         capture_output=True,
         check=False,
         text=True,
