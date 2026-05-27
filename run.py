@@ -1,4 +1,5 @@
 # noqa: D100
+import shlex
 import subprocess
 import sys
 import textwrap
@@ -117,7 +118,7 @@ def Update(
 # ----------------------------------------------------------------------
 def _CheckUvVersion() -> bool:
     result = subprocess.run(
-        "uv self update --dry-run",  # noqa: S607
+        ["uv", "self", "update", "--dry-run"],  # noqa: S607
         capture_output=True,
         check=False,
         text=True,
@@ -155,9 +156,8 @@ def _Execute(
 
         try:
             subprocess.run(  # noqa: S603
-                command_line,
+                shlex.split(command_line),
                 stderr=subprocess.STDOUT,
-                stdin=subprocess.PIPE,
                 stdout=sys.stdout,
                 check=True,
             )
