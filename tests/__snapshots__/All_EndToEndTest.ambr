@@ -1473,7 +1473,7 @@
       build-backend = "uv_build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff", "typer<0.26"]
       
       [tool.pytest.ini_options]
       addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
@@ -3064,7 +3064,7 @@
       build-backend = "uv_build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff", "typer<0.26"]
       
       [tool.pytest.ini_options]
       addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
@@ -4653,7 +4653,7 @@
       build-backend = "uv_build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff", "typer<0.26"]
       
       [tool.pytest.ini_options]
       addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
@@ -6231,7 +6231,7 @@
       build-backend = "uv_build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff", "typer<0.26"]
       
       [tool.pytest.ini_options]
       addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
@@ -7816,7 +7816,7 @@
       build-backend = "uv_build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff", "typer<0.26"]
       
       [tool.pytest.ini_options]
       addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
@@ -9344,7 +9344,7 @@
       build-backend = "uv_build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff", "typer<0.26"]
       
       [tool.pytest.ini_options]
       addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
@@ -10880,7 +10880,7 @@
       build-backend = "uv_build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "pytest", "pytest-cov", "ruff", "typer<0.26"]
       
       [tool.pytest.ini_options]
       addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
@@ -12434,7 +12434,7 @@
       build-backend = "uv_build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff", "typer<0.26"]
       
       [tool.pytest.ini_options]
       addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"
@@ -14028,7 +14028,7 @@
       build-backend = "uv_build"
       
       [dependency-groups]
-      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff", "ty"]
+      dev = ["autogitsemver", "pre-commit", "py-minisign", "pytest", "pytest-cov", "ruff", "ty", "typer<0.26"]
       
       [tool.pytest.ini_options]
       addopts = "--verbose -vv --capture=no --cov=this_is_the_project_name --cov-report html --cov-report term --cov-report xml:coverage.xml --cov-fail-under=95.0"

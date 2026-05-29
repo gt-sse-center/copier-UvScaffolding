@@ -1,4 +1,5 @@
 # noqa: D100
+import shlex
 import sys
 import textwrap
 
@@ -62,6 +63,7 @@ def _RunUvInit(indented_stream: StreamDecorator) -> bool:
                 "pytest",
                 "pytest-cov",
                 "ruff",
+                "typer<0.26",
             ]
 
 {% if sign_artifacts_question %}
@@ -72,7 +74,7 @@ def _RunUvInit(indented_stream: StreamDecorator) -> bool:
             dev_dependencies.append("ty")
 {% endif %}
 
-            command_line = f"uv add {' '.join(dev_dependencies)} --dev"
+            command_line = f"uv add {' '.join(shlex.quote(d) for d in dev_dependencies)} --dev"
 
             dm.WriteVerbose(f"Command line: {command_line}\n\n")
 
