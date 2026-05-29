@@ -1,5 +1,4 @@
 # noqa: D100
-import shlex
 import sys
 import textwrap
 
@@ -74,7 +73,7 @@ def _RunUvInit(indented_stream: StreamDecorator) -> bool:
             dev_dependencies.append("ty")
 {% endif %}
 
-            command_line = f"uv add {' '.join(shlex.quote(d) for d in dev_dependencies)} --dev"
+            command_line = "uv add {} --dev".format(" ".join(f'"{d}"' for d in dev_dependencies))
 
             dm.WriteVerbose(f"Command line: {command_line}\n\n")
 
