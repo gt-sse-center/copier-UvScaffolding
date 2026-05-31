@@ -1,4 +1,5 @@
 # noqa: D100
+import re
 import sys
 import textwrap
 
@@ -241,7 +242,18 @@ def _AugmentInitFile(indented_stream: StreamDecorator) -> bool:
         if "__version__" in source:
             return None
 
-        return source.rstrip() + "\n\n\n" + fragment
+        result = source.rstrip() + "\n\n\n" + fragment
+
+        # Remove the sentinel comment and everything that comes before it.
+        match = re.search(
+            r"### This is the uv init sentinel\.[^\n]*\r?\n(?:###[^\n]*\r?\n)*",
+            result,
+            re.MULTILINE,
+        )
+        if match:
+            result = result[match.end():]
+
+        return result
 
     # ----------------------------------------------------------------------
 
