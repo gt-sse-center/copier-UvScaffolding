@@ -1547,13 +1547,9 @@
   
     ''',
     'src/this_is_the_project_name/__init__.py': '''
-      def hello() -> str:
-          return "Hello from this-is-the-project-name!"
-      
-      
       # noqa: D104
       
-      from importlib.metadata import version  # noqa: E402
+      from importlib.metadata import version
       
       
       __version__ = version("this_is_the_project_name")
@@ -3138,13 +3134,9 @@
   
     ''',
     'src/this_is_the_project_name/__init__.py': '''
-      def hello() -> str:
-          return "Hello from this-is-the-project-name!"
-      
-      
       # noqa: D104
       
-      from importlib.metadata import version  # noqa: E402
+      from importlib.metadata import version
       
       
       __version__ = version("this_is_the_project_name")
@@ -4727,13 +4719,9 @@
   
     ''',
     'src/this_is_the_project_name/__init__.py': '''
-      def hello() -> str:
-          return "Hello from this-is-the-project-name!"
-      
-      
       # noqa: D104
       
-      from importlib.metadata import version  # noqa: E402
+      from importlib.metadata import version
       
       
       __version__ = version("this_is_the_project_name")
@@ -6305,13 +6293,9 @@
   
     ''',
     'src/this_is_the_project_name/__init__.py': '''
-      def hello() -> str:
-          return "Hello from this-is-the-project-name!"
-      
-      
       # noqa: D104
       
-      from importlib.metadata import version  # noqa: E402
+      from importlib.metadata import version
       
       
       __version__ = version("this_is_the_project_name")
@@ -7890,13 +7874,9 @@
   
     ''',
     'src/this_is_the_project_name/__init__.py': '''
-      def hello() -> str:
-          return "Hello from this-is-the-project-name!"
-      
-      
       # noqa: D104
       
-      from importlib.metadata import version  # noqa: E402
+      from importlib.metadata import version
       
       
       __version__ = version("this_is_the_project_name")
@@ -9418,13 +9398,9 @@
   
     ''',
     'src/this_is_the_project_name/__init__.py': '''
-      def hello() -> str:
-          return "Hello from this-is-the-project-name!"
-      
-      
       # noqa: D104
       
-      from importlib.metadata import version  # noqa: E402
+      from importlib.metadata import version
       
       
       __version__ = version("this_is_the_project_name")
@@ -10954,13 +10930,9 @@
   
     ''',
     'src/this_is_the_project_name/__init__.py': '''
-      def hello() -> str:
-          return "Hello from this-is-the-project-name!"
-      
-      
       # noqa: D104
       
-      from importlib.metadata import version  # noqa: E402
+      from importlib.metadata import version
       
       
       __version__ = version("this_is_the_project_name")
@@ -12508,13 +12480,9 @@
   
     ''',
     'src/this_is_the_project_name/__init__.py': '''
-      def hello() -> str:
-          return "Hello from this-is-the-project-name!"
-      
-      
       # noqa: D104
       
-      from importlib.metadata import version  # noqa: E402
+      from importlib.metadata import version
       
       
       __version__ = version("this_is_the_project_name")
@@ -14102,13 +14070,9 @@
   
     ''',
     'src/this_is_the_project_name/__init__.py': '''
-      def hello() -> str:
-          return "Hello from this-is-the-project-name!"
-      
-      
       # noqa: D104
       
-      from importlib.metadata import version  # noqa: E402
+      from importlib.metadata import version
       
       
       __version__ = version("this_is_the_project_name")
