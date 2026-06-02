@@ -1494,6 +1494,8 @@
           "D105", # Missing docstring in magic method
           "D107", # Missing docstring in `__init__` method
           "D202", # No blank lines allowed after function docstring
+          "D203", # Incorrect blank line before class docstring
+          "D213", # Multi line summary second line
           "E501", # Line too long
           "FIX002", # Line contains TODO, consider resolving the issue
           "I001", # Import block is un-sorted or un-formatted
@@ -3081,6 +3083,8 @@
           "D105", # Missing docstring in magic method
           "D107", # Missing docstring in `__init__` method
           "D202", # No blank lines allowed after function docstring
+          "D203", # Incorrect blank line before class docstring
+          "D213", # Multi line summary second line
           "E501", # Line too long
           "FIX002", # Line contains TODO, consider resolving the issue
           "I001", # Import block is un-sorted or un-formatted
@@ -4666,6 +4670,8 @@
           "D105", # Missing docstring in magic method
           "D107", # Missing docstring in `__init__` method
           "D202", # No blank lines allowed after function docstring
+          "D203", # Incorrect blank line before class docstring
+          "D213", # Multi line summary second line
           "E501", # Line too long
           "FIX002", # Line contains TODO, consider resolving the issue
           "I001", # Import block is un-sorted or un-formatted
@@ -6240,6 +6246,8 @@
           "D105", # Missing docstring in magic method
           "D107", # Missing docstring in `__init__` method
           "D202", # No blank lines allowed after function docstring
+          "D203", # Incorrect blank line before class docstring
+          "D213", # Multi line summary second line
           "E501", # Line too long
           "FIX002", # Line contains TODO, consider resolving the issue
           "I001", # Import block is un-sorted or un-formatted
@@ -7821,6 +7829,8 @@
           "D105", # Missing docstring in magic method
           "D107", # Missing docstring in `__init__` method
           "D202", # No blank lines allowed after function docstring
+          "D203", # Incorrect blank line before class docstring
+          "D213", # Multi line summary second line
           "E501", # Line too long
           "FIX002", # Line contains TODO, consider resolving the issue
           "I001", # Import block is un-sorted or un-formatted
@@ -9345,6 +9355,8 @@
           "D105", # Missing docstring in magic method
           "D107", # Missing docstring in `__init__` method
           "D202", # No blank lines allowed after function docstring
+          "D203", # Incorrect blank line before class docstring
+          "D213", # Multi line summary second line
           "E501", # Line too long
           "FIX002", # Line contains TODO, consider resolving the issue
           "I001", # Import block is un-sorted or un-formatted
@@ -10877,6 +10889,8 @@
           "D105", # Missing docstring in magic method
           "D107", # Missing docstring in `__init__` method
           "D202", # No blank lines allowed after function docstring
+          "D203", # Incorrect blank line before class docstring
+          "D213", # Multi line summary second line
           "E501", # Line too long
           "FIX002", # Line contains TODO, consider resolving the issue
           "I001", # Import block is un-sorted or un-formatted
@@ -12427,6 +12441,8 @@
           "D105", # Missing docstring in magic method
           "D107", # Missing docstring in `__init__` method
           "D202", # No blank lines allowed after function docstring
+          "D203", # Incorrect blank line before class docstring
+          "D213", # Multi line summary second line
           "E501", # Line too long
           "FIX002", # Line contains TODO, consider resolving the issue
           "I001", # Import block is un-sorted or un-formatted
@@ -14017,6 +14033,8 @@
           "D105", # Missing docstring in magic method
           "D107", # Missing docstring in `__init__` method
           "D202", # No blank lines allowed after function docstring
+          "D203", # Incorrect blank line before class docstring
+          "D213", # Multi line summary second line
           "E501", # Line too long
           "FIX002", # Line contains TODO, consider resolving the issue
           "I001", # Import block is un-sorted or un-formatted
