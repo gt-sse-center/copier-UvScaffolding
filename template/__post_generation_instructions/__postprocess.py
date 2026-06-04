@@ -246,17 +246,46 @@ def _CreateMinisignSecret(instructions: dict[str, str]) -> None:
 
 # ----------------------------------------------------------------------
 def _CreateUvInstructions(instructions: dict[str, str]) -> None:
-    instructions["Install uv locally"] = textwrap.dedent(
+    commands: list[str] = []
+
+    # Determine if uv is installed.
+    #
+    # It turns out that this code is really difficult to test, due to:
+    #   1) This file is a jinja template and not valid python (making it difficult to import and test directly)
+    #   2) This file is generated and invoked directly by copier (making it impossible(?) to mock when it is invoked)
+    #   3) When used, uv is a fundamental part of the python execution process, and any subprocess
+    #      invoked will inherit the PATH that ensured uv was available when invoking copier.
+    #
+    # I thought about creating a very-unlikely-to-be-used-in-the-real-world environment variable that can
+    # be set in testing scenarios that would short-circuit the logic below, but ultimately decided that
+    # the added complexity to the code and tests was not worth it given how fundamental uv is to the
+    # development experience of this template. If uv is not installed, the instructions generated
+    # will simply include instructions for installing uv.
+
+    is_uv_installed = False
+
+    result = SubprocessEx.Run("uv --version")
+    if result.returncode == 0:
+        is_uv_installed = True
+
+    if not is_uv_installed:
+        commands.append("Install uv by following the instructions at <a href=\"https://docs.astral.sh/uv/#installation\" target=\"_blank\">https://docs.astral.sh/uv/#installation</a>.<br/>")
+
+    commands += [
+      "<code>uv sync</code><br/>",
+    ]
+
+    instructions["Initialize the Local Repository"] = textwrap.dedent(
         """\
         <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
 
-        <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and execute the following steps:</p>
 
-        <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
-
-        1. <code>uv sync</code><br/>
+        {}
         <p></p>
         """,
+    ).format(
+        "\n".join(f"{index + 1}. {command}" for index, command in enumerate(commands)),
     )
 
 
