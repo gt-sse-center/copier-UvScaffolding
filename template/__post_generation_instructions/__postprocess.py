@@ -2,10 +2,14 @@ import textwrap
 
 from pathlib import Path
 
+from dbrownell_Common import SubprocessEx
 
+
+# ----------------------------------------------------------------------
 PLACEHOLDER = "<!-- REPLACE ME -->"
 
 
+# ----------------------------------------------------------------------
 def Execute():
     instructions: dict[str, str] = {}
 
@@ -272,17 +276,34 @@ def _CreatePreCommitInstructions(instructions: dict[str, str]) -> None:
 
 # ----------------------------------------------------------------------
 def _CreateCommitInstructions(instructions: dict[str, str]) -> None:
+    commands: list[str] = []
+
+    # Determine if we need to add an instruction to set the git origin (only do this if the origin
+    # has not been set)
+    target_repo_root = Path(__file__).parent.parent
+
+    result = SubprocessEx.Run("git config --get remote.origin.url", target_repo_root)
+    if result.returncode != 0:
+        commands.append("Set this repository's origin by running <code>git remote add origin &lt;your repository URL&gt;</code><br/>")
+
+    # These commands will always be included
+    commands += [
+        "<code>git add --all</code><br/>",
+        '<code>git commit -m "🎉 Initial commit"</code><br/>',
+        "<code>git push</code><br/>",
+    ]
+
     instructions["Initialize the git repository"] = textwrap.dedent(
         """\
         <p>In this step, we will commit the files generated in git and push the changes.</p>
 
         <p>Open a terminal window, navigate to your repository, and run the following commands:</p>
 
-        1. <code>git add --all</code><br/>
-        2. <code>git commit -m "🎉 Initial commit"</code><br/>
-        3. <code>git push</code><br/>
+        {}
         <p></p>
         """,
+    ).format(
+        "\n".join(f"{index + 1}. {command}" for index, command in enumerate(commands)),
     )
 
 
