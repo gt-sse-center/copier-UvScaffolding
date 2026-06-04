@@ -1243,13 +1243,11 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+          <span role="term"><input type="checkbox" id="initialize-dependencies">10) Initialize dependencies</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
-      
-      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>In this step, we will initialize local python dependencies using <a href="https://docs.astral.sh/uv" target="_blank">uv</a>.</p>
       
       <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
       
@@ -2833,13 +2831,11 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+          <span role="term"><input type="checkbox" id="initialize-dependencies">10) Initialize dependencies</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
-      
-      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>In this step, we will initialize local python dependencies using <a href="https://docs.astral.sh/uv" target="_blank">uv</a>.</p>
       
       <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
       
@@ -4421,13 +4417,11 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+          <span role="term"><input type="checkbox" id="initialize-dependencies">10) Initialize dependencies</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
-      
-      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>In this step, we will initialize local python dependencies using <a href="https://docs.astral.sh/uv" target="_blank">uv</a>.</p>
       
       <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
       
@@ -5998,13 +5992,11 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+          <span role="term"><input type="checkbox" id="initialize-dependencies">10) Initialize dependencies</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
-      
-      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>In this step, we will initialize local python dependencies using <a href="https://docs.astral.sh/uv" target="_blank">uv</a>.</p>
       
       <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
       
@@ -7582,13 +7574,11 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+          <span role="term"><input type="checkbox" id="initialize-dependencies">10) Initialize dependencies</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
-      
-      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>In this step, we will initialize local python dependencies using <a href="https://docs.astral.sh/uv" target="_blank">uv</a>.</p>
       
       <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
       
@@ -9109,13 +9099,11 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="install-uv-locally">8) Install uv locally</span>
+          <span role="term"><input type="checkbox" id="initialize-dependencies">8) Initialize dependencies</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
-      
-      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>In this step, we will initialize local python dependencies using <a href="https://docs.astral.sh/uv" target="_blank">uv</a>.</p>
       
       <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
       
@@ -10644,13 +10632,11 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="install-uv-locally">8) Install uv locally</span>
+          <span role="term"><input type="checkbox" id="initialize-dependencies">8) Initialize dependencies</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
-      
-      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>In this step, we will initialize local python dependencies using <a href="https://docs.astral.sh/uv" target="_blank">uv</a>.</p>
       
       <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
       
@@ -12200,13 +12186,11 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+          <span role="term"><input type="checkbox" id="initialize-dependencies">10) Initialize dependencies</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
-      
-      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>In this step, we will initialize local python dependencies using <a href="https://docs.astral.sh/uv" target="_blank">uv</a>.</p>
       
       <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
       
@@ -13790,13 +13774,11 @@
       
       <details>
         <summary>
-          <span role="term"><input type="checkbox" id="install-uv-locally">10) Install uv locally</span>
+          <span role="term"><input type="checkbox" id="initialize-dependencies">10) Initialize dependencies</span>
         </summary>
       </details>
       <div role="definition" class="details-content">
-        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
-      
-      <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>In this step, we will initialize local python dependencies using <a href="https://docs.astral.sh/uv" target="_blank">uv</a>.</p>
       
       <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
       

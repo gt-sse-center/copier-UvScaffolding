@@ -17,7 +17,7 @@ def Execute():
     _CreateGitHubSettings(instructions)
     _CreateTemporaryPyPiToken(instructions)
     _CreateMinisignSecret(instructions)
-    _CreateUvInstructions(instructions)
+    _CreateInitializeInstructions(instructions)
     _CreatePreCommitInstructions(instructions)
     _CreateCommitInstructions(instructions)
 
@@ -245,12 +245,10 @@ def _CreateMinisignSecret(instructions: dict[str, str]) -> None:
 
 
 # ----------------------------------------------------------------------
-def _CreateUvInstructions(instructions: dict[str, str]) -> None:
-    instructions["Install uv locally"] = textwrap.dedent(
+def _CreateInitializeInstructions(instructions: dict[str, str]) -> None:
+    instructions["Initialize dependencies"] = textwrap.dedent(
         """\
-        <p>In this step, we will install <a href="https://docs.astral.sh/uv" target="_blank">uv</a> for local development (if necessary) and initialize its dependencies.</p>
-
-        <p>To install <code>uv</code> locally, follow the instructions at <a href="https://docs.astral.sh/uv/#installation" target="_blank">https://docs.astral.sh/uv/#installation</a>.</p>
+        <p>In this step, we will initialize local python dependencies using <a href="https://docs.astral.sh/uv" target="_blank">uv</a>.</p>
 
         <p>To initialize this repository's dependencies, open a terminal window, navigate to your repository, and run the following command:</p>
 
