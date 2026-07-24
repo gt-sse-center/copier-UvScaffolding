@@ -21,7 +21,7 @@ content = textwrap.dedent(
 
     [green]Your project is almost complete![/]
 
-    To finish generating your project, please follow the steps in [yellow]./post_generation_instructions.html[/][default].[/]
+    To finish generating your project, please follow the instructions in [yellow]./post_generation_instructions.html[/][default].[/]
 
 
     """,
